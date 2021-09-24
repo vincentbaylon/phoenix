@@ -1,5 +1,5 @@
 function CreateRoutine() {
-	return <>CREATE ROUTINE</>
+	return <></>
 }
 
 export default CreateRoutine

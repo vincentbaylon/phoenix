@@ -36,16 +36,18 @@ function App() {
 	// 		})
 	// }, [])
 
-	// useEffect(() => {
-	// 	fetch('/me').then((response) => {
-	// 		if (response.ok) {
-	// 			response.json().then((user) => {
-	// 				setUser(user)
-	// 				setLoggedIn(true)
-	// 			})
-	// 		}
-	// 	})
-	// }, [])
+	useEffect(() => {
+		fetch('/me').then((response) => {
+			if (response.ok) {
+				response.json().then((user) => {
+					setUser(user)
+					if (location.pathname === '/') {
+						history.push('/home')
+					}
+				})
+			}
+		})
+	}, [])
 
 	// const handleChange = (e) => {
 	// 	const name = e.target.name
@@ -123,23 +125,23 @@ function App() {
 	// 	}).then(onLogout)
 	// }
 
-	// const handleLogout = () => {
-	// 	fetch('/logout', {
-	// 		method: 'DELETE',
-	// 	}).then(onLogout)
-	// }
+	const handleLogout = () => {
+		fetch('/logout', {
+			method: 'DELETE',
+		}).then(onLogout)
+	}
 
-	// const onLogout = () => {
-	// 	setUser({})
-	// 	setLoggedIn(false)
-	// }
+	const onLogout = () => {
+		setUser({})
+		setLoggedIn(false)
+	}
 
 	return (
 		<div>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname == '/' || location.pathname == '/signup' ? null : (
-					<NavBar />
+					<NavBar handleLogout={handleLogout} />
 				)}
 
 				<Switch>

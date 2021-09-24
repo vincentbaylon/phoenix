@@ -36,25 +36,20 @@ function SignUp({ setUser }) {
 		})
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		fetch('/users', {
+		const res = await fetch('/users', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify(formData),
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.error === undefined) {
-					setUser(data)
-					history.push('/home')
-				} else {
-					alert(data.error)
-				}
-			})
+
+		const parsedBody = await res.json()
+		parsedBody.error ? alert(parsedBody.error) : setUser(parsedBody)
+		history.push('/home')
 	}
 
 	return (
