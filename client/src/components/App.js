@@ -138,11 +138,13 @@ function App() {
 		<div>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
-				{location.pathname == '/' ? null : <NavBar />}
+				{location.pathname == '/' || location.pathname == '/signup' ? null : (
+					<NavBar />
+				)}
 
 				<Switch>
 					<Route path='/signup'>
-						<SignUp />
+						<SignUp setUser={setUser} />
 					</Route>
 					<Route path='/home'>
 						<Home />
