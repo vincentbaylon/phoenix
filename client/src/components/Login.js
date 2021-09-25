@@ -24,23 +24,6 @@ function Login() {
 	}
 
 	const handleLogin = async () => {
-		// fetch('/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(formData),
-		// })
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		if (data.error === undefined) {
-		// 			setUser(data)
-		// 			history.push('/home')
-		// 		} else {
-		// 			alert(data.error)
-		// 		}
-		// 	})
-
 		const res = await fetch('/login', {
 			method: 'POST',
 			headers: {
@@ -50,8 +33,16 @@ function Login() {
 		})
 
 		const parsedBody = await res.json()
-		parsedBody.error ? alert(parsedBody.error) : setUser(parsedBody)
-		history.push('/home')
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			setUser(parsedBody)
+			history.push('/home')
+		}
+	}
+
+	const handleSignUp = () => {
+		history.push('/signup')
 	}
 
 	return (
@@ -69,7 +60,8 @@ function Login() {
 				onChange={handleChange}
 			/>
 
-			<Button onClick={handleLogin}>Login</Button>
+			<Button onClick={handleLogin}>Log In</Button>
+			<Button onClick={handleSignUp}>Sign Up</Button>
 		</>
 	)
 }

@@ -52,6 +52,10 @@ function SignUp({ setUser }) {
 		history.push('/home')
 	}
 
+	const handleLogin = () => {
+		history.push('/')
+	}
+
 	return (
 		<Box
 			sx={{
@@ -109,6 +113,7 @@ function SignUp({ setUser }) {
 			</FormControl>
 
 			<Button onClick={handleSubmit}>Sign Up</Button>
+			<Button onClick={handleLogin}>Log In</Button>
 		</Box>
 	)
 }

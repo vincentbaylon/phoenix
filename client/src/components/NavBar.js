@@ -15,6 +15,7 @@ function NavBar({ handleLogout }) {
 		<>
 			<AppBar variant='fullWidth'>
 				<Tabs
+					centered
 					value={value}
 					onChange={handleChange}
 					indicatorColor='secondary'
