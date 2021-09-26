@@ -13,13 +13,14 @@ function NavBar({ handleLogout }) {
 
 	return (
 		<>
-			<AppBar variant='fullWidth'>
+			<AppBar variant='fullWidth' sx={{ backgroundColor: 'black' }}>
 				<Tabs
 					centered
 					value={value}
 					onChange={handleChange}
-					indicatorColor='secondary'
-					textColor='secondary'
+					indicatorColor='textPrimary'
+					textColor='textSecondary'
+					sx={{ right: 0 }}
 				>
 					<Tab component={NavLink} to='/home' label='Home' />
 					<Tab component={NavLink} to='/progress' label='Progress' />

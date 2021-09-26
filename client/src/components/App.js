@@ -140,7 +140,7 @@ function App() {
 		<div>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
-				{location.pathname == '/' || location.pathname == '/signup' ? null : (
+				{location.pathname === '/' || location.pathname === '/signup' ? null : (
 					<NavBar handleLogout={handleLogout} />
 				)}
 

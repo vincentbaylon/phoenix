@@ -7,6 +7,10 @@ import { FormControl } from '@mui/material'
 import { Select } from '@mui/material'
 import { MenuItem } from '@mui/material'
 import { InputLabel } from '@mui/material'
+import Stack from '@mui/material/Stack'
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
+import DateTimePicker from '@mui/lab/DateTimePicker'
 
 function CreateRoutine() {
 	const [formData, setFormData] = useState({
@@ -14,8 +18,11 @@ function CreateRoutine() {
 		bodypart: '',
 		type: '',
 	})
+	const [value, setValue] = useState(new Date('2014-08-18T21:11:54'))
 
-	const handleChange = () => {}
+	const handleChange = (newValue) => {
+		setValue(newValue)
+	}
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
@@ -33,19 +40,31 @@ function CreateRoutine() {
 					label='Routine Name'
 					fullWidth
 					variant='standard'
+					sx={{ mb: 3 }}
 				/>
+
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<Stack>
+						<DateTimePicker
+							label='Date&Time picker'
+							value={value}
+							onChange={handleChange}
+							renderInput={(params) => <TextField {...params} />}
+						/>
+					</Stack>
+				</LocalizationProvider>
 
 				<Typography fontWeight='bold' sx={{ mt: 2 }}>
 					Add Exercises
 				</Typography>
+				<Stack spacing={2}>
+					<TextField
+						name='name'
+						label='Exercise Name'
+						fullWidth
+						variant='standard'
+					/>
 
-				<TextField
-					name='name'
-					label='Exercise Name'
-					fullWidth
-					variant='standard'
-				/>
-				<Box sx={{ minWidth: 120 }}>
 					<FormControl fullWidth variant='standard'>
 						<InputLabel id='bodypartLabel'>Bodypart</InputLabel>
 						<Select
@@ -83,7 +102,7 @@ function CreateRoutine() {
 						</Select>
 					</FormControl>
 					<Button>Add Exercise</Button>
-				</Box>
+				</Stack>
 			</Box>
 		</Box>
 	)
