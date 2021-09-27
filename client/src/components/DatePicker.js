@@ -20,26 +20,6 @@ export default function MaterialUIPickers() {
 		<Box sx={{ mt: 2 }}>
 			<LocalizationProvider dateAdapter={AdapterDateFns}>
 				<Stack spacing={5}>
-					<DesktopDatePicker
-						label='Date desktop'
-						inputFormat='MM/dd/yyyy'
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
-					<MobileDatePicker
-						label='Date mobile'
-						inputFormat='MM/dd/yyyy'
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
-					<TimePicker
-						label='Time'
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
 					<DateTimePicker
 						label='Date&Time picker'
 						value={value}
