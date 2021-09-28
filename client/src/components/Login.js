@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { TextField } from '@mui/material'
 import { Typography } from '@mui/material'
 import { Button } from '@mui/material'
-import { Box } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 
 function Login() {
 	const history = useHistory()
@@ -46,23 +46,37 @@ function Login() {
 	}
 
 	return (
-		<>
-			<TextField
-				name='username'
-				value={formData.username}
-				label='Username'
-				onChange={handleChange}
-			/>
-			<TextField
-				name='password'
-				value={formData.password}
-				label='Password'
-				onChange={handleChange}
-			/>
-
-			<Button onClick={handleLogin}>Log In</Button>
-			<Button onClick={handleSignUp}>Sign Up</Button>
-		</>
+		<Grid
+			container
+			spacing={2}
+			justifyContent='center'
+			direction='column'
+			alignItems='center'
+			sx={{ height: '100vh' }}
+		>
+			<Grid item>
+				<TextField
+					name='username'
+					value={formData.username}
+					label='Username'
+					onChange={handleChange}
+				/>
+			</Grid>
+			<Grid item>
+				<TextField
+					name='password'
+					value={formData.password}
+					label='Password'
+					onChange={handleChange}
+				/>
+			</Grid>
+			<Grid item>
+				<Button onClick={handleLogin}>Log In</Button>
+			</Grid>
+			<Grid item>
+				<Button onClick={handleSignUp}>Sign Up</Button>
+			</Grid>
+		</Grid>
 	)
 }
 

@@ -15,26 +15,13 @@ import NavBar from './NavBar'
 import Progress from './Progress'
 import SignUp from './SignUp'
 import Workout from './Workout'
+import Routine from './Routine'
 
 function App() {
 	const history = useHistory()
 	const location = useLocation()
 	const [user, setUser] = useState({})
 	const [loggedIn, setLoggedIn] = useState(false)
-
-	// useEffect(() => {
-	// 	const url =
-	// 		"https://quickchart.io/chart?c={type:'bar',data:{labels:['Q1','Q2','Q3','Q4'], datasets:[{label:'Users',data:[50,60,70,180]},{label:'Revenue',data:[100,200,300,400]}]}}"
-
-	// 	fetch(url)
-	// 		.then((res) => res.blob())
-	// 		.then((imageBlob) => {
-	// 			console.log(imageBlob)
-	// 			const imageObjectUrl = URL.createObjectURL(imageBlob)
-	// 			console.log(imageObjectUrl)
-	// 			setImage(imageObjectUrl)
-	// 		})
-	// }, [])
 
 	useEffect(() => {
 		fetch('/me').then((response) => {
@@ -151,8 +138,8 @@ function App() {
 					<Route path='/home'>
 						<Home />
 					</Route>
-					<Route path='/create_routine'>
-						<CreateRoutine />
+					<Route path='/routine'>
+						<Routine />
 					</Route>
 					<Route path='/progress'>
 						<Progress />

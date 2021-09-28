@@ -1,9 +1,10 @@
+import CreateExercise from './CreateWorkout'
 import CreateWorkout from './CreateWorkout'
-import CreateExercise from './CreateExercise'
+import CreateRoutine from './CreateRoutine'
 
 import { Box } from '@mui/material'
 
-function Workout() {
+function Routine() {
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
 			<Box
@@ -13,6 +14,7 @@ function Workout() {
 					width: '100%',
 				}}
 			>
+				<CreateRoutine />
 				<CreateWorkout />
 				<CreateExercise />
 			</Box>
@@ -20,4 +22,4 @@ function Workout() {
 	)
 }
 
-export default Workout
+export default Routine

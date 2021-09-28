@@ -38,168 +38,66 @@ function CreateRoutine() {
 	}
 
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
-			<Box
-				sx={{
-					m: 5,
-					mt: 10,
-					width: '100%',
-				}}
-			>
-				<Typography fontWeight='bold'>Create A Routine</Typography>
+		<>
+			<Typography fontWeight='bold'>Create A Routine</Typography>
 
-				<TextField
-					name='name'
-					label='Routine Name'
+			<TextField
+				name='name'
+				label='Routine Name'
+				fullWidth
+				variant='standard'
+			/>
+			<Stack spacing={2}>
+				<FormControl
 					fullWidth
 					variant='standard'
-				/>
-				<Stack spacing={2}>
-					<FormControl
-						fullWidth
-						variant='standard'
-						sx={{ mb: 1 }}
-						style={{
-							textOverflow: 'ellipsis',
-							overflow: 'hidden',
-							whiteSpace: 'pre',
-						}}
+					sx={{ mb: 1 }}
+					style={{
+						textOverflow: 'ellipsis',
+						overflow: 'hidden',
+						whiteSpace: 'pre',
+					}}
+				>
+					<InputLabel id='workoutDays'>Select Workout Days</InputLabel>
+					<Select
+						labelId='workoutDays'
+						id='workoutDays'
+						value={workoutDays}
+						label='Workout Days'
+						name='workoutDays'
+						multiple
+						onChange={handleDays}
 					>
-						<InputLabel id='workoutDays'>Select Workout Days</InputLabel>
-						<Select
-							labelId='workoutDays'
-							id='workoutDays'
-							value={workoutDays}
-							label='Workout Days'
-							name='workoutDays'
-							multiple
-							onChange={handleDays}
-						>
-							<MenuItem value={'Monday'}>Monday</MenuItem>
-							<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
-							<MenuItem value={'Wednesday'}>Wednesday</MenuItem>
-							<MenuItem value={'Thursday'}>Thursday</MenuItem>
-							<MenuItem value={'Friday'}>Friday</MenuItem>
-							<MenuItem value={'Saturday'}>Saturday</MenuItem>
-							<MenuItem value={'Sunday'}>Sunday</MenuItem>
-						</Select>
-					</FormControl>
+						<MenuItem value={'Monday'}>Monday</MenuItem>
+						<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
+						<MenuItem value={'Wednesday'}>Wednesday</MenuItem>
+						<MenuItem value={'Thursday'}>Thursday</MenuItem>
+						<MenuItem value={'Friday'}>Friday</MenuItem>
+						<MenuItem value={'Saturday'}>Saturday</MenuItem>
+						<MenuItem value={'Sunday'}>Sunday</MenuItem>
+					</Select>
+				</FormControl>
 
-					<LocalizationProvider dateAdapter={AdapterDateFns}>
-						<MobileDatePicker
-							label='Select Start Date'
-							inputFormat='MM/dd/yyyy'
-							value={value}
-							onChange={handleChange}
-							renderInput={(params) => <TextField {...params} />}
-						/>
-						<MobileDatePicker
-							label='Select End Date'
-							inputFormat='MM/dd/yyyy'
-							value={value}
-							onChange={handleChange}
-							renderInput={(params) => <TextField {...params} />}
-						/>
-					</LocalizationProvider>
-
-					<Button variant='outlined'>Create Routine</Button>
-				</Stack>
-
-				<Typography fontWeight='bold' sx={{ mt: 3 }}>
-					Create Workouts For Routine
-				</Typography>
-
-				<TextField
-					name='name'
-					label='Workout Name'
-					fullWidth
-					variant='standard'
-				/>
-				<Stack spacing={2}>
-					<FormControl
-						fullWidth
-						variant='standard'
-						sx={{ mb: 1 }}
-						style={{
-							textOverflow: 'ellipsis',
-							overflow: 'hidden',
-							whiteSpace: 'pre',
-						}}
-					>
-						<InputLabel id='workoutDays'>Select Day for Workout</InputLabel>
-						<Select
-							labelId='workoutDays'
-							id='workoutDays'
-							value={workoutDays}
-							label='Workout Days'
-							name='workoutDays'
-							multiple
-							onChange={handleDays}
-						>
-							<MenuItem value={'Monday'}>Monday</MenuItem>
-							<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
-							<MenuItem value={'Wednesday'}>Wednesday</MenuItem>
-							<MenuItem value={'Thursday'}>Thursday</MenuItem>
-							<MenuItem value={'Friday'}>Friday</MenuItem>
-							<MenuItem value={'Saturday'}>Saturday</MenuItem>
-							<MenuItem value={'Sunday'}>Sunday</MenuItem>
-						</Select>
-					</FormControl>
-
-					<Button variant='outlined'>Create Workout</Button>
-				</Stack>
-
-				<Typography fontWeight='bold' sx={{ mt: 2 }}>
-					Add Exercises To Workout
-				</Typography>
-				<Stack spacing={2}>
-					<TextField
-						name='name'
-						label='Exercise Name'
-						fullWidth
-						variant='standard'
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<MobileDatePicker
+						label='Select Start Date'
+						inputFormat='MM/dd/yyyy'
+						value={value}
+						onChange={handleChange}
+						renderInput={(params) => <TextField {...params} />}
 					/>
+					<MobileDatePicker
+						label='Select End Date'
+						inputFormat='MM/dd/yyyy'
+						value={value}
+						onChange={handleChange}
+						renderInput={(params) => <TextField {...params} />}
+					/>
+				</LocalizationProvider>
 
-					<FormControl fullWidth variant='standard'>
-						<InputLabel id='bodypartLabel'>Bodypart</InputLabel>
-						<Select
-							labelId='bodypartLabel'
-							id='bodypartSelect'
-							value={formData.bodypart}
-							label='Bodypart'
-							name='bodypart'
-							onChange={handleChange}
-						>
-							<MenuItem value={'Chest'}>Chest</MenuItem>
-							<MenuItem value={'Back'}>Back</MenuItem>
-							<MenuItem value={'Legs'}>Legs</MenuItem>
-							<MenuItem value={'Shoulders'}>Shoulders</MenuItem>
-							<MenuItem value={'Arms'}>Arms</MenuItem>
-							<MenuItem value={'Olympic'}>Olympic</MenuItem>
-						</Select>
-					</FormControl>
-					<FormControl fullWidth variant='standard'>
-						<InputLabel id='typeLabel'>Type</InputLabel>
-						<Select
-							labelId='typeLabel'
-							id='typeSelect'
-							value={formData.type}
-							label='Type'
-							name='type'
-							onChange={handleChange}
-						>
-							<MenuItem value={'Dumbbell'}>Dumbbell</MenuItem>
-							<MenuItem value={'Barbell'}>Barbell</MenuItem>
-							<MenuItem value={'Machine'}>Machine</MenuItem>
-							<MenuItem value={'Bodyweight'}>Bodyweight</MenuItem>
-							<MenuItem value={'Cardio'}>Cardio</MenuItem>
-							<MenuItem value={'Duration'}>Duration</MenuItem>
-						</Select>
-					</FormControl>
-					<Button variant='outlined'>Add Exercise</Button>
-				</Stack>
-			</Box>
-		</Box>
+				<Button variant='outlined'>Create Routine</Button>
+			</Stack>
+		</>
 	)
 }
 

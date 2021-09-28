@@ -24,7 +24,7 @@ function NavBar({ handleLogout }) {
 				>
 					<Tab component={NavLink} to='/home' label='Home' />
 					<Tab component={NavLink} to='/progress' label='Progress' />
-					<Tab component={NavLink} to='/create_routine' label='Routine' />
+					<Tab component={NavLink} to='/routine' label='Routine' />
 					<Tab component={NavLink} to='/workout' label='Workout' />
 					<Tab
 						component={NavLink}
