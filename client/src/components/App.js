@@ -141,9 +141,6 @@ function App() {
 					<Route path='/routine'>
 						<Routine />
 					</Route>
-					<Route path='/progress'>
-						<Progress />
-					</Route>
 					<Route path='/workout'>
 						<Workout />
 					</Route>

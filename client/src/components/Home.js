@@ -1,6 +1,7 @@
 import { Box, Typography, Divider } from '@mui/material'
 
 import Quotes from './Quotes'
+import Progress from './Progress'
 
 function Home() {
 	const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)]
@@ -11,6 +12,9 @@ function Home() {
 				{randomQuote}
 			</Typography>
 			<Divider />
+			<Typography>Action Items</Typography>
+			<Divider />
+			<Progress />
 		</Box>
 	)
 }

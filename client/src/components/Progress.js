@@ -19,45 +19,31 @@ function Progress() {
 	}, [])
 
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'center',
-				height: '100vw',
-				width: '100vw',
-			}}
-		>
+		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
 			<Grid
-				container
-				display='flex'
-				justifyContent='center'
-				sx={{ m: 5, mt: 10 }}
+				item
+				xs={12}
+				md={10}
+				lg={5}
+				sx={{
+					height: '100%',
+					width: '100%',
+				}}
+				style={{
+					textAlign: 'center',
+					// backgroundImage: `url(${image})`,
+					// backgroundRepeat: 'no-repeat',
+					// backgroundSize: 'contain',
+					// backgroundPosition: 'center',
+				}}
 			>
-				<Grid
-					item
-					xs={12}
-					md={12}
-					lg={12}
-					sx={{
-						height: '450px',
-						width: '100%',
-					}}
-					style={{
-						textAlign: 'center',
-						backgroundImage: `url(${image})`,
-						backgroundRepeat: 'no-repeat',
-						backgroundSize: 'contain',
-						// backgroundPosition: 'center',
-					}}
-				>
-					{/* <img
-							src={image}
-							alt='Progress chart'
-							style={{ objectFit: 'contain' }}
-						/> */}
-				</Grid>
+				<img
+					src={image}
+					alt='Progress chart'
+					style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+				/>
 			</Grid>
-		</Box>
+		</Grid>
 	)
 }
 

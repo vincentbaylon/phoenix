@@ -9,9 +9,6 @@ import { Select } from '@mui/material'
 import { MenuItem } from '@mui/material'
 import { InputLabel } from '@mui/material'
 import Stack from '@mui/material/Stack'
-import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import MobileDatePicker from '@mui/lab/MobileDatePicker'
 
 function CreateRoutine() {
 	const [formData, setFormData] = useState({
@@ -27,7 +24,6 @@ function CreateRoutine() {
 	}
 
 	const handleDays = (e) => {
-		console.log(e.target.value)
 		const {
 			target: { value },
 		} = e
@@ -77,23 +73,6 @@ function CreateRoutine() {
 						<MenuItem value={'Sunday'}>Sunday</MenuItem>
 					</Select>
 				</FormControl>
-
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
-					<MobileDatePicker
-						label='Select Start Date'
-						inputFormat='MM/dd/yyyy'
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
-					<MobileDatePicker
-						label='Select End Date'
-						inputFormat='MM/dd/yyyy'
-						value={value}
-						onChange={handleChange}
-						renderInput={(params) => <TextField {...params} />}
-					/>
-				</LocalizationProvider>
 
 				<Button variant='outlined'>Create Routine</Button>
 			</Stack>

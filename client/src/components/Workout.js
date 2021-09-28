@@ -12,10 +12,7 @@ function Workout() {
 					mt: 10,
 					width: '100%',
 				}}
-			>
-				<CreateWorkout />
-				<CreateExercise />
-			</Box>
+			></Box>
 		</Box>
 	)
 }
