@@ -11,6 +11,8 @@ import { VisibilityOff } from '@mui/icons-material'
 import { FormControl } from '@mui/material'
 import { InputLabel } from '@mui/material'
 import { OutlinedInput } from '@mui/material'
+import { Grid } from '@mui/material'
+import { Stack } from '@mui/material'
 
 function SignUp({ setUser }) {
 	const history = useHistory()
@@ -48,67 +50,102 @@ function SignUp({ setUser }) {
 		})
 
 		const parsedBody = await res.json()
-		parsedBody.error ? alert(parsedBody.error) : setUser(parsedBody)
-		history.push('/home')
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			const res = await fetch('/progresses', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(parsedBody.id),
+			})
+
+			const parsedBody = await res.json()
+			if (parsedBody.error) {
+				alert(parsedBody.error)
+			} else {
+				setUser(parsedBody)
+				history.push('/home')
+			}
+		}
+	}
+
+	const handleLogin = () => {
+		history.push('/')
 	}
 
 	return (
 		<Box
 			sx={{
 				display: 'flex',
-				width: '50%',
-				flexDirection: 'column',
-				p: 1,
-				m: 1,
+				justifyContent: 'center',
+				width: '100%',
+				height: '100vh',
 			}}
 		>
-			<Typography>Create Your Account</Typography>
-			<TextField
-				type='text'
-				name='name'
-				value={formData.name}
-				label='Name'
-				onChange={handleChange}
-			/>
-			<TextField
-				type='email'
-				name='email'
-				value={formData.email}
-				label='Email'
-				onChange={handleChange}
-			/>
-			<TextField
-				type='text'
-				name='username'
-				value={formData.username}
-				label='Username'
-				onChange={handleChange}
-			/>
+			<Box
+				sx={{
+					m: 5,
+					mt: 10,
+				}}
+			>
+				<Stack spacing={3}>
+					<Typography>Create Your Account</Typography>
+					<TextField
+						type='text'
+						name='name'
+						value={formData.name}
+						label='Name'
+						onChange={handleChange}
+					/>
+					<TextField
+						type='email'
+						name='email'
+						value={formData.email}
+						label='Email'
+						onChange={handleChange}
+					/>
+					<TextField
+						type='text'
+						name='username'
+						value={formData.username}
+						label='Username'
+						onChange={handleChange}
+					/>
 
-			<FormControl sx={{ m: 1, width: '50ch' }} variant='outlined'>
-				<InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
-				<OutlinedInput
-					id='outlined-adornment-password'
-					type={showPassword ? 'text' : 'password'}
-					name='password'
-					value={formData.password}
-					label='Password'
-					onChange={handleChange}
-					endAdornment={
-						<InputAdornment position='end'>
-							<IconButton
-								aria-label='toggle password visibility'
-								onClick={handleShowPassword}
-								edge='end'
-							>
-								{showPassword ? <VisibilityOff /> : <Visibility />}
-							</IconButton>
-						</InputAdornment>
-					}
-				/>
-			</FormControl>
+					<FormControl sx={{ m: 1 }} variant='outlined'>
+						<InputLabel htmlFor='outlined-adornment-password'>
+							Password
+						</InputLabel>
+						<OutlinedInput
+							id='outlined-adornment-password'
+							type={showPassword ? 'text' : 'password'}
+							name='password'
+							value={formData.password}
+							label='Password'
+							placeholder='(Min 6 characters)'
+							onChange={handleChange}
+							endAdornment={
+								<InputAdornment position='end'>
+									<IconButton
+										aria-label='toggle password visibility'
+										onClick={handleShowPassword}
+										edge='end'
+									>
+										{showPassword ? <VisibilityOff /> : <Visibility />}
+									</IconButton>
+								</InputAdornment>
+							}
+						/>
+					</FormControl>
 
-			<Button onClick={handleSubmit}>Sign Up</Button>
+					<Button variant='contained' onClick={handleSubmit}>
+						Sign Up
+					</Button>
+					<Button onClick={handleLogin}>Log In</Button>
+				</Stack>
+			</Box>
 		</Box>
 	)
 }

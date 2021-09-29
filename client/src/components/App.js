@@ -9,38 +9,28 @@ import { Box } from '@mui/material'
 import { Container } from '@mui/material'
 
 import CreateRoutine from './CreateRoutine'
+import CreateExercise from './CreateExercise'
 import Home from './Home'
 import Login from './Login'
 import NavBar from './NavBar'
 import Progress from './Progress'
 import SignUp from './SignUp'
 import Workout from './Workout'
+import Routine from './Routine'
 
 function App() {
 	const history = useHistory()
 	const location = useLocation()
 	const [user, setUser] = useState({})
 	const [loggedIn, setLoggedIn] = useState(false)
-
-	// useEffect(() => {
-	// 	const url =
-	// 		"https://quickchart.io/chart?c={type:'bar',data:{labels:['Q1','Q2','Q3','Q4'], datasets:[{label:'Users',data:[50,60,70,180]},{label:'Revenue',data:[100,200,300,400]}]}}"
-
-	// 	fetch(url)
-	// 		.then((res) => res.blob())
-	// 		.then((imageBlob) => {
-	// 			console.log(imageBlob)
-	// 			const imageObjectUrl = URL.createObjectURL(imageBlob)
-	// 			console.log(imageObjectUrl)
-	// 			setImage(imageObjectUrl)
-	// 		})
-	// }, [])
+	const [routine, setRoutine] = useState({})
 
 	useEffect(() => {
 		fetch('/me').then((response) => {
 			if (response.ok) {
 				response.json().then((user) => {
 					setUser(user)
+					setLoggedIn(true)
 					if (location.pathname === '/') {
 						history.push('/home')
 					}
@@ -140,8 +130,8 @@ function App() {
 		<div>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
-				{location.pathname == '/' || location.pathname == '/signup' ? null : (
-					<NavBar handleLogout={handleLogout} />
+				{location.pathname === '/' || location.pathname === '/signup' ? null : (
+					<NavBar handleLogout={handleLogout} loggedIn={loggedIn} user={user} />
 				)}
 
 				<Switch>
@@ -151,17 +141,17 @@ function App() {
 					<Route path='/home'>
 						<Home />
 					</Route>
-					<Route path='/create_routine'>
-						<CreateRoutine />
-					</Route>
-					<Route path='/progress'>
-						<Progress />
+					<Route path='/routine'>
+						<Routine user={user} setRoutine={setRoutine} routine={routine} />
 					</Route>
 					<Route path='/workout'>
 						<Workout />
 					</Route>
+					<Route path='/create_exercise'>
+						<CreateExercise routine={routine} />
+					</Route>
 					<Route exact path='/'>
-						<Login />
+						<Login setLoggedIn={setLoggedIn} />
 					</Route>
 				</Switch>
 			</Box>

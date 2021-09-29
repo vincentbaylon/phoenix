@@ -3,9 +3,9 @@ import { useHistory } from 'react-router-dom'
 import { TextField } from '@mui/material'
 import { Typography } from '@mui/material'
 import { Button } from '@mui/material'
-import { Box } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 
-function Login() {
+function Login({ setLoggedIn }) {
 	const history = useHistory()
 	const [user, setUser] = useState({})
 	const [formData, setFormData] = useState({
@@ -24,23 +24,6 @@ function Login() {
 	}
 
 	const handleLogin = async () => {
-		// fetch('/login', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'Content-Type': 'application/json',
-		// 	},
-		// 	body: JSON.stringify(formData),
-		// })
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		if (data.error === undefined) {
-		// 			setUser(data)
-		// 			history.push('/home')
-		// 		} else {
-		// 			alert(data.error)
-		// 		}
-		// 	})
-
 		const res = await fetch('/login', {
 			method: 'POST',
 			headers: {
@@ -50,27 +33,57 @@ function Login() {
 		})
 
 		const parsedBody = await res.json()
-		parsedBody.error ? alert(parsedBody.error) : setUser(parsedBody)
-		history.push('/home')
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			setUser(parsedBody)
+			setLoggedIn(true)
+			history.push('/home')
+		}
+	}
+
+	const handleSignUp = () => {
+		history.push('/signup')
 	}
 
 	return (
-		<>
-			<TextField
-				name='username'
-				value={formData.username}
-				label='Username'
-				onChange={handleChange}
-			/>
-			<TextField
-				name='password'
-				value={formData.password}
-				label='Password'
-				onChange={handleChange}
-			/>
-
-			<Button onClick={handleLogin}>Login</Button>
-		</>
+		<Grid
+			container
+			spacing={2}
+			justifyContent='center'
+			direction='column'
+			alignItems='center'
+			sx={{ height: '100vh' }}
+		>
+			<Grid item sx={{ mb: 3 }}>
+				<Typography variant='h2'>Phoenix Fitness</Typography>
+			</Grid>
+			<Grid item>
+				<TextField
+					name='username'
+					value={formData.username}
+					label='Username'
+					onChange={handleChange}
+				/>
+			</Grid>
+			<Grid item>
+				<TextField
+					type='password'
+					name='password'
+					value={formData.password}
+					label='Password'
+					onChange={handleChange}
+				/>
+			</Grid>
+			<Grid item>
+				<Button variant='contained' onClick={handleLogin}>
+					Log In
+				</Button>
+			</Grid>
+			<Grid item>
+				<Button onClick={handleSignUp}>Sign Up</Button>
+			</Grid>
+		</Grid>
 	)
 }
 

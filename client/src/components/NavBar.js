@@ -3,32 +3,57 @@ import { NavLink } from 'react-router-dom'
 import { AppBar } from '@mui/material'
 import { Tabs } from '@mui/material'
 import { Tab } from '@mui/material'
+import { Typography } from '@mui/material'
 
-function NavBar({ handleLogout }) {
+function NavBar({ handleLogout, loggedIn, user }) {
 	const [value, setValue] = useState(0)
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue)
 	}
 
+	const tabStyle = {
+		color: 'white',
+	}
+
 	return (
 		<>
-			<AppBar variant='fullWidth'>
+			<AppBar variant='fullWidth' sx={{ backgroundColor: 'black' }}>
 				<Tabs
+					centered
 					value={value}
 					onChange={handleChange}
 					indicatorColor='secondary'
 					textColor='secondary'
 				>
-					<Tab component={NavLink} to='/home' label='Home' />
-					<Tab component={NavLink} to='/progress' label='Progress' />
-					<Tab component={NavLink} to='/create_routine' label='Routine' />
-					<Tab component={NavLink} to='/workout' label='Workout' />
+					<Typography variant='h4' style={{ flex: 1, margin: '10px' }}>
+						Phoenix Fitness
+					</Typography>
+					<Tab
+						component={NavLink}
+						to='/home'
+						label={user ? user.username : 'Home'}
+						style={tabStyle}
+					/>
+					<Tab
+						component={NavLink}
+						to='/workout'
+						label='Start Workout'
+						style={tabStyle}
+					/>
+					<Tab
+						component={NavLink}
+						to='/routine'
+						label='Routine'
+						style={tabStyle}
+					/>
+
 					<Tab
 						component={NavLink}
 						to='/'
-						label='Logout'
-						onClick={handleLogout}
+						label={loggedIn ? 'Logout' : 'Login'}
+						onClick={loggedIn ? handleLogout : null}
+						style={tabStyle}
 					/>
 				</Tabs>
 			</AppBar>
