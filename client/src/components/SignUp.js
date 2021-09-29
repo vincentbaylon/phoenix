@@ -107,6 +107,7 @@ function SignUp({ setUser }) {
 							name='password'
 							value={formData.password}
 							label='Password'
+							placeholder='(Min 6 characters)'
 							onChange={handleChange}
 							endAdornment={
 								<InputAdornment position='end'>
@@ -122,7 +123,9 @@ function SignUp({ setUser }) {
 						/>
 					</FormControl>
 
-					<Button onClick={handleSubmit}>Sign Up</Button>
+					<Button variant='contained' onClick={handleSubmit}>
+						Sign Up
+					</Button>
 					<Button onClick={handleLogin}>Log In</Button>
 				</Stack>
 			</Box>

@@ -54,6 +54,9 @@ function Login() {
 			alignItems='center'
 			sx={{ height: '100vh' }}
 		>
+			<Grid item sx={{ mb: 3 }}>
+				<Typography variant='h2'>Phoenix Fitness</Typography>
+			</Grid>
 			<Grid item>
 				<TextField
 					name='username'
@@ -64,6 +67,7 @@ function Login() {
 			</Grid>
 			<Grid item>
 				<TextField
+					type='password'
 					name='password'
 					value={formData.password}
 					label='Password'
@@ -71,7 +75,9 @@ function Login() {
 				/>
 			</Grid>
 			<Grid item>
-				<Button onClick={handleLogin}>Log In</Button>
+				<Button variant='contained' onClick={handleLogin}>
+					Log In
+				</Button>
 			</Grid>
 			<Grid item>
 				<Button onClick={handleSignUp}>Sign Up</Button>
