@@ -1,19 +1,14 @@
 class ProgressesController < ApplicationController
-  def index
-
-  end
-
-  def show
-    
-  end
+  before_action :authorize, except: :create
 
   def create
-
-  end
-
-  def destroy
-
+    progress = Progress.create!(progress_params)
+    render json: progress, status: :created
   end
 
   private
+
+  def progress_params
+    params.permit()
+  end
 end

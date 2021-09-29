@@ -28,10 +28,8 @@ ActiveRecord::Schema.define(version: 2021_09_29_052630) do
     t.boolean "checkedIn"
     t.date "checkInFrequency"
     t.string "checkInDay"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_progresses_on_user_id"
   end
 
   create_table "routine_workouts", force: :cascade do |t|
@@ -118,7 +116,6 @@ ActiveRecord::Schema.define(version: 2021_09_29_052630) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "progresses", "users"
   add_foreign_key "routine_workouts", "routines"
   add_foreign_key "routine_workouts", "workouts"
   add_foreign_key "user_exercises", "exercises"

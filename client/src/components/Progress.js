@@ -1,27 +1,63 @@
 import { useEffect, useState } from 'react'
 import { Box, Grid } from '@mui/material'
+import DialogForm from './DialogForm'
 
-function Progress() {
+function Progress({ user }) {
 	const [image, setImage] = useState('')
-	const [labels, setLabels] = useState(['Today', 'Tomorrow', 'Previous'])
-	const [data, setData] = useState([150, 160, 170])
+	const [labels, setLabels] = useState([''])
+	const [checkIns, setCheckIns] = useState([0])
 
 	useEffect(() => {
-		const mapLabels = labels.map((l) => {
-			return `"${l}"`
-		})
+		fetch(`/users/${user.id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				let checkInArr = data?.user_progresses
+				checkInArr?.forEach((p) => {
+					setLabels([...labels, p.date])
+					setCheckIns([...checkIns, p.weight])
+				})
 
-		const url = `https://quickchart.io/chart?c={type:'line',data:{labels:[${mapLabels}], datasets:[{label:'Weight',data:[${data}], fill:false, borderColor:'orange'}]}}`
+				const mapLabels = labels.map((l) => {
+					return `"${l}"`
+				})
 
-		fetch(url)
-			.then((res) => res.blob())
-			.then((imageBlob) => {
-				console.log(imageBlob)
-				const imageObjectUrl = URL.createObjectURL(imageBlob)
-				console.log(imageObjectUrl)
-				setImage(imageObjectUrl)
+				const url = `https://quickchart.io/chart?c={type:'line',data:{labels:[${labels}], datasets:[{label:'Weight',data:[${checkIns}], fill:false, borderColor:'orange'}]}}`
+
+				fetch(url)
+					.then((res) => res.blob())
+					.then((imageBlob) => {
+						const imageObjectUrl = URL.createObjectURL(imageBlob)
+						setImage(imageObjectUrl)
+					})
 			})
 	}, [])
+
+	function refetchChart() {
+		fetch(`/users/${user.id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				let checkInArr = data.user_progresses
+				checkInArr.forEach((p) => {
+					setLabels([...labels, p.date])
+					setCheckIns([...checkIns, p.weight])
+				})
+
+				console.log(labels)
+				console.log(checkIns)
+				const mapLabels = labels.map((l) => {
+					return `"${l}"`
+				})
+
+				const url = `https://quickchart.io/chart?c={type:'line',data:{labels:[${labels}], datasets:[{label:'Weight',data:[${checkIns}], fill:false, borderColor:'orange'}]}}`
+
+				fetch(url)
+					.then((res) => res.blob())
+					.then((imageBlob) => {
+						const imageObjectUrl = URL.createObjectURL(imageBlob)
+						setImage(imageObjectUrl)
+					})
+			})
+	}
 
 	return (
 		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
@@ -42,12 +78,15 @@ function Progress() {
 					// backgroundPosition: 'center',
 				}}
 			>
-				<img
-					src={image}
-					alt='Progress chart'
-					style={{ objectFit: 'contain', height: '100%', width: '100%' }}
-				/>
+				{image ? (
+					<img
+						src={image}
+						alt='Progress chart'
+						style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+					/>
+				) : null}
 			</Grid>
+			<DialogForm user={user} refetchChart={refetchChart} />
 		</Grid>
 	)
 }

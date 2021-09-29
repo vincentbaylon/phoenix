@@ -124,10 +124,12 @@ function App() {
 	const onLogout = () => {
 		setUser({})
 		setLoggedIn(false)
+		history.push('/')
 	}
 
 	return (
 		<div>
+			{console.log(user)}
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname === '/' || location.pathname === '/signup' ? null : (
@@ -139,13 +141,13 @@ function App() {
 						<SignUp setUser={setUser} />
 					</Route>
 					<Route path='/home'>
-						<Home />
+						<Home user={user} handleLogout={handleLogout} />
 					</Route>
 					<Route path='/routine'>
 						<Routine user={user} setRoutine={setRoutine} routine={routine} />
 					</Route>
 					<Route path='/workout'>
-						<Workout />
+						<Workout user={user} />
 					</Route>
 					<Route path='/create_exercise'>
 						<CreateExercise routine={routine} />

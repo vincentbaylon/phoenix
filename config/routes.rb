@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :exercises
   resources :users
 
+  get '/user_progresses/:id', to: 'user_progresses#show'
   get '/workouts/:id', to: 'workouts#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
