@@ -28,6 +28,7 @@ function App() {
 			if (response.ok) {
 				response.json().then((user) => {
 					setUser(user)
+					setLoggedIn(true)
 					if (location.pathname === '/') {
 						history.push('/home')
 					}
@@ -128,7 +129,7 @@ function App() {
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname === '/' || location.pathname === '/signup' ? null : (
-					<NavBar handleLogout={handleLogout} />
+					<NavBar handleLogout={handleLogout} loggedIn={loggedIn} user={user} />
 				)}
 
 				<Switch>
@@ -139,13 +140,13 @@ function App() {
 						<Home />
 					</Route>
 					<Route path='/routine'>
-						<Routine />
+						<Routine user={user} />
 					</Route>
 					<Route path='/workout'>
 						<Workout />
 					</Route>
 					<Route exact path='/'>
-						<Login />
+						<Login setLoggedIn={setLoggedIn} />
 					</Route>
 				</Switch>
 			</Box>

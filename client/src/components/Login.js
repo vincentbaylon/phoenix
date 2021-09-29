@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { Button } from '@mui/material'
 import { Box, Grid } from '@mui/material'
 
-function Login() {
+function Login({ setLoggedIn }) {
 	const history = useHistory()
 	const [user, setUser] = useState({})
 	const [formData, setFormData] = useState({
@@ -37,6 +37,7 @@ function Login() {
 			alert(parsedBody.error)
 		} else {
 			setUser(parsedBody)
+			setLoggedIn(true)
 			history.push('/home')
 		}
 	}

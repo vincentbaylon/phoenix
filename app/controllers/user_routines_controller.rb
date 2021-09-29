@@ -1,0 +1,2 @@
+class UserRoutinesController < ApplicationController
+end

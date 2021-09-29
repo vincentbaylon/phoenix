@@ -10,27 +10,45 @@ import { MenuItem } from '@mui/material'
 import { InputLabel } from '@mui/material'
 import Stack from '@mui/material/Stack'
 
-function CreateRoutine() {
-	const [formData, setFormData] = useState({
-		name: '',
-		bodypart: '',
-		type: '',
-	})
-	const [value, setValue] = useState(null)
+function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
+	const [name, setName] = useState('')
 	const [workoutDays, setWorkoutDays] = useState([])
 
-	const handleChange = (newValue) => {
-		setValue(newValue)
+	const handleChange = (e) => {
+		setName(e.target.value)
 	}
 
 	const handleDays = (e) => {
 		const {
 			target: { value },
 		} = e
-		setWorkoutDays(
-			// On autofill we get a the stringified value.
-			typeof value === 'string' ? value.split(',') : value
-		)
+		setWorkoutDays(typeof value === 'string' ? value.split(',') : value)
+	}
+
+	const handleRoutine = async (e) => {
+		e.preventDefault()
+
+		const body = {
+			name: name,
+			days: workoutDays,
+			user_id: user.id,
+		}
+		const res = await fetch('/routines', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
+
+		const parsedBody = await res.json()
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			setShowRoutine(false)
+			setShowWorkout(true)
+			setRoutine(parsedBody)
+		}
 	}
 
 	return (
@@ -42,6 +60,8 @@ function CreateRoutine() {
 				label='Routine Name'
 				fullWidth
 				variant='standard'
+				value={name}
+				onChange={handleChange}
 			/>
 			<Stack spacing={2}>
 				<FormControl
@@ -73,9 +93,10 @@ function CreateRoutine() {
 						<MenuItem value={'Sunday'}>Sunday</MenuItem>
 					</Select>
 				</FormControl>
-
-				<Button variant='outlined'>Create Routine</Button>
 			</Stack>
+			<Button variant='contained' onClick={handleRoutine}>
+				Create Routine
+			</Button>
 		</>
 	)
 }
