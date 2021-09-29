@@ -1,10 +1,8 @@
 class RoutinesController < ApplicationController
+  before_action :find_routine, except: [:index, :create]
+  before_action :authorize, except: [:index, :show]
   def index
-
-  end
-
-  def show
-    
+    render json: Routine.all, status: :ok
   end
 
   def create
@@ -12,17 +10,16 @@ class RoutinesController < ApplicationController
     render json: routine, status: :created
   end
 
-  def destroy
-
+  def show
+    render json: @routine, status: :ok
   end
 
   private
-
   def find_routine
-
+    @routine = Routine.find(params[:id])
   end
 
   def routine_params
-    params.permit(:name, :days, :id, :user_id, :routine)
+    params.permit(:name, :id, :user_id, :routine)
   end
 end

@@ -1,19 +1,12 @@
 class ExercisesController < ApplicationController
-  def index
-
-  end
-
-  def show
-    
-  end
-
   def create
-
-  end
-
-  def destroy
-
+    exercise = Exercise.create!(exercise_params)
+    render json: exercise, status: :created
   end
 
   private
+
+  def exercise_params
+    params.permit(:name, :weight, :bodypart)
+  end
 end

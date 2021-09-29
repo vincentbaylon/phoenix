@@ -50,8 +50,25 @@ function SignUp({ setUser }) {
 		})
 
 		const parsedBody = await res.json()
-		parsedBody.error ? alert(parsedBody.error) : setUser(parsedBody)
-		history.push('/home')
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			const res = await fetch('/progresses', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(parsedBody.id),
+			})
+
+			const parsedBody = await res.json()
+			if (parsedBody.error) {
+				alert(parsedBody.error)
+			} else {
+				setUser(parsedBody)
+				history.push('/home')
+			}
+		}
 	}
 
 	const handleLogin = () => {

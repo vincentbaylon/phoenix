@@ -9,6 +9,7 @@ import { Box } from '@mui/material'
 import { Container } from '@mui/material'
 
 import CreateRoutine from './CreateRoutine'
+import CreateExercise from './CreateExercise'
 import Home from './Home'
 import Login from './Login'
 import NavBar from './NavBar'
@@ -22,6 +23,7 @@ function App() {
 	const location = useLocation()
 	const [user, setUser] = useState({})
 	const [loggedIn, setLoggedIn] = useState(false)
+	const [routine, setRoutine] = useState({})
 
 	useEffect(() => {
 		fetch('/me').then((response) => {
@@ -140,10 +142,13 @@ function App() {
 						<Home />
 					</Route>
 					<Route path='/routine'>
-						<Routine user={user} />
+						<Routine user={user} setRoutine={setRoutine} routine={routine} />
 					</Route>
 					<Route path='/workout'>
 						<Workout />
+					</Route>
+					<Route path='/create_exercise'>
+						<CreateExercise routine={routine} />
 					</Route>
 					<Route exact path='/'>
 						<Login setLoggedIn={setLoggedIn} />

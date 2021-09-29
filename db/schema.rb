@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_29_041500) do
+ActiveRecord::Schema.define(version: 2021_09_29_052630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "exercises", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "weight"
     t.string "bodypart"
     t.string "region"
     t.datetime "created_at", precision: 6, null: false
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2021_09_29_041500) do
   create_table "user_progresses", force: :cascade do |t|
     t.integer "weight"
     t.string "image_url"
+    t.string "date"
     t.bigint "user_id", null: false
     t.bigint "progress_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -73,15 +74,24 @@ ActiveRecord::Schema.define(version: 2021_09_29_041500) do
   end
 
   create_table "user_routines", force: :cascade do |t|
-    t.string "days"
     t.boolean "day_complete"
     t.boolean "current"
     t.bigint "user_id", null: false
     t.bigint "routine_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "days", default: [], array: true
     t.index ["routine_id"], name: "index_user_routines_on_routine_id"
     t.index ["user_id"], name: "index_user_routines_on_user_id"
+  end
+
+  create_table "user_workouts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workout_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_workouts_on_user_id"
+    t.index ["workout_id"], name: "index_user_workouts_on_workout_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,6 +127,8 @@ ActiveRecord::Schema.define(version: 2021_09_29_041500) do
   add_foreign_key "user_progresses", "users"
   add_foreign_key "user_routines", "routines"
   add_foreign_key "user_routines", "users"
+  add_foreign_key "user_workouts", "users"
+  add_foreign_key "user_workouts", "workouts"
   add_foreign_key "workout_exercises", "exercises"
   add_foreign_key "workout_exercises", "workouts"
 end

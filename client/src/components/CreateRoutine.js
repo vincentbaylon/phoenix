@@ -28,26 +28,42 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 	const handleRoutine = async (e) => {
 		e.preventDefault()
 
-		const body = {
+		const routineBody = {
 			name: name,
-			days: workoutDays,
-			user_id: user.id,
 		}
 		const res = await fetch('/routines', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(body),
+			body: JSON.stringify(routineBody),
 		})
 
-		const parsedBody = await res.json()
-		if (parsedBody.error) {
-			alert(parsedBody.error)
+		const parsedRoutineBody = await res.json()
+		if (parsedRoutineBody.error) {
+			alert(parsedRoutineBody.error)
 		} else {
-			setShowRoutine(false)
-			setShowWorkout(true)
-			setRoutine(parsedBody)
+			const userRoutineBody = {
+				user_id: user.id,
+				routine_id: parsedRoutineBody.id,
+				days: workoutDays,
+			}
+			const res = await fetch('/user_routines', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(userRoutineBody),
+			})
+
+			const parsedUserRoutineBody = await res.json()
+			if (parsedUserRoutineBody.error) {
+				alert(parsedUserRoutineBody.error)
+			} else {
+				setShowRoutine(false)
+				setShowWorkout(true)
+				setRoutine(parsedRoutineBody)
+			}
 		}
 	}
 
@@ -64,7 +80,7 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 				onChange={handleChange}
 			/>
 			<Stack spacing={2}>
-				<FormControl
+				{/* <FormControl
 					fullWidth
 					variant='standard'
 					sx={{ mb: 1 }}
@@ -92,9 +108,9 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 						<MenuItem value={'Saturday'}>Saturday</MenuItem>
 						<MenuItem value={'Sunday'}>Sunday</MenuItem>
 					</Select>
-				</FormControl>
+				</FormControl> */}
 			</Stack>
-			<Button variant='contained' onClick={handleRoutine}>
+			<Button variant='contained' onClick={handleRoutine} sx={{ mt: 2 }}>
 				Create Routine
 			</Button>
 		</>

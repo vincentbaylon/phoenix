@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :user_workouts
   resources :workout_exercises
   resources :user_routines
   resources :routine_workouts
@@ -11,6 +12,7 @@ Rails.application.routes.draw do
   resources :exercises
   resources :users
 
+  get '/workouts/:id', to: 'workouts#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show'

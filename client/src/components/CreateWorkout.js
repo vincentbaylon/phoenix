@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import {
 	Typography,
 	TextField,
@@ -8,26 +9,103 @@ import {
 	Select,
 	MenuItem,
 	Button,
+	Divider,
+	Box,
 } from '@mui/material'
 
-function CreateExercise() {
-	const [workoutDays, setWorkoutDays] = useState([])
+import Cards from './Cards'
 
-	const handleDays = () => {}
+function CreateExercise({
+	routine,
+	user,
+	workouts,
+	setWorkouts,
+	setShowWorkout,
+	setShowExercise,
+	handleWorkoutDone,
+}) {
+	const [day, setDay] = useState('')
+	const [name, setName] = useState('')
+	const history = useHistory()
+
+	useEffect(() => {})
+
+	const handleDay = (e) => {
+		setDay(e.target.value)
+	}
+
+	const handleChange = (e) => {
+		setName(e.target.value)
+	}
+
+	const handleDone = () => {
+		history.push('/create_exercise')
+	}
+
+	const handleAddWorkout = async (e) => {
+		e.preventDefault()
+		const body = {
+			name: name,
+		}
+		const res = await fetch('/workouts', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
+
+		const parsedBody = await res.json()
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			const userWorkoutBody = {
+				routine_id: routine.id,
+				workout_id: parsedBody.id,
+				day: day,
+			}
+			const res = await fetch('/routine_workouts', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(userWorkoutBody),
+			})
+
+			const parsedUserWorkoutBody = await res.json()
+			if (parsedUserWorkoutBody.error) {
+				alert(parsedUserWorkoutBody.error)
+			} else {
+				console.log(parsedUserWorkoutBody)
+				let updateArr = [...workouts, parsedUserWorkoutBody]
+				setWorkouts(updateArr)
+				setName('')
+				setDay('')
+				// handleWorkoutDone()
+				console.log(workouts)
+			}
+		}
+	}
+
+	const displayWorkouts = workouts.map((w) => {
+		return <Cards key={w.id} props={w} />
+	})
 
 	return (
 		<>
-			<Typography fontWeight='bold' sx={{ mt: 3 }}>
-				Create Workouts For Routine
+			<Typography fontWeight='bold' sx={{ mt: 3, mb: 2 }}>
+				Create Workouts For "{routine.name}"
 			</Typography>
-
-			<TextField
-				name='name'
-				label='Workout Name'
-				fullWidth
-				variant='standard'
-			/>
 			<Stack spacing={2}>
+				<TextField
+					name='name'
+					label='Workout Name'
+					fullWidth
+					variant='standard'
+					value={name}
+					onChange={handleChange}
+				/>
+
 				<FormControl
 					fullWidth
 					variant='standard'
@@ -42,11 +120,10 @@ function CreateExercise() {
 					<Select
 						labelId='workoutDays'
 						id='workoutDays'
-						value={workoutDays}
+						value={day}
 						label='Workout Days'
 						name='workoutDays'
-						multiple
-						onChange={handleDays}
+						onChange={handleDay}
 					>
 						<MenuItem value={'Monday'}>Monday</MenuItem>
 						<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
@@ -57,9 +134,26 @@ function CreateExercise() {
 						<MenuItem value={'Sunday'}>Sunday</MenuItem>
 					</Select>
 				</FormControl>
-
-				<Button variant='outlined'>Create Workout</Button>
 			</Stack>
+			<Button
+				variant='contained'
+				onClick={handleAddWorkout}
+				sx={{ mt: 2, mb: 2 }}
+			>
+				Add Workout
+			</Button>
+			<Divider />
+			<Box sx={{ display: 'flex', flexDirection: 'row' }}>
+				{workouts.length > 0 ? displayWorkouts : null}
+			</Box>
+			<Button
+				variant='contained'
+				color='secondary'
+				onClick={handleDone}
+				sx={{ mb: 2 }}
+			>
+				Done Adding Workouts
+			</Button>
 		</>
 	)
 }

@@ -3,10 +3,15 @@ import { Box, Grid } from '@mui/material'
 
 function Progress() {
 	const [image, setImage] = useState('')
+	const [labels, setLabels] = useState(['Today', 'Tomorrow', 'Previous'])
+	const [data, setData] = useState([150, 160, 170])
 
 	useEffect(() => {
-		const url =
-			"https://quickchart.io/chart?c={type:'line',data:{labels:['Jan','Feb','Mar','Apr'], datasets:[{label:'Weight',data:[50,60,180,150], fill:false, borderColor:'orange'}]}}"
+		const mapLabels = labels.map((l) => {
+			return `"${l}"`
+		})
+
+		const url = `https://quickchart.io/chart?c={type:'line',data:{labels:[${mapLabels}], datasets:[{label:'Weight',data:[${data}], fill:false, borderColor:'orange'}]}}`
 
 		fetch(url)
 			.then((res) => res.blob())
