@@ -26,8 +26,6 @@ export default function FormDialog({ user, refetchChart }) {
 
 		let formattedDate = format(date, 'M/d')
 
-		console.log(weight, formattedDate)
-
 		const body = {
 			user_id: user.id,
 			progress_id: user.progresses[0]?.id,
