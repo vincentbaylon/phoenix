@@ -1,6 +1,10 @@
 import { Card, Box, Typography } from '@mui/material'
 
-function RoutineCards({ props }) {
+function RoutineCards({ props, handleClick }) {
+	const cardClick = () => {
+		handleClick(props.id)
+	}
+
 	return (
 		<>
 			<Card
@@ -13,6 +17,7 @@ function RoutineCards({ props }) {
 					flexDirection: 'column',
 					m: 1,
 				}}
+				onClick={cardClick}
 			>
 				<Typography variant='h6'>{props.name}</Typography>
 				<Typography variant='p'>{props.day}</Typography>

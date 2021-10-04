@@ -40,8 +40,27 @@ function Routine({ user, setRoutine, routine }) {
 		setShowExercise(true)
 	}
 
+	const handleClick = async (id) => {
+		const res = await fetch(`/user_routines/${id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				current: true,
+			}),
+		})
+
+		const parsedBody = await res.json()
+		if (parsedBody.error) {
+			alert(parsedBody.error)
+		} else {
+			alert('Current routine set')
+		}
+	}
+
 	const displayRoutines = routineArr.map((r) => {
-		return <RoutineCards key={r.id} props={r} />
+		return <RoutineCards key={r.id} props={r} handleClick={handleClick} />
 	})
 
 	return (

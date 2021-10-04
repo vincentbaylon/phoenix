@@ -16,12 +16,12 @@ function Workout({ user }) {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.routines.length > 0) {
-					fetch(`/routines/${data.routines[0].id}`)
+					const current = data.user_routines.find((r) => r.current === true)
+
+					fetch(`/routines/${current.id}`)
 						.then((res) => res.json())
 						.then((data) => {
 							console.log(data)
-							setRoutine(data)
-							setWorkout(data.workouts)
 						})
 				}
 			})
@@ -33,6 +33,7 @@ function Workout({ user }) {
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
+			{console.log(routine)}
 			<Box
 				sx={{
 					m: 5,
@@ -40,7 +41,7 @@ function Workout({ user }) {
 					width: '100%',
 				}}
 			>
-				{/* {displayCards} */}
+				{displayCards}
 				<Typography variant='h4'>Routine Name</Typography>
 				<Typography variant='h6' sx={{ mb: 2 }}>
 					Workout Name

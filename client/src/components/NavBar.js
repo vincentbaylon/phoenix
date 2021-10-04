@@ -32,7 +32,7 @@ function NavBar({ handleLogout, loggedIn, user }) {
 					<Tab
 						component={NavLink}
 						to='/home'
-						label={user ? user.username : 'Home'}
+						label={loggedIn ? user.username : 'Home'}
 						style={tabStyle}
 					/>
 					<Tab

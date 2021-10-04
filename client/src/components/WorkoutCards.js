@@ -3,7 +3,6 @@ import { Card, Box, Typography } from '@mui/material'
 function WorkoutCards({ props }) {
 	return (
 		<>
-			{console.log(props)}
 			<Card
 				sx={{
 					width: '150px',
