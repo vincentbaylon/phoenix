@@ -1,15 +1,17 @@
 import CreateWorkout from './CreateWorkout'
 import CreateExercise from './CreateExercise'
-
 import WorkoutCards from './WorkoutCards'
 import TrackerCard from './TrackerCard'
-
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Divider } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { format } from 'date-fns'
+import { useMediaQuery } from '@mui/material'
 
 function Workout({ user }) {
 	const [routine, setRoutine] = useState({})
 	const [workout, setWorkout] = useState([])
+	const [date, setDate] = useState(new Date())
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		fetch(`/users/${user.id}`)
@@ -22,32 +24,47 @@ function Workout({ user }) {
 						.then((res) => res.json())
 						.then((data) => {
 							console.log(data)
+							setRoutine(data)
+							setWorkout(data.workouts[0].workout_exercises)
 						})
 				}
 			})
 	}, [])
 
+	useEffect(() => {
+		let formattedDate = format(date, 'EEEE')
+		console.log(formattedDate)
+		console.log(workout)
+	}, [])
+
 	const displayCards = workout.map((w) => {
-		return <WorkoutCards key={w.id} props={w} />
+		return <TrackerCard key={w.id} props={w} />
 	})
 
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center', width: '100vw' }}>
-			{console.log(routine)}
+		<Box
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				width: '100vw',
+			}}
+		>
+			{console.log(matches)}
 			<Box
 				sx={{
-					m: 5,
+					m: 2,
 					mt: 10,
-					width: '100%',
+					width: matches ? '100%' : '50%',
 				}}
 			>
-				{displayCards}
-				<Typography variant='h4'>Routine Name</Typography>
-				<Typography variant='h6' sx={{ mb: 2 }}>
-					Workout Name
+				{/* <Typography variant='h4'>{routine?.name}</Typography> */}
+				<Typography variant='h5' sx={{ mb: 2 }}>
+					{routine.workouts ? routine.workouts[0].name : 'Workout'} (
+					{format(date, 'EE')})
 				</Typography>
-
-				<TrackerCard />
+				<Divider sx={{ mb: 2 }} />
+				{displayCards}
 			</Box>
 		</Box>
 	)

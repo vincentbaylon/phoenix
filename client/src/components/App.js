@@ -17,6 +17,7 @@ import Progress from './Progress'
 import SignUp from './SignUp'
 import Workout from './Workout'
 import Routine from './Routine'
+import History from './History'
 
 function App() {
 	const history = useHistory()
@@ -38,82 +39,6 @@ function App() {
 			}
 		})
 	}, [])
-
-	// const handleChange = (e) => {
-	// 	const name = e.target.name
-	// 	let value = e.target.value
-
-	// 	setFormData({
-	// 		...formData,
-	// 		[name]: value,
-	// 	})
-	// }
-
-	// const handleSignUp = () => {
-	// 	fetch('/users', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(formData),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			console.log('SIGNUP', data)
-	// 			if (data.error === undefined) {
-	// 				setUser(data)
-	// 				setLoggedIn(true)
-	// 			} else {
-	// 				alert(data.error)
-	// 			}
-	// 		})
-	// }
-
-	// const handleLogin = () => {
-	// 	fetch('/login', {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify(formData),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			console.log('LOGIN', data)
-	// 			if (data.error === undefined) {
-	// 				setUser(data)
-	// 				setLoggedIn(true)
-	// 			} else {
-	// 				alert(data.error)
-	// 			}
-	// 		})
-	// }
-	// const handleUpdate = () => {
-	// 	fetch(`/users/${user.id}`, {
-	// 		method: 'PATCH',
-	// 		headers: {
-	// 			'Content-Type': 'application/json',
-	// 		},
-	// 		body: JSON.stringify({
-	// 			username: formData.username,
-	// 		}),
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			console.log('UPDATE', data)
-	// 			if (data.error === undefined) {
-	// 				setUser(data)
-	// 			} else {
-	// 				alert(data.error)
-	// 			}
-	// 		})
-	// }
-
-	// const handleDelete = () => {
-	// 	fetch(`/users/${user.id}`, {
-	// 		method: 'DELETE',
-	// 	}).then(onLogout)
-	// }
 
 	const handleLogout = () => {
 		fetch('/logout', {
@@ -152,8 +77,11 @@ function App() {
 					<Route path='/create_exercise'>
 						<CreateExercise routine={routine} />
 					</Route>
+					<Route path='/history'>
+						<History />
+					</Route>
 					<Route exact path='/'>
-						<Login setLoggedIn={setLoggedIn} />
+						<Login setLoggedIn={setLoggedIn} setUser={setUser} />
 					</Route>
 				</Switch>
 			</Box>

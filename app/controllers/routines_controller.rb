@@ -1,6 +1,5 @@
 class RoutinesController < ApplicationController
   before_action :find_routine, except: [:index, :create]
-  before_action :authorize, except: [:index, :show]
 
   def index
     render json: Routine.all, status: :ok

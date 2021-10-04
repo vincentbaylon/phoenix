@@ -15,7 +15,7 @@ function Home({ user, handleLogout }) {
 	}
 
 	return (
-		<Box sx={{ m: 5, mt: 10, textAlign: 'center' }}>
+		<Box sx={{ m: 2, mt: 10, textAlign: 'center' }}>
 			<Typography variant='h5' sx={{ mb: 5 }}>
 				{randomQuote}
 			</Typography>

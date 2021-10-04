@@ -1,6 +1,5 @@
 class UserProgressesController < ApplicationController
   before_action :find_user_progress, except: :create
-  before_action :authorize, except: :create
 
   def create
     user_progress = UserProgress.create!(user_progress_params)

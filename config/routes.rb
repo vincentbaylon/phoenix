@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :trackers
   resources :user_workouts
   resources :workout_exercises
   resources :user_routines

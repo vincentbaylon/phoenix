@@ -18,13 +18,14 @@ function ExerciseCards({ props, day, handleSelect }) {
 			<Card
 				onClick={handleClick}
 				sx={{
-					width: '150px',
-					height: '200px',
+					width: '125px',
+					height: '150px',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
 					flexDirection: 'column',
 					m: 1,
+					p: 1,
 				}}
 			>
 				<Typography variant='h6'>{props.name}</Typography>

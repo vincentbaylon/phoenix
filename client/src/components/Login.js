@@ -5,9 +5,9 @@ import { Typography } from '@mui/material'
 import { Button } from '@mui/material'
 import { Box, Grid } from '@mui/material'
 
-function Login({ setLoggedIn }) {
+function Login({ setLoggedIn, setUser }) {
 	const history = useHistory()
-	const [user, setUser] = useState({})
+	// const [user, setUser] = useState({})
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -36,6 +36,7 @@ function Login({ setLoggedIn }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
+			console.log('LOGIN', parsedBody)
 			setUser(parsedBody)
 			setLoggedIn(true)
 			history.push('/home')

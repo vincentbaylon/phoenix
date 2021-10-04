@@ -1,6 +1,5 @@
 class WorkoutsController < ApplicationController
   before_action :find_workout, except: :create
-  before_action :authorize, except: :show
 
   def create
     workout = Workout.create!(workout_params)

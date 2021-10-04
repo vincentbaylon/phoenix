@@ -11,6 +11,7 @@ import {
 	Button,
 	Divider,
 	Box,
+	Grid,
 } from '@mui/material'
 
 import Cards from './Cards'
@@ -88,12 +89,16 @@ function CreateExercise({
 	}
 
 	const displayWorkouts = workouts.map((w) => {
-		return <Cards key={w.id} props={w} />
+		return (
+			<Grid item>
+				<Cards key={w.id} props={w} />
+			</Grid>
+		)
 	})
 
 	return (
-		<>
-			<Typography fontWeight='bold' sx={{ mt: 3, mb: 2 }}>
+		<Box sx={{ p: 2, width: '100vw' }}>
+			<Typography fontWeight='bold'>
 				Create Workouts For "{routine.name}"
 			</Typography>
 			<Stack spacing={2}>
@@ -143,9 +148,7 @@ function CreateExercise({
 				Add Workout
 			</Button>
 			<Divider />
-			<Box sx={{ display: 'flex', flexDirection: 'row' }}>
-				{workouts.length > 0 ? displayWorkouts : null}
-			</Box>
+			<Grid container>{workouts.length > 0 ? displayWorkouts : null}</Grid>
 			<Button
 				variant='contained'
 				color='secondary'
@@ -154,7 +157,7 @@ function CreateExercise({
 			>
 				Done Adding Workouts
 			</Button>
-		</>
+		</Box>
 	)
 }
 

@@ -68,7 +68,7 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 	}
 
 	return (
-		<>
+		<Box sx={{ p: 2, width: '100vw' }}>
 			<Typography fontWeight='bold'>Create A Routine</Typography>
 
 			<TextField
@@ -113,7 +113,7 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 			<Button variant='contained' onClick={handleRoutine} sx={{ mt: 2 }}>
 				Create Routine
 			</Button>
-		</>
+		</Box>
 	)
 }
 

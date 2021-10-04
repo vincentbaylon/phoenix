@@ -9,13 +9,14 @@ function RoutineCards({ props, handleClick }) {
 		<>
 			<Card
 				sx={{
-					width: '150px',
-					height: '200px',
+					width: '125px',
+					height: '150px',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
 					flexDirection: 'column',
 					m: 1,
+					p: 1,
 				}}
 				onClick={cardClick}
 			>

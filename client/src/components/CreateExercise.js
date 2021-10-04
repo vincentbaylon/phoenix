@@ -121,12 +121,14 @@ function CreateExercise({ routine, workouts, user }) {
 
 	const displayWorkouts = workoutArr.map((w, i) => {
 		return (
-			<ExerciseCards
-				key={w.id}
-				props={w}
-				day={workoutDays[i]}
-				handleSelect={handleSelect}
-			/>
+			<Grid item>
+				<ExerciseCards
+					key={w.id}
+					props={w}
+					day={workoutDays[i]}
+					handleSelect={handleSelect}
+				/>
+			</Grid>
 		)
 	})
 
@@ -135,11 +137,8 @@ function CreateExercise({ routine, workouts, user }) {
 	})
 
 	return (
-		<Box sx={{ m: 5 }}>
-			console.log(workouts)
-			<Box sx={{ display: 'flex', flexDirection: 'row' }}>
-				{workoutArr.length > 0 ? displayWorkouts : null}
-			</Box>
+		<Box sx={{ m: 2, mt: 10 }}>
+			<Grid container>{workoutArr.length > 0 ? displayWorkouts : null}</Grid>
 			<Typography sx={{ mb: 2 }}>
 				Currently selected: {selected.name} - {selected.day}
 			</Typography>
@@ -153,12 +152,11 @@ function CreateExercise({ routine, workouts, user }) {
 					value={formData.name}
 					label='Exercise Name'
 					placeholder='Exercise'
-					fullWidth
 					variant='standard'
 					onChange={handleChange}
 				/>
 
-				<FormControl fullWidth variant='standard'>
+				<FormControl variant='standard'>
 					<InputLabel id='bodypartLabel'>Bodypart</InputLabel>
 					<Select
 						labelId='bodypartLabel'
@@ -176,7 +174,7 @@ function CreateExercise({ routine, workouts, user }) {
 						<MenuItem value={'Olympic'}>Olympic</MenuItem>
 					</Select>
 				</FormControl>
-				<FormControl fullWidth variant='standard'>
+				<FormControl variant='standard'>
 					<InputLabel id='weightLabel'>Weight</InputLabel>
 					<Select
 						labelId='weightLabel'
@@ -204,7 +202,7 @@ function CreateExercise({ routine, workouts, user }) {
 				{displayExercises}
 			</Box>
 			<Button variant='contained' color='secondary' onClick={handleDone}>
-				Done
+				Done Adding Exercises
 			</Button>
 		</Box>
 	)
