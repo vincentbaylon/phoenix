@@ -55,7 +55,7 @@ function SetCard({ set, props }) {
 	}
 
 	const textStyle = {
-		width: '50px',
+		width: '40px',
 	}
 
 	return (
@@ -101,7 +101,7 @@ function SetCard({ set, props }) {
 								inputProps={{ 'aria-label': 'controlled' }}
 							/>
 						}
-						label='Log set'
+						label='Log'
 					/>
 				</FormGroup>
 			</Grid>

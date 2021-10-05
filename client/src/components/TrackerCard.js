@@ -51,7 +51,7 @@ function TrackerCard({ props }) {
 				<SetCard set={3} />
 			</Grid> */}
 				<Grid item>
-					<TextField placeholder='Notes' multiline rows={1} rowsMax={4} />
+					<TextField placeholder='Notes' multiline rows={1} rowsmax={4} />
 				</Grid>
 				<Grid item>
 					<Button onClick={handleAdd}>Add Set</Button>
