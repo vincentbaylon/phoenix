@@ -42,7 +42,7 @@ export default function SwipeableTemporaryDrawer() {
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List>
-				{['Start Workout', 'History', 'Routine'].map((text) => (
+				{['Start Workout', 'History', 'Progress', 'Routine'].map((text) => (
 					<ListItem button key={text} onClick={handleClick}>
 						<ListItemText primary={text} />
 					</ListItem>

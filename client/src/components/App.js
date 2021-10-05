@@ -7,6 +7,7 @@ import { TextField } from '@mui/material'
 import { CssBaseline } from '@mui/material'
 import { Box } from '@mui/material'
 import { Container } from '@mui/material'
+import { useMediaQuery } from '@mui/material'
 
 import CreateRoutine from './CreateRoutine'
 import CreateExercise from './CreateExercise'
@@ -25,6 +26,7 @@ function App() {
 	const [user, setUser] = useState({})
 	const [loggedIn, setLoggedIn] = useState(false)
 	const [routine, setRoutine] = useState({})
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		fetch('/me').then((response) => {
