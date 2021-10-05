@@ -32,7 +32,7 @@ function TrackerCard({ props }) {
 		<>
 			<Grid
 				container
-				// justifyContent='center'
+				justifyContent='center'
 				alignItems='center'
 				direction='column'
 				spacing={2}

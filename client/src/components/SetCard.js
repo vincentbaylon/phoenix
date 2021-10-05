@@ -59,7 +59,13 @@ function SetCard({ set, props }) {
 	}
 
 	return (
-		<Grid container alignItems='center' spacing={2}>
+		<Grid
+			container
+			direction='row'
+			alignItems='center'
+			justifyContent='center'
+			spacing={2}
+		>
 			<Grid item>
 				<Typography>Set #{set}</Typography>
 			</Grid>
