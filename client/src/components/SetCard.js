@@ -66,13 +66,13 @@ function SetCard({ set, props }) {
 			justifyContent='center'
 			spacing={2}
 		>
-			<Grid item>
+			<Grid item xs={3}>
 				<Typography>Set #{set}</Typography>
 			</Grid>
 			{/* <Grid item>
 				<Typography variant='standard'>Prev</Typography>
 			</Grid> */}
-			<Grid item>
+			<Grid item xs={3}>
 				<TextField
 					name='reps'
 					type='number'
@@ -84,7 +84,7 @@ function SetCard({ set, props }) {
 					onClick={handleClick}
 				/>
 			</Grid>
-			<Grid item>
+			<Grid item xs={3}>
 				<TextField
 					name='weight'
 					type='number'
@@ -97,7 +97,7 @@ function SetCard({ set, props }) {
 				/>
 			</Grid>
 
-			<Grid item>
+			<Grid item xs={3}>
 				<FormGroup>
 					<FormControlLabel
 						control={
