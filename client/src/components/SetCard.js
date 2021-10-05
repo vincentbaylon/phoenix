@@ -63,9 +63,9 @@ function SetCard({ set, props }) {
 			<Grid item>
 				<Typography>Set #{set}</Typography>
 			</Grid>
-			<Grid item>
+			{/* <Grid item>
 				<Typography variant='standard'>Prev</Typography>
-			</Grid>
+			</Grid> */}
 			<Grid item>
 				<TextField
 					name='reps'
@@ -101,7 +101,7 @@ function SetCard({ set, props }) {
 								inputProps={{ 'aria-label': 'controlled' }}
 							/>
 						}
-						label='Log'
+						label=''
 					/>
 				</FormGroup>
 			</Grid>
