@@ -20,8 +20,12 @@ function RoutineCards({ props, handleClick }) {
 				}}
 				onClick={cardClick}
 			>
-				<Typography variant='h6'>{props.name}</Typography>
-				<Typography variant='p'>{props.day}</Typography>
+				<Typography variant='h6' align='center'>
+					{props.name}
+				</Typography>
+				<Typography variant='p' align='center'>
+					{props.day}
+				</Typography>
 			</Card>
 		</>
 	)

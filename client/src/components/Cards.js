@@ -15,8 +15,12 @@ function Cards({ props }) {
 					p: 1,
 				}}
 			>
-				<Typography variant='h6'>{props.workout?.name}</Typography>
-				<Typography variant='p'>{props.day}</Typography>
+				<Typography variant='h6' align='center'>
+					{props.workout?.name}
+				</Typography>
+				<Typography variant='p' align='center'>
+					{props.day}
+				</Typography>
 			</Card>
 		</>
 	)

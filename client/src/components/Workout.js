@@ -6,6 +6,7 @@ import { Box, Typography, Divider } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { useMediaQuery } from '@mui/material'
+import FadeIn from 'react-fade-in'
 
 function Workout({ user }) {
 	const [routine, setRoutine] = useState({})
@@ -42,31 +43,32 @@ function Workout({ user }) {
 	})
 
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				width: '100vw',
-			}}
-		>
-			{console.log(matches)}
+		<FadeIn>
 			<Box
 				sx={{
-					m: 2,
-					mt: 10,
-					width: matches ? '100%' : '50%',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					width: '100vw',
 				}}
 			>
-				{/* <Typography variant='h4'>{routine?.name}</Typography> */}
-				<Typography variant='h5' sx={{ mb: 2 }}>
-					{routine.workouts ? routine.workouts[0].name : 'Workout'} (
-					{format(date, 'EE')})
-				</Typography>
-				<Divider sx={{ mb: 2 }} />
-				{displayCards}
+				{console.log(matches)}
+				<Box
+					sx={{
+						m: 2,
+						mt: 10,
+						width: matches ? '100%' : '50%',
+					}}
+				>
+					{/* <Typography variant='h4'>{routine?.name}</Typography> */}
+					<Typography variant='h5' sx={{ mb: 2 }}>
+						{routine.workouts ? routine.workouts[0].name : 'Workout'}
+					</Typography>
+					<Divider sx={{ mb: 2 }} />
+					{displayCards}
+				</Box>
 			</Box>
-		</Box>
+		</FadeIn>
 	)
 }
 

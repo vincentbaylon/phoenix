@@ -9,10 +9,12 @@ import { Select } from '@mui/material'
 import { MenuItem } from '@mui/material'
 import { InputLabel } from '@mui/material'
 import Stack from '@mui/material/Stack'
+import { useMediaQuery } from '@mui/material'
 
 function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 	const [name, setName] = useState('')
 	const [workoutDays, setWorkoutDays] = useState([])
+	const matches = useMediaQuery('(max-width:900px)')
 
 	const handleChange = (e) => {
 		setName(e.target.value)
@@ -68,7 +70,7 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 	}
 
 	return (
-		<Box sx={{ p: 2, width: '100vw' }}>
+		<Box sx={{ p: 2, width: matches ? '100vw' : '50vw' }}>
 			<Typography fontWeight='bold'>Create A Routine</Typography>
 
 			<TextField
@@ -79,37 +81,6 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 				value={name}
 				onChange={handleChange}
 			/>
-			<Stack spacing={2}>
-				{/* <FormControl
-					fullWidth
-					variant='standard'
-					sx={{ mb: 1 }}
-					style={{
-						textOverflow: 'ellipsis',
-						overflow: 'hidden',
-						whiteSpace: 'pre',
-					}}
-				>
-					<InputLabel id='workoutDays'>Select Workout Days</InputLabel>
-					<Select
-						labelId='workoutDays'
-						id='workoutDays'
-						value={workoutDays}
-						label='Workout Days'
-						name='workoutDays'
-						multiple
-						onChange={handleDays}
-					>
-						<MenuItem value={'Monday'}>Monday</MenuItem>
-						<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
-						<MenuItem value={'Wednesday'}>Wednesday</MenuItem>
-						<MenuItem value={'Thursday'}>Thursday</MenuItem>
-						<MenuItem value={'Friday'}>Friday</MenuItem>
-						<MenuItem value={'Saturday'}>Saturday</MenuItem>
-						<MenuItem value={'Sunday'}>Sunday</MenuItem>
-					</Select>
-				</FormControl> */}
-			</Stack>
 			<Button variant='contained' onClick={handleRoutine} sx={{ mt: 2 }}>
 				Create Routine
 			</Button>

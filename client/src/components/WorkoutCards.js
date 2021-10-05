@@ -5,8 +5,8 @@ function WorkoutCards({ props }) {
 		<>
 			<Card
 				sx={{
-					width: '150px',
-					height: '150px',
+					width: '125px',
+					height: '100px',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -14,7 +14,9 @@ function WorkoutCards({ props }) {
 					m: 1,
 				}}
 			>
-				<Typography variant='h6'>{props.name}</Typography>
+				<Typography variant='h6' align='center'>
+					{props.name}
+				</Typography>
 				{/* <Typography variant='p'>{props.day}</Typography> */}
 			</Card>
 		</>

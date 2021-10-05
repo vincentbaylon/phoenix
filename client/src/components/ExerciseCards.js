@@ -14,12 +14,12 @@ function ExerciseCards({ props, day, handleSelect }) {
 
 	return (
 		<>
-			{console.log(props.id)}
+			{console.log('DAY', day)}
 			<Card
 				onClick={handleClick}
 				sx={{
 					width: '125px',
-					height: '150px',
+					height: '100px',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',

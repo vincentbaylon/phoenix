@@ -12,6 +12,7 @@ import {
 	Divider,
 	Box,
 	Grid,
+	useMediaQuery,
 } from '@mui/material'
 
 import Cards from './Cards'
@@ -28,6 +29,7 @@ function CreateExercise({
 	const [day, setDay] = useState('')
 	const [name, setName] = useState('')
 	const history = useHistory()
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {})
 
@@ -97,8 +99,8 @@ function CreateExercise({
 	})
 
 	return (
-		<Box sx={{ p: 2, width: '100vw' }}>
-			<Typography fontWeight='bold'>
+		<Box sx={{ p: 2, width: matches ? '100vw' : '50vw' }}>
+			<Typography variant='h6' fontWeight='bold'>
 				Create Workouts For "{routine.name}"
 			</Typography>
 			<Stack spacing={2}>

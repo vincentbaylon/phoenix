@@ -13,4 +13,26 @@ class User < ApplicationRecord
   has_many :routines, through: :user_routines
   has_many :user_workouts, dependent: :destroy
   has_many :workouts, through: :user_workouts
+
+  def generate_password_token!
+    self.reset_password_token = generate_token
+    self.reset_password_sent_at = Time.now.utc
+    save!
+  end
+   
+  def password_token_valid?
+    (self.reset_password_sent_at + 1.hours) > Time.now.utc
+  end
+   
+  def reset_password!(password)
+    self.reset_password_token = nil
+    self.password = password
+    save!
+  end
+   
+  private
+   
+  def generate_token
+    SecureRandom.hex(10)
+  end
 end

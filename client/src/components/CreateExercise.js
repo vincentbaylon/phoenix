@@ -16,6 +16,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import MobileDatePicker from '@mui/lab/MobileDatePicker'
 import ExerciseCards from './ExerciseCards'
 import AddCards from './AddCards'
+import { useMediaQuery } from '@mui/material'
 
 function CreateExercise({ routine, workouts, user }) {
 	const history = useHistory()
@@ -32,6 +33,7 @@ function CreateExercise({ routine, workouts, user }) {
 		day: '',
 	})
 	const [addWorkouts, setAddWorkouts] = useState([])
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		async function fetchRoutine() {
@@ -137,73 +139,102 @@ function CreateExercise({ routine, workouts, user }) {
 	})
 
 	return (
-		<Box sx={{ m: 2, mt: 10 }}>
-			<Grid container>{workoutArr.length > 0 ? displayWorkouts : null}</Grid>
-			<Typography sx={{ mb: 2 }}>
-				Currently selected: {selected.name} - {selected.day}
-			</Typography>
-			<Divider />
-			<Typography fontWeight='bold' sx={{ mt: 2 }}>
-				Add Exercises To Workout
-			</Typography>
-			<Stack spacing={2}>
-				<TextField
-					name='name'
-					value={formData.name}
-					label='Exercise Name'
-					placeholder='Exercise'
-					variant='standard'
-					onChange={handleChange}
-				/>
+		<Box
+			sx={{
+				m: 2,
+				mt: 8,
+				p: 2,
+				width: matches ? '100vw' : '50vw',
+				margin: 'auto',
+			}}
+		>
+			<Box>
+				<Typography variant='h6' fontWeight='bold' sx={{ mb: 2 }}>
+					Select A Workout
+				</Typography>
+				<Grid container>{workoutArr.length > 0 ? displayWorkouts : null}</Grid>
+				<Typography sx={{ mb: 2 }}>
+					Currently selected: {selected.name}
+				</Typography>
 
-				<FormControl variant='standard'>
-					<InputLabel id='bodypartLabel'>Bodypart</InputLabel>
-					<Select
-						labelId='bodypartLabel'
-						id='bodypartSelect'
-						value={formData.bodypart}
-						label='Bodypart'
-						name='bodypart'
+				<Divider />
+				<Typography variant='h6' fontWeight='bold' sx={{ mt: 2 }}>
+					Add Exercises To Workout
+				</Typography>
+				<Stack spacing={2}>
+					<TextField
+						name='name'
+						value={formData.name}
+						label='Exercise Name'
+						placeholder='Exercise'
+						variant='standard'
 						onChange={handleChange}
+					/>
+
+					<FormControl variant='standard'>
+						<InputLabel id='bodypartLabel'>Bodypart</InputLabel>
+						<Select
+							labelId='bodypartLabel'
+							id='bodypartSelect'
+							value={formData.bodypart}
+							label='Bodypart'
+							name='bodypart'
+							onChange={handleChange}
+						>
+							<MenuItem value={'Chest'}>Chest</MenuItem>
+							<MenuItem value={'Back'}>Back</MenuItem>
+							<MenuItem value={'Legs'}>Legs</MenuItem>
+							<MenuItem value={'Shoulders'}>Shoulders</MenuItem>
+							<MenuItem value={'Arms'}>Arms</MenuItem>
+							<MenuItem value={'Olympic'}>Olympic</MenuItem>
+						</Select>
+					</FormControl>
+					<FormControl variant='standard'>
+						<InputLabel id='weightLabel'>Weight</InputLabel>
+						<Select
+							labelId='weightLabel'
+							id='weightSelect'
+							value={formData.weight}
+							label='Weight'
+							name='weight'
+							onChange={handleChange}
+						>
+							<MenuItem value={'Dumbbell'}>Dumbbell</MenuItem>
+							<MenuItem value={'Barbell'}>Barbell</MenuItem>
+							<MenuItem value={'Machine'}>Machine</MenuItem>
+							<MenuItem value={'Bodyweight'}>Bodyweight</MenuItem>
+							<MenuItem value={'Cardio'}>Cardio</MenuItem>
+							<MenuItem value={'Duration'}>Duration</MenuItem>
+						</Select>
+					</FormControl>
+				</Stack>
+				<Button variant='contained' onClick={handleAdd} sx={{ mt: 2, mb: 3 }}>
+					Add Exercise
+				</Button>
+				<Divider />
+				<Typography variant='h6' fontweight='bold' sx={{ mt: 2, mb: 2 }}>
+					Exercises Currently Added
+				</Typography>
+				<Box sx={{ display: 'flex', flexDirection: 'row' }}>
+					{displayExercises}
+				</Box>
+				<Box
+					sx={{
+						width: '100%',
+						display: 'flex',
+						justifyContent: 'flex-end',
+					}}
+				>
+					<Button
+						variant='contained'
+						color='secondary'
+						onClick={handleDone}
+						sx={{ right: 0 }}
 					>
-						<MenuItem value={'Chest'}>Chest</MenuItem>
-						<MenuItem value={'Back'}>Back</MenuItem>
-						<MenuItem value={'Legs'}>Legs</MenuItem>
-						<MenuItem value={'Shoulders'}>Shoulders</MenuItem>
-						<MenuItem value={'Arms'}>Arms</MenuItem>
-						<MenuItem value={'Olympic'}>Olympic</MenuItem>
-					</Select>
-				</FormControl>
-				<FormControl variant='standard'>
-					<InputLabel id='weightLabel'>Weight</InputLabel>
-					<Select
-						labelId='weightLabel'
-						id='weightSelect'
-						value={formData.weight}
-						label='Weight'
-						name='weight'
-						onChange={handleChange}
-					>
-						<MenuItem value={'Dumbbell'}>Dumbbell</MenuItem>
-						<MenuItem value={'Barbell'}>Barbell</MenuItem>
-						<MenuItem value={'Machine'}>Machine</MenuItem>
-						<MenuItem value={'Bodyweight'}>Bodyweight</MenuItem>
-						<MenuItem value={'Cardio'}>Cardio</MenuItem>
-						<MenuItem value={'Duration'}>Duration</MenuItem>
-					</Select>
-				</FormControl>
-			</Stack>
-			<Button variant='contained' onClick={handleAdd} sx={{ mt: 2, mb: 3 }}>
-				Add Exercise
-			</Button>
-			<Divider />
-			<Typography sx={{ mt: 2, mb: 2 }}>Exercises currently added:</Typography>
-			<Box sx={{ display: 'flex', flexDirection: 'row' }}>
-				{displayExercises}
+						Save Routine
+					</Button>
+				</Box>
 			</Box>
-			<Button variant='contained' color='secondary' onClick={handleDone}>
-				Done Adding Exercises
-			</Button>
 		</Box>
 	)
 }

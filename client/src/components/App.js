@@ -56,13 +56,11 @@ function App() {
 
 	return (
 		<div>
-			{console.log(user)}
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname === '/' || location.pathname === '/signup' ? null : (
 					<NavBar handleLogout={handleLogout} loggedIn={loggedIn} user={user} />
 				)}
-
 				<Switch>
 					<Route path='/signup'>
 						<SignUp setUser={setUser} />

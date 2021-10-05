@@ -5,8 +5,16 @@ import CreateWorkout from './CreateWorkout'
 import CreateRoutine from './CreateRoutine'
 import Cards from './Cards'
 import RoutineCards from './RoutineCards'
+import FadeIn from 'react-fade-in'
 
-import { Box, Card, Typography, Divider, Grid } from '@mui/material'
+import {
+	Box,
+	Card,
+	Typography,
+	Divider,
+	Grid,
+	useMediaQuery,
+} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 
 function Routine({ user, setRoutine, routine }) {
@@ -16,6 +24,7 @@ function Routine({ user, setRoutine, routine }) {
 	const [showRoutinePage, setShowRoutinePage] = useState(true)
 	const [routineArr, setRoutineArr] = useState([])
 	const [workouts, setWorkouts] = useState([])
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		async function fetchRoutine() {
@@ -68,65 +77,71 @@ function Routine({ user, setRoutine, routine }) {
 	})
 
 	return (
-		<Box sx={{ m: 2, mt: 10 }}>
-			<Grid container justifyContent='center'>
-				<Grid item>
-					{showRoutinePage ? (
-						<>
-							<Typography>Select A Routine</Typography>
-							<Grid container direction='row'>
-								<Grid item>
-									<Card
-										onClick={handleRoutine}
-										sx={{
-											width: '125px',
-											height: '150px',
-											display: 'flex',
-											justifyContent: 'center',
-											alignItems: 'center',
-											flexDirection: 'column',
-											m: 1,
-											p: 1,
-										}}
-									>
-										<AddIcon fontSize='large' />
-										<Typography align='center'>Create A Routine</Typography>
-									</Card>
+		<FadeIn>
+			<Box sx={{ m: 2, mt: 10 }}>
+				<Grid container justifyContent='center'>
+					<Grid item>
+						{showRoutinePage ? (
+							<>
+								<Typography>Select A Routine</Typography>
+								<Grid container direction='row'>
+									<Grid item>
+										<Card
+											onClick={handleRoutine}
+											sx={{
+												width: '125px',
+												height: '150px',
+												display: 'flex',
+												justifyContent: 'center',
+												alignItems: 'center',
+												flexDirection: 'column',
+												m: 1,
+												p: 1,
+											}}
+										>
+											<AddIcon fontSize='large' />
+											<Typography align='center'>Create A Routine</Typography>
+										</Card>
+									</Grid>
+									{displayRoutines}
 								</Grid>
-								{displayRoutines}
-							</Grid>
-						</>
-					) : null}
+							</>
+						) : null}
+					</Grid>
+					<Grid item>
+						{showRoutine ? (
+							<CreateRoutine
+								user={user}
+								setShowWorkout={setShowWorkout}
+								setShowRoutine={setShowRoutine}
+								setRoutine={setRoutine}
+							/>
+						) : null}
+					</Grid>
+					<Grid item>
+						{showWorkout ? (
+							<CreateWorkout
+								routine={routine}
+								user={user}
+								workouts={workouts}
+								setWorkouts={setWorkouts}
+								setShowWorkout={setShowWorkout}
+								setShowExercise={setShowExercise}
+								handleWorkoutDone={handleWorkoutDone}
+							/>
+						) : null}
+						{showExercise ? (
+							<CreateExercise
+								routine={routine}
+								user={user}
+								workouts={workouts}
+							/>
+						) : null}
+					</Grid>
+					<Divider />
 				</Grid>
-				<Grid item>
-					{showRoutine ? (
-						<CreateRoutine
-							user={user}
-							setShowWorkout={setShowWorkout}
-							setShowRoutine={setShowRoutine}
-							setRoutine={setRoutine}
-						/>
-					) : null}
-				</Grid>
-				<Grid item>
-					{showWorkout ? (
-						<CreateWorkout
-							routine={routine}
-							user={user}
-							workouts={workouts}
-							setWorkouts={setWorkouts}
-							setShowWorkout={setShowWorkout}
-							setShowExercise={setShowExercise}
-							handleWorkoutDone={handleWorkoutDone}
-						/>
-					) : null}
-					{showExercise ? (
-						<CreateExercise routine={routine} user={user} workouts={workouts} />
-					) : null}
-				</Grid>
-				<Divider />
-			</Grid>
-		</Box>
+			</Box>
+		</FadeIn>
 	)
 }
 

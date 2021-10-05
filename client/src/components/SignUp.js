@@ -53,37 +53,8 @@ function SignUp({ setUser }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
-			const res = await fetch('/progresses', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			})
-
-			const parsedProgress = await res.json()
-			if (parsedProgress.error) {
-				alert(parsedProgress.error)
-			} else {
-				const body = {
-					user_id: parsedBody.id,
-					progress_id: parsedProgress.id,
-				}
-				const res = await fetch('/user_progresses', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(body),
-				})
-
-				const parsedUserProrgress = await res.json()
-				if (parsedUserProrgress.error) {
-					alert(parsedUserProrgress.error)
-				} else {
-					setUser(parsedBody)
-					history.push('/home')
-				}
-			}
+			setUser(parsedBody)
+			history.push('/home')
 		}
 	}
 

@@ -7,6 +7,7 @@ import {
 	Checkbox,
 	FormGroup,
 	FormControlLabel,
+	Stack,
 } from '@mui/material'
 
 function SetCard({ set, props }) {
@@ -61,55 +62,52 @@ function SetCard({ set, props }) {
 	return (
 		<Grid
 			container
-			direction='row'
+			display='flex'
+			direction='column'
 			alignItems='center'
 			justifyContent='center'
-			spacing={2}
+			sx={{ ml: 2 }}
 		>
-			<Grid item xs={3}>
-				<Typography>Set #{set}</Typography>
-			</Grid>
-			{/* <Grid item>
-				<Typography variant='standard'>Prev</Typography>
-			</Grid> */}
-			<Grid item xs={3}>
-				<TextField
-					name='reps'
-					type='number'
-					variant='standard'
-					label='Reps'
-					style={textStyle}
-					value={formData.reps}
-					onChange={handleChange}
-					onClick={handleClick}
-				/>
-			</Grid>
-			<Grid item xs={3}>
-				<TextField
-					name='weight'
-					type='number'
-					variant='standard'
-					label='Lbs'
-					style={textStyle}
-					value={formData.weight}
-					onChange={handleChange}
-					onClick={handleClick}
-				/>
-			</Grid>
-
-			<Grid item xs={3}>
-				<FormGroup>
-					<FormControlLabel
-						control={
-							<Checkbox
-								checked={checked}
-								onChange={handleCheck}
-								inputProps={{ 'aria-label': 'controlled' }}
-							/>
-						}
-						label=''
+			<Grid item>
+				<Stack
+					direction='row'
+					alignItems='center'
+					justifyContent='center'
+					spacing={4}
+				>
+					<Typography sx={{ mt: 1 }}>{set}</Typography>
+					<Typography>Prev</Typography>
+					<TextField
+						name='reps'
+						type='number'
+						variant='standard'
+						style={textStyle}
+						value={formData.reps}
+						onChange={handleChange}
+						onClick={handleClick}
 					/>
-				</FormGroup>
+					<TextField
+						name='weight'
+						type='number'
+						variant='standard'
+						style={textStyle}
+						value={formData.weight}
+						onChange={handleChange}
+						onClick={handleClick}
+					/>
+					<FormGroup>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={checked}
+									onChange={handleCheck}
+									inputProps={{ 'aria-label': 'controlled' }}
+								/>
+							}
+							label=''
+						/>
+					</FormGroup>
+				</Stack>
 			</Grid>
 		</Grid>
 	)

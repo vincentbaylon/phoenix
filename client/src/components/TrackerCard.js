@@ -6,6 +6,7 @@ import {
 	Box,
 	Grid,
 	Divider,
+	Stack,
 } from '@mui/material'
 
 import SetCard from './SetCard'
@@ -42,6 +43,15 @@ function TrackerCard({ props }) {
 					<Typography variant='h6' align='left'>
 						{props.name}
 					</Typography>
+				</Grid>
+				<Grid item>
+					<Stack direction='row' spacing={3}>
+						<Typography>Set</Typography>
+						<Typography>Prev</Typography>
+						<Typography>Reps</Typography>
+						<Typography>Weight</Typography>
+						<Typography>Save</Typography>
+					</Stack>
 				</Grid>
 				<Grid item>{displayCards}</Grid>
 				{/* <Grid item>

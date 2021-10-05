@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import { AppBar } from '@mui/material'
+import { NavLink, useHistory } from 'react-router-dom'
+import { AppBar, Box } from '@mui/material'
 import { Tabs } from '@mui/material'
 import { Tab } from '@mui/material'
 import { Typography } from '@mui/material'
@@ -8,6 +8,7 @@ import Drawer from './Drawer'
 import { useMediaQuery } from '@mui/material'
 
 function NavBar({ handleLogout, loggedIn, user }) {
+	const history = useHistory()
 	const [value, setValue] = useState(0)
 	const matches = useMediaQuery('(max-width:900px)')
 	const handleChange = (event, newValue) => {
@@ -16,6 +17,10 @@ function NavBar({ handleLogout, loggedIn, user }) {
 
 	const tabStyle = {
 		color: 'white',
+	}
+
+	const handleLogo = () => {
+		history.push('/home')
 	}
 
 	if (matches) {
@@ -33,12 +38,7 @@ function NavBar({ handleLogout, loggedIn, user }) {
 						<Typography variant='h4' style={{ flex: 1, margin: '10px' }}>
 							Phoenix
 						</Typography>
-						<Tab
-							component={NavLink}
-							to='/home'
-							label={loggedIn ? user.username : 'Home'}
-							style={tabStyle}
-						/>
+						<Tab component={NavLink} to='/home' label='Home' style={tabStyle} />
 						<Drawer />
 					</Tabs>
 				</AppBar>
@@ -57,13 +57,18 @@ function NavBar({ handleLogout, loggedIn, user }) {
 					indicatorColor='secondary'
 					textColor='secondary'
 				>
-					<Typography variant='h4' style={{ flex: 1, margin: '10px' }}>
-						Phoenix Fitness
-					</Typography>
+					<Box
+						onClick={handleLogo}
+						style={{ cursor: 'pointer', flex: 1, margin: '10px' }}
+					>
+						<Typography variant='h4'>Phoenix Fitness</Typography>
+					</Box>
+
+					<Tab component={NavLink} to='/home' label='Home' style={tabStyle} />
 					<Tab
 						component={NavLink}
-						to='/home'
-						label={loggedIn ? user.username : 'Home'}
+						to='/routine'
+						label='Routine'
 						style={tabStyle}
 					/>
 					<Tab
@@ -80,11 +85,10 @@ function NavBar({ handleLogout, loggedIn, user }) {
 					/>
 					<Tab
 						component={NavLink}
-						to='/routine'
-						label='Routine'
+						to='/progress'
+						label='Progress'
 						style={tabStyle}
 					/>
-
 					<Tab
 						component={NavLink}
 						to='/'
