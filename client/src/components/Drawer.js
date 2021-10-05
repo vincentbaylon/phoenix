@@ -10,8 +10,10 @@ import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
+import { useHistory } from 'react-router-dom'
 
 export default function SwipeableTemporaryDrawer() {
+	const history = useHistory()
 	const [state, setState] = React.useState({
 		top: false,
 		left: false,
@@ -31,8 +33,13 @@ export default function SwipeableTemporaryDrawer() {
 		setState({ ...state, [anchor]: open })
 	}
 
-	const handleClick = () => {
-		console.log('CLICK')
+	const handleClick = (e) => {
+		if (e.target.innerText === 'Start Workout') {
+			history.push('/workout')
+		} else {
+			let value = e.target.innerText
+			history.push(`/${value.toLowerCase()}`)
+		}
 	}
 
 	const list = (anchor) => (
