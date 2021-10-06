@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
   end
 
   create_table "routine_workouts", force: :cascade do |t|
-    t.string "day"
+    t.string "day", array: true
     t.boolean "day_complete"
     t.bigint "routine_id", null: false
     t.bigint "workout_id", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
 
   create_table "trackers", force: :cascade do |t|
     t.bigint "exercise_id", null: false
+    t.bigint "history_id", null: false
     t.string "date"
     t.string "set"
     t.integer "reps"
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exercise_id"], name: "index_trackers_on_exercise_id"
+    t.index ["history_id"], name: "index_trackers_on_history_id"
   end
 
   create_table "user_exercises", force: :cascade do |t|
@@ -143,6 +145,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
   add_foreign_key "routine_workouts", "routines"
   add_foreign_key "routine_workouts", "workouts"
   add_foreign_key "trackers", "exercises"
+  add_foreign_key "trackers", "histories"
   add_foreign_key "user_exercises", "exercises"
   add_foreign_key "user_exercises", "users"
   add_foreign_key "user_progresses", "users"

@@ -26,10 +26,19 @@ function CreateExercise({
 	setShowExercise,
 	handleWorkoutDone,
 }) {
-	const [day, setDay] = useState('')
+	const [day, setDay] = useState([])
 	const [name, setName] = useState('')
 	const history = useHistory()
 	const matches = useMediaQuery('(max-width:900px)')
+	const daysArr = [
+		'Monday',
+		'Tuesday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+		'Sunday',
+	]
 
 	useEffect(() => {})
 
@@ -83,7 +92,7 @@ function CreateExercise({
 				let updateArr = [...workouts, parsedUserWorkoutBody]
 				setWorkouts(updateArr)
 				setName('')
-				setDay('')
+				setDay([])
 				// handleWorkoutDone()
 				console.log(workouts)
 			}
@@ -95,6 +104,14 @@ function CreateExercise({
 			<Grid item>
 				<Cards key={w.id} props={w} />
 			</Grid>
+		)
+	})
+
+	const menuItems = daysArr.map((d) => {
+		return (
+			<MenuItem key={d} value={d}>
+				{d}
+			</MenuItem>
 		)
 	})
 
@@ -131,14 +148,9 @@ function CreateExercise({
 						label='Workout Days'
 						name='workoutDays'
 						onChange={handleDay}
+						multiple
 					>
-						<MenuItem value={'Monday'}>Monday</MenuItem>
-						<MenuItem value={'Tuesday'}>Tuesday</MenuItem>
-						<MenuItem value={'Wednesday'}>Wednesday</MenuItem>
-						<MenuItem value={'Thursday'}>Thursday</MenuItem>
-						<MenuItem value={'Friday'}>Friday</MenuItem>
-						<MenuItem value={'Saturday'}>Saturday</MenuItem>
-						<MenuItem value={'Sunday'}>Sunday</MenuItem>
+						{menuItems}
 					</Select>
 				</FormControl>
 			</Stack>
