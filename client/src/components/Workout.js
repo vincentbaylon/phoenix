@@ -20,14 +20,20 @@ function Workout({ user }) {
 			.then((data) => {
 				if (data.routines.length > 0) {
 					const current = data.user_routines.find((r) => r.current === true)
-
-					fetch(`/routines/${current.id}`)
-						.then((res) => res.json())
-						.then((data) => {
-							console.log(data)
-							setRoutine(data)
-							setWorkout(data.workouts[0].workout_exercises)
-						})
+					console.log('CURRENT', current)
+					if (current) {
+						fetch(`/routines/${current.id}`)
+							.then((res) => res.json())
+							.then((data) => {
+								console.log(data)
+								setRoutine(data)
+								setWorkout(data.workouts[0].workout_exercises)
+							})
+					} else {
+						alert('No routine set as "Current"')
+					}
+				} else {
+					alert('Create a routine')
 				}
 			})
 	}, [])
@@ -43,32 +49,30 @@ function Workout({ user }) {
 	})
 
 	return (
-		<FadeIn>
+		<Box
+			sx={{
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				width: '100vw',
+			}}
+		>
+			{console.log(matches)}
 			<Box
 				sx={{
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-					width: '100vw',
+					m: 2,
+					mt: 10,
+					width: matches ? '100%' : '50%',
 				}}
 			>
-				{console.log(matches)}
-				<Box
-					sx={{
-						m: 2,
-						mt: 10,
-						width: matches ? '100%' : '50%',
-					}}
-				>
-					{/* <Typography variant='h4'>{routine?.name}</Typography> */}
-					<Typography variant='h5' sx={{ mb: 2 }}>
-						{routine.workouts ? routine.workouts[0].name : 'Workout'}
-					</Typography>
-					<Divider sx={{ mb: 2 }} />
-					{displayCards}
-				</Box>
+				{/* <Typography variant='h4'>{routine?.name}</Typography> */}
+				<Typography variant='h5' sx={{ mb: 2 }}>
+					{routine.workouts ? routine.workouts[0].name : 'Workout'}
+				</Typography>
+				<Divider sx={{ mb: 2 }} />
+				{displayCards}
 			</Box>
-		</FadeIn>
+		</Box>
 	)
 }
 

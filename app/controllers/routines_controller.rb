@@ -19,6 +19,11 @@ class RoutinesController < ApplicationController
     render json: @routine, status: :accepted
   end
 
+  def destroy
+    @routine.destroy
+    head :no_content
+  end
+
   private
   def find_routine
     @routine = Routine.find(params[:id])

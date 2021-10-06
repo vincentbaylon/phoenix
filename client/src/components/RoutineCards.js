@@ -1,12 +1,14 @@
 import { Card, Box, Typography } from '@mui/material'
+import { useState } from 'react'
 
-function RoutineCards({ props, handleClick }) {
+function RoutineCards({ props, handleClick, current }) {
 	const cardClick = () => {
-		handleClick(props.id)
+		handleClick(props)
 	}
 
 	return (
 		<>
+			{console.log(props)}
 			<Card
 				sx={{
 					width: '125px',
@@ -26,6 +28,7 @@ function RoutineCards({ props, handleClick }) {
 				<Typography variant='p' align='center'>
 					{props.day}
 				</Typography>
+				{current ? <Typography variant='p'>(Current)</Typography> : null}
 			</Card>
 		</>
 	)

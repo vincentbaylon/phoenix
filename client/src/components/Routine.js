@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
-
+import { useHistory } from 'react-router-dom'
 import CreateExercise from './CreateWorkout'
 import CreateWorkout from './CreateWorkout'
 import CreateRoutine from './CreateRoutine'
 import Cards from './Cards'
 import RoutineCards from './RoutineCards'
-import FadeIn from 'react-fade-in'
 
 import {
 	Box,
@@ -18,11 +17,13 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 
 function Routine({ user, setRoutine, routine }) {
+	const history = useHistory()
 	const [showRoutine, setShowRoutine] = useState(false)
 	const [showWorkout, setShowWorkout] = useState(false)
 	const [showExercise, setShowExercise] = useState(false)
 	const [showRoutinePage, setShowRoutinePage] = useState(true)
 	const [routineArr, setRoutineArr] = useState([])
+	const [currentRoutine, setCurrentRoutine] = useState({})
 	const [workouts, setWorkouts] = useState([])
 	const matches = useMediaQuery('(max-width:900px)')
 
@@ -33,8 +34,13 @@ function Routine({ user, setRoutine, routine }) {
 			if (parsedBody.error) {
 				alert(parsedBody.error)
 			} else {
-				console.log(parsedBody)
 				setRoutineArr(parsedBody.routines)
+				const findCurrent = parsedBody.user_routines.find(
+					(r) => r.current === true
+				)
+				if (findCurrent) {
+					setCurrentRoutine(findCurrent)
+				}
 			}
 		}
 		fetchRoutine()
@@ -49,99 +55,86 @@ function Routine({ user, setRoutine, routine }) {
 		setShowExercise(true)
 	}
 
-	const handleClick = async (id) => {
-		const res = await fetch(`/user_routines/${id}`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				current: true,
-			}),
-		})
-
-		const parsedBody = await res.json()
-		if (parsedBody.error) {
-			alert(parsedBody.error)
-		} else {
-			alert('Current routine set')
-		}
+	const handleClick = (props) => {
+		setRoutine(props)
+		history.push('/edit_routine')
 	}
 
 	const displayRoutines = routineArr.map((r) => {
 		return (
 			<Grid item>
-				<RoutineCards key={r.id} props={r} handleClick={handleClick} />
+				<RoutineCards
+					key={r.id}
+					props={r}
+					handleClick={handleClick}
+					current={currentRoutine.id === r.id ? true : false}
+				/>
 			</Grid>
 		)
 	})
 
 	return (
-		<FadeIn>
-			<Box sx={{ m: 2, mt: 10 }}>
-				<Grid container justifyContent='center'>
-					<Grid item>
-						{showRoutinePage ? (
-							<>
-								<Typography>Select A Routine</Typography>
-								<Grid container direction='row'>
-									<Grid item>
-										<Card
-											onClick={handleRoutine}
-											sx={{
-												width: '125px',
-												height: '150px',
-												display: 'flex',
-												justifyContent: 'center',
-												alignItems: 'center',
-												flexDirection: 'column',
-												m: 1,
-												p: 1,
-											}}
-										>
-											<AddIcon fontSize='large' />
-											<Typography align='center'>Create A Routine</Typography>
-										</Card>
-									</Grid>
-									{displayRoutines}
+		<Box sx={{ m: 2, mt: 10 }}>
+			<Grid container justifyContent='center'>
+				<Grid item>
+					{showRoutinePage ? (
+						<>
+							<Typography variant='h6' fontWeight='bold'>
+								Set A Routine As "Current"
+							</Typography>
+							<Grid container direction='row'>
+								<Grid item>
+									<Card
+										onClick={handleRoutine}
+										sx={{
+											width: '125px',
+											height: '150px',
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center',
+											flexDirection: 'column',
+											m: 1,
+											p: 1,
+										}}
+									>
+										<AddIcon fontSize='large' />
+										<Typography align='center'>Create A Routine</Typography>
+									</Card>
 								</Grid>
-							</>
-						) : null}
-					</Grid>
-					<Grid item>
-						{showRoutine ? (
-							<CreateRoutine
-								user={user}
-								setShowWorkout={setShowWorkout}
-								setShowRoutine={setShowRoutine}
-								setRoutine={setRoutine}
-							/>
-						) : null}
-					</Grid>
-					<Grid item>
-						{showWorkout ? (
-							<CreateWorkout
-								routine={routine}
-								user={user}
-								workouts={workouts}
-								setWorkouts={setWorkouts}
-								setShowWorkout={setShowWorkout}
-								setShowExercise={setShowExercise}
-								handleWorkoutDone={handleWorkoutDone}
-							/>
-						) : null}
-						{showExercise ? (
-							<CreateExercise
-								routine={routine}
-								user={user}
-								workouts={workouts}
-							/>
-						) : null}
-					</Grid>
-					<Divider />
+								{displayRoutines}
+							</Grid>
+						</>
+					) : null}
 				</Grid>
-			</Box>
-		</FadeIn>
+				<Grid item>
+					{showRoutine ? (
+						<CreateRoutine
+							user={user}
+							setShowWorkout={setShowWorkout}
+							setShowRoutine={setShowRoutine}
+							setRoutine={setRoutine}
+						/>
+					) : null}
+				</Grid>
+				<Grid item>
+					{showWorkout ? (
+						<CreateWorkout
+							routine={routine}
+							user={user}
+							workouts={workouts}
+							setWorkouts={setWorkouts}
+							setShowWorkout={setShowWorkout}
+							setShowExercise={setShowExercise}
+							handleWorkoutDone={handleWorkoutDone}
+						/>
+					) : null}
+					{showExercise ? (
+						<CreateExercise routine={routine} user={user} workouts={workouts} />
+					) : null}
+				</Grid>
+				<Divider />
+			</Grid>
+		</Box>
 	)
 }
 

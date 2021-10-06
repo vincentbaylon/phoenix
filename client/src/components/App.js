@@ -19,6 +19,7 @@ import SignUp from './SignUp'
 import Workout from './Workout'
 import Routine from './Routine'
 import History from './History'
+import EditRoutine from './EditRoutine'
 
 function App() {
 	const history = useHistory()
@@ -79,6 +80,12 @@ function App() {
 					</Route>
 					<Route path='/history'>
 						<History />
+					</Route>
+					<Route path='/progress'>
+						<Progress user={user} />
+					</Route>
+					<Route path='/edit_routine'>
+						<EditRoutine setRoutine={setRoutine} routine={routine} />
 					</Route>
 					<Route exact path='/'>
 						<Login setLoggedIn={setLoggedIn} setUser={setUser} />

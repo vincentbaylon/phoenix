@@ -75,8 +75,8 @@ function SetCard({ set, props }) {
 					justifyContent='center'
 					spacing={4}
 				>
-					<Typography sx={{ mt: 1 }}>{set}</Typography>
-					<Typography>Prev</Typography>
+					<Typography>{set}</Typography>
+					<Typography>175</Typography>
 					<TextField
 						name='reps'
 						type='number'

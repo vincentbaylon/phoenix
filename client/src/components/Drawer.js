@@ -12,7 +12,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import MenuIcon from '@mui/icons-material/Menu'
 import { useHistory } from 'react-router-dom'
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer({ handleLogout }) {
 	const history = useHistory()
 	const [state, setState] = React.useState({
 		top: false,
@@ -36,6 +36,8 @@ export default function SwipeableTemporaryDrawer() {
 	const handleClick = (e) => {
 		if (e.target.innerText === 'Start Workout') {
 			history.push('/workout')
+		} else if (e.target.innerText === 'Logout') {
+			handleLogout()
 		} else {
 			let value = e.target.innerText
 			history.push(`/${value.toLowerCase()}`)
@@ -60,7 +62,7 @@ export default function SwipeableTemporaryDrawer() {
 			<Divider />
 			<List>
 				{['Account', 'Logout'].map((text) => (
-					<ListItem button key={text}>
+					<ListItem button key={text} onClick={handleClick}>
 						<ListItemText primary={text} />
 					</ListItem>
 				))}

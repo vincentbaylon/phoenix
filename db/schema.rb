@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_210409) do
+ActiveRecord::Schema.define(version: 2021_10_06_105137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_210409) do
     t.bigint "user_id", null: false
     t.bigint "routine_id", null: false
     t.string "date"
-    t.boolean "in_progress"
+    t.boolean "in_progress", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["routine_id"], name: "index_histories_on_routine_id"
@@ -68,9 +68,7 @@ ActiveRecord::Schema.define(version: 2021_10_05_210409) do
     t.integer "weight"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "history_id", null: false
     t.index ["exercise_id"], name: "index_trackers_on_exercise_id"
-    t.index ["history_id"], name: "index_trackers_on_history_id"
   end
 
   create_table "user_exercises", force: :cascade do |t|
@@ -145,7 +143,6 @@ ActiveRecord::Schema.define(version: 2021_10_05_210409) do
   add_foreign_key "routine_workouts", "routines"
   add_foreign_key "routine_workouts", "workouts"
   add_foreign_key "trackers", "exercises"
-  add_foreign_key "trackers", "histories"
   add_foreign_key "user_exercises", "exercises"
   add_foreign_key "user_exercises", "users"
   add_foreign_key "user_progresses", "users"

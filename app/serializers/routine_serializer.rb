@@ -1,5 +1,5 @@
 class RoutineSerializer < ActiveModel::Serializer
-  attributes :id, :name, :routine_workouts, :workout_days
+  attributes :id, :name, :routine_workouts, :routine_days, :routine_exercises
   has_many :user_routines
   has_many :users, through: :user_routines
 
@@ -10,7 +10,11 @@ class RoutineSerializer < ActiveModel::Serializer
     self.object.workouts
   end
 
-  def workout_days
+  def routine_days
     self.object.routine_workouts
+  end
+
+  def routine_exercises
+    self.object.workouts.map(&:show_exercises)
   end
 end
