@@ -7,6 +7,6 @@ class RoutineWorkoutsController < ApplicationController
   private
 
   def routine_workout_params
-    params.permit(:routine_id, :workout_id, :day)
+    params.permit(:routine_id, :workout_id, :day => [])
   end
 end

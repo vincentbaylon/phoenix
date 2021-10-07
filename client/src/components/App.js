@@ -55,8 +55,15 @@ function App() {
 		history.push('/')
 	}
 
+	const divStyle = {
+		width: '100%',
+		height: '100vh',
+		// background: 'linear-gradient(rgba(245,210,66,0.5),transparent)',
+		// backgroundColor: 'grey',
+	}
+
 	return (
-		<div>
+		<div style={divStyle}>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname === '/' || location.pathname === '/signup' ? null : (

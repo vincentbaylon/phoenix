@@ -67,7 +67,7 @@ function EditRoutine({ setRoutine, routine }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
-			alert('Current routine set')
+			alert('Current routine set. Have a good workout!')
 		}
 	}
 

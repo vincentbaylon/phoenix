@@ -10,9 +10,11 @@ import { Visibility } from '@mui/icons-material'
 import { VisibilityOff } from '@mui/icons-material'
 import { FormControl } from '@mui/material'
 import { InputLabel } from '@mui/material'
-import { OutlinedInput } from '@mui/material'
+import { FilledInput } from '@mui/material'
 import { Grid } from '@mui/material'
 import { Stack } from '@mui/material'
+import background from '../assets/quote-bg2.jpeg'
+import FadeIn from 'react-fade-in'
 
 function SignUp({ setUser }) {
 	const history = useHistory()
@@ -62,6 +64,19 @@ function SignUp({ setUser }) {
 		history.push('/')
 	}
 
+	const textStyle = {
+		backgroundColor: 'white',
+		borderColor: '1px solid white',
+		color: 'black',
+		borderRadius: '2px',
+		width: '300px',
+	}
+
+	const buttonStyle = {
+		color: 'black',
+		background: '#4266F5',
+	}
+
 	return (
 		<Box
 			sx={{
@@ -69,6 +84,11 @@ function SignUp({ setUser }) {
 				justifyContent: 'center',
 				width: '100%',
 				height: '100vh',
+				backgroundImage: `url(${background})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundSize: 'cover',
+				backgroundPosition: 'center',
+				backgroundColor: '#0a121d',
 			}}
 		>
 			<Box
@@ -77,61 +97,88 @@ function SignUp({ setUser }) {
 					mt: 10,
 				}}
 			>
-				<Stack spacing={3}>
-					<Typography>Create Your Account</Typography>
-					<TextField
-						type='text'
-						name='name'
-						value={formData.name}
-						label='Name'
-						onChange={handleChange}
-					/>
-					<TextField
-						type='email'
-						name='email'
-						value={formData.email}
-						label='Email'
-						onChange={handleChange}
-					/>
-					<TextField
-						type='text'
-						name='username'
-						value={formData.username}
-						label='Username'
-						onChange={handleChange}
-					/>
-
-					<FormControl sx={{ m: 1 }} variant='outlined'>
-						<InputLabel htmlFor='outlined-adornment-password'>
-							Password
-						</InputLabel>
-						<OutlinedInput
-							id='outlined-adornment-password'
-							type={showPassword ? 'text' : 'password'}
-							name='password'
-							value={formData.password}
-							label='Password'
-							placeholder='(Min 6 characters)'
+				<FadeIn>
+					<Stack spacing={3}>
+						<Typography variant='h5' color='white'>
+							Create Your Account
+						</Typography>
+						<TextField
+							type='text'
+							name='name'
+							value={formData.name}
+							label='Name'
 							onChange={handleChange}
-							endAdornment={
-								<InputAdornment position='end'>
-									<IconButton
-										aria-label='toggle password visibility'
-										onClick={handleShowPassword}
-										edge='end'
-									>
-										{showPassword ? <VisibilityOff /> : <Visibility />}
-									</IconButton>
-								</InputAdornment>
-							}
+							style={textStyle}
+							variant='filled'
 						/>
-					</FormControl>
+						<TextField
+							type='email'
+							name='email'
+							value={formData.email}
+							label='Email'
+							onChange={handleChange}
+							style={textStyle}
+							variant='filled'
+						/>
+						<TextField
+							type='text'
+							name='username'
+							value={formData.username}
+							label='Username'
+							onChange={handleChange}
+							style={textStyle}
+							variant='filled'
+						/>
 
-					<Button variant='contained' onClick={handleSubmit}>
-						Sign Up
-					</Button>
-					<Button onClick={handleLogin}>Log In</Button>
-				</Stack>
+						<FormControl sx={{ m: 1 }} variant='filled'>
+							<InputLabel htmlFor='outlined-adornment-password'>
+								Password
+							</InputLabel>
+							<FilledInput
+								id='outlined-adornment-password'
+								type={showPassword ? 'text' : 'password'}
+								name='password'
+								value={formData.password}
+								label='Password'
+								placeholder='(Min 6 characters)'
+								onChange={handleChange}
+								style={textStyle}
+								endAdornment={
+									<InputAdornment position='end'>
+										<IconButton
+											aria-label='toggle password visibility'
+											onClick={handleShowPassword}
+											edge='end'
+										>
+											{showPassword ? <VisibilityOff /> : <Visibility />}
+										</IconButton>
+									</InputAdornment>
+								}
+							/>
+						</FormControl>
+
+						<Button
+							variant='contained'
+							onClick={handleSubmit}
+							style={buttonStyle}
+						>
+							Sign Up
+						</Button>
+						<Box
+							sx={{
+								display: 'flex',
+								direction: 'row',
+								justifyContent: 'center',
+								alignItems: 'center',
+							}}
+						>
+							<Typography color='white'>Already have an account?</Typography>
+							<Button onClick={handleLogin} sx={{ color: '#F5D242' }}>
+								Log In
+							</Button>
+						</Box>
+					</Stack>
+				</FadeIn>
 			</Box>
 		</Box>
 	)

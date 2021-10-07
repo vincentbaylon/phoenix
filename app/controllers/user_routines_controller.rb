@@ -14,7 +14,7 @@ class UserRoutinesController < ApplicationController
   private
 
   def find_user_routine
-    @user_routine = UserRoutine.find(params[:id])
+    @user_routine = UserRoutine.find_by(routine_id: params[:id])
   end
 
   def user_routine_params

@@ -83,40 +83,44 @@ function CreateExercise({ routine, workouts, user }) {
 	const handleAdd = async (e) => {
 		e.preventDefault()
 
-		const res = await fetch('/exercises', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(formData),
-		})
-
-		const parsedBody = await res.json()
-		if (parsedBody.error) {
-			alert(parsedBody.error)
+		if (selected.id === '') {
+			alert('Select a workout')
 		} else {
-			const body = {
-				workout_id: selected.id,
-				exercise_id: parsedBody.id,
-			}
-			const res = await fetch('/workout_exercises', {
+			const res = await fetch('/exercises', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(body),
+				body: JSON.stringify(formData),
 			})
 
-			const parsedRoutineWorkout = await res.json()
-			if (parsedRoutineWorkout.error) {
-				alert(parsedRoutineWorkout.error)
+			const parsedBody = await res.json()
+			if (parsedBody.error) {
+				alert(parsedBody.error)
 			} else {
-				setAddWorkouts([...addWorkouts, parsedBody])
-				setFormData({
-					name: '',
-					bodypart: '',
-					weight: '',
+				const body = {
+					workout_id: selected.id,
+					exercise_id: parsedBody.id,
+				}
+				const res = await fetch('/workout_exercises', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(body),
 				})
+
+				const parsedRoutineWorkout = await res.json()
+				if (parsedRoutineWorkout.error) {
+					alert(parsedRoutineWorkout.error)
+				} else {
+					setAddWorkouts([...addWorkouts, parsedBody])
+					setFormData({
+						name: '',
+						bodypart: '',
+						weight: '',
+					})
+				}
 			}
 		}
 	}
