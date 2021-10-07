@@ -11,7 +11,7 @@ import {
 
 import SetCard from './SetCard'
 
-function TrackerCard({ props }) {
+function TrackerCard({ props, historyWorkout }) {
 	const [count, setCount] = useState(1)
 
 	const handleAdd = () => {
@@ -26,7 +26,14 @@ function TrackerCard({ props }) {
 	}
 
 	const displayCards = [...Array(count)].map((_, i) => {
-		return <SetCard key={i + 1} set={i + 1} props={props} />
+		return (
+			<SetCard
+				key={i + 1}
+				set={i + 1}
+				props={props}
+				historyWorkout={historyWorkout}
+			/>
+		)
 	})
 
 	return (
@@ -41,7 +48,7 @@ function TrackerCard({ props }) {
 			>
 				<Grid item>
 					<Typography variant='h6' align='left'>
-						{props.name}
+						{props.name} - {props.weight}
 					</Typography>
 				</Grid>
 				<Grid item>
@@ -60,9 +67,9 @@ function TrackerCard({ props }) {
 			<Grid item>
 				<SetCard set={3} />
 			</Grid> */}
-				<Grid item>
+				{/* <Grid item>
 					<TextField placeholder='Notes' multiline rows={1} rowsmax={4} />
-				</Grid>
+				</Grid> */}
 				<Grid item>
 					<Button onClick={handleAdd}>Add Set</Button>
 					<Button onClick={handleRemove}>Remove Set</Button>

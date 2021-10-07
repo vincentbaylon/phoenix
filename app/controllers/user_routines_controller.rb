@@ -11,6 +11,14 @@ class UserRoutinesController < ApplicationController
     render json: @user_routine, status: :accepted
   end
 
+  def current
+    find_current = UserRoutine.find_by(user_id: params[:id], current: true)
+    if find_current
+      find_current.update!(current: false)
+    end
+    render json: find_current, status: :accepted
+  end
+
   private
 
   def find_user_routine

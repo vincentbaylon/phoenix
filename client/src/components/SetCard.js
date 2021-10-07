@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import {
 	Grid,
 	Box,
@@ -10,14 +10,20 @@ import {
 	Stack,
 } from '@mui/material'
 
-function SetCard({ set, props }) {
+function SetCard({ set, props, historyWorkout }) {
 	const [checked, setChecked] = useState(false)
 	const [formData, setFormData] = useState({
-		set: `${set}`,
+		set: set,
 		reps: '',
 		weight: '',
-		exercise_id: `${props.id}}`,
+		exercise_id: props.id,
+		history_id: '',
 	})
+
+	useEffect(() => {
+		console.log('SETCARD', historyWorkout)
+	}, [historyWorkout])
+
 	const [tracker, setTracker] = useState({})
 
 	const handleCheck = (e) => {
@@ -28,10 +34,18 @@ function SetCard({ set, props }) {
 				method: 'DELETE',
 			})
 		} else {
+			console.log('HISTORY ID', historyWorkout.id)
+
 			fetch('/trackers', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(formData),
+				body: JSON.stringify({
+					set: set,
+					reps: formData.reps,
+					weight: formData.weight,
+					exercise_id: props.id,
+					history_id: historyWorkout.id,
+				}),
 			})
 				.then((res) => res.json())
 				.then((data) => {
@@ -73,10 +87,10 @@ function SetCard({ set, props }) {
 					direction='row'
 					alignItems='center'
 					justifyContent='center'
-					spacing={4}
+					spacing={5}
 				>
 					<Typography>{set}</Typography>
-					<Typography>175</Typography>
+					<Typography></Typography>
 					<TextField
 						name='reps'
 						type='number'

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :routines
   resources :exercises
   resources :users
+  resources :histories
 
   get '/user_progresses/:id', to: 'user_progresses#show'
   get '/workouts/:id', to: 'workouts#show'
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post 'password/forgot', to: 'passwords#forgot'
   post 'password/reset', to: 'passwords#reset'
+  get '/user_routines/current/:id', to: 'user_routines#current'
 
 
   # Routing logic: fallback requests for React Router.

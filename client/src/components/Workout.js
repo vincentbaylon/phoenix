@@ -2,15 +2,19 @@ import CreateWorkout from './CreateWorkout'
 import CreateExercise from './CreateExercise'
 import WorkoutCards from './WorkoutCards'
 import TrackerCard from './TrackerCard'
-import { Box, Typography, Divider } from '@mui/material'
+import { Box, Typography, Divider, Grid, Button } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { format } from 'date-fns'
 import { useMediaQuery } from '@mui/material'
 import FadeIn from 'react-fade-in'
 
-function Workout({ user }) {
+function Workout({ user, historyWorkout, setHistoryWorkout }) {
+	const history = useHistory()
 	const [routine, setRoutine] = useState({})
 	const [workout, setWorkout] = useState([])
+	const [workoutInProgress, setWorkoutInProgress] = useState(false)
+	const [workoutDays, setWorkoutDays] = useState([])
 	const [date, setDate] = useState(new Date())
 	const matches = useMediaQuery('(max-width:900px)')
 
@@ -25,9 +29,9 @@ function Workout({ user }) {
 						fetch(`/routines/${current.id}`)
 							.then((res) => res.json())
 							.then((data) => {
-								console.log(data)
 								setRoutine(data)
-								setWorkout(data.workouts[0].workout_exercises)
+								setWorkoutDays(data.routine_workouts)
+								// setWorkout(data.workouts[0].workout_exercises)
 							})
 					} else {
 						alert('No routine set as "Current"')
@@ -38,15 +42,74 @@ function Workout({ user }) {
 			})
 	}, [])
 
-	useEffect(() => {
-		let formattedDate = format(date, 'EEEE')
-		console.log(formattedDate)
-		console.log(workout)
-	}, [])
+	// useEffect(() => {
+	// 	let formattedDate = format(date, 'EEE, MMM dd')
+	// 	console.log(formattedDate)
+	// 	console.log(routine)
+	// }, [])
+
+	const handleSelect = (prop) => {
+		console.log(prop)
+		setWorkout(prop.workout_exercises)
+		let formattedDate = format(date, 'EEE, MMM dd')
+
+		const body = {
+			user_id: user.id,
+			routine_id: routine.id,
+			workout_id: prop.id,
+			date: formattedDate,
+			in_progress: true,
+		}
+
+		fetch('/histories', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log('HISTORY', data)
+				if (data.error) {
+					alert(data.error)
+				} else {
+					setHistoryWorkout(data)
+					setWorkoutInProgress(true)
+				}
+			})
+	}
 
 	const displayCards = workout.map((w) => {
-		return <TrackerCard key={w.id} props={w} />
+		return <TrackerCard key={w.id} props={w} historyWorkout={historyWorkout} />
 	})
+
+	const displayWorkouts = routine?.workouts?.map((w) => {
+		return <WorkoutCards key={w.id} props={w} handleSelect={handleSelect} />
+	})
+
+	const buttonStyle = {
+		background: '#F5D242',
+		color: 'black',
+	}
+
+	const handleEnd = () => {
+		fetch(`/histories/${historyWorkout.id}`, {
+			method: 'PATCH',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				in_progress: false,
+			}),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				console.log(data)
+				alert('Great work! Rest up and fuel your body for recovery.')
+				history.push('/home')
+			})
+	}
 
 	return (
 		<Box
@@ -66,11 +129,37 @@ function Workout({ user }) {
 				}}
 			>
 				{/* <Typography variant='h4'>{routine?.name}</Typography> */}
-				<Typography variant='h5' sx={{ mb: 2 }}>
-					{routine.workouts ? routine.workouts[0].name : 'Workout'}
-				</Typography>
-				<Divider sx={{ mb: 2 }} />
-				{displayCards}
+
+				{workoutInProgress ? (
+					<FadeIn>
+						<Typography variant='h5' sx={{ mb: 2 }}>
+							{routine.workouts ? routine.workouts[0].name : 'Workout'}
+						</Typography>
+						<Divider sx={{ mb: 2 }} />
+						{displayCards}
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'flex-end',
+							}}
+						>
+							<Button
+								variant='contained'
+								style={buttonStyle}
+								onClick={handleEnd}
+							>
+								End Workout
+							</Button>
+						</Box>
+					</FadeIn>
+				) : (
+					<FadeIn>
+						<Typography variant='h5' fontWeight='bold'>
+							Select A Workout
+						</Typography>
+						<Grid container>{displayWorkouts}</Grid>
+					</FadeIn>
+				)}
 			</Box>
 		</Box>
 	)

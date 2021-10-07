@@ -55,6 +55,7 @@ function SignUp({ setUser }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
+			console.log('SIGNUP', parsedBody)
 			setUser(parsedBody)
 			history.push('/home')
 		}
@@ -73,7 +74,7 @@ function SignUp({ setUser }) {
 	}
 
 	const buttonStyle = {
-		color: 'black',
+		color: 'white',
 		background: '#4266F5',
 	}
 

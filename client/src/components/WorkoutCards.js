@@ -1,9 +1,14 @@
 import { Card, Box, Typography } from '@mui/material'
 
-function WorkoutCards({ props }) {
+function WorkoutCards({ props, handleSelect }) {
+	const handleClick = () => {
+		handleSelect(props)
+	}
+
 	return (
 		<>
 			<Card
+				onClick={handleClick}
 				sx={{
 					width: '125px',
 					height: '100px',
@@ -17,7 +22,9 @@ function WorkoutCards({ props }) {
 				<Typography variant='h6' align='center'>
 					{props.name}
 				</Typography>
-				{/* <Typography variant='p'>{props.day}</Typography> */}
+				<Typography variant='p' align='center'>
+					{props.workout_days[0].day.join(', ')}
+				</Typography>
 			</Card>
 		</>
 	)

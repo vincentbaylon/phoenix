@@ -2,17 +2,20 @@ import { useEffect, useState } from 'react'
 import { Box, Typography, Grid } from '@mui/material'
 import HistoryCard from './HistoryCard'
 import { useMediaQuery } from '@mui/material'
+import FadeIn from 'react-fade-in'
 
-function History() {
+function History({ user }) {
 	const [trackers, setTrackers] = useState([])
+	const [historyDate, setHistoryDate] = useState('')
 	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
-		fetch('/trackers')
+		fetch(`/users/${user.id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
-				setTrackers(data)
+				console.log(data.histories.at(-1))
+				setHistoryDate(data.histories.at(-1).date)
+				setTrackers(data.histories.at(-1).show_trackers)
 			})
 	}, [])
 
@@ -38,9 +41,11 @@ function History() {
 				alignItems='center'
 			>
 				<Grid item>
-					<Typography align='left'>Previous workout</Typography>
+					<Typography variant='h6' align='left'>
+						Previous workout - {historyDate}
+					</Typography>
 				</Grid>
-				{displayTrackers}
+				<FadeIn>{displayTrackers}</FadeIn>
 			</Grid>
 		</Box>
 	)

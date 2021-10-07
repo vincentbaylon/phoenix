@@ -28,6 +28,7 @@ function App() {
 	const [loggedIn, setLoggedIn] = useState(false)
 	const [routine, setRoutine] = useState({})
 	const matches = useMediaQuery('(max-width:900px)')
+	const [historyWorkout, setHistoryWorkout] = useState({})
 
 	useEffect(() => {
 		fetch('/me').then((response) => {
@@ -74,25 +75,33 @@ function App() {
 						<SignUp setUser={setUser} />
 					</Route>
 					<Route path='/home'>
-						<Home user={user} handleLogout={handleLogout} />
+						<Home user={user} setUser={setUser} handleLogout={handleLogout} />
 					</Route>
 					<Route path='/routine'>
 						<Routine user={user} setRoutine={setRoutine} routine={routine} />
 					</Route>
 					<Route path='/workout'>
-						<Workout user={user} />
+						<Workout
+							user={user}
+							historyWorkout={historyWorkout}
+							setHistoryWorkout={setHistoryWorkout}
+						/>
 					</Route>
 					<Route path='/create_exercise'>
 						<CreateExercise routine={routine} />
 					</Route>
 					<Route path='/history'>
-						<History />
+						<History user={user} />
 					</Route>
 					<Route path='/progress'>
 						<Progress user={user} />
 					</Route>
 					<Route path='/edit_routine'>
-						<EditRoutine setRoutine={setRoutine} routine={routine} />
+						<EditRoutine
+							setRoutine={setRoutine}
+							routine={routine}
+							user={user}
+						/>
 					</Route>
 					<Route exact path='/'>
 						<Login setLoggedIn={setLoggedIn} setUser={setUser} />

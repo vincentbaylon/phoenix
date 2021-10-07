@@ -41,7 +41,7 @@ function NavBar({ handleLogout, loggedIn, user }) {
 						>
 							<Typography variant='h4'>Phoenix</Typography>
 						</Box>
-						<Tab component={NavLink} to='/home' label='Home' style={tabStyle} />
+						{/* <Tab component={NavLink} to='/home' label='Home' style={tabStyle} /> */}
 						<Drawer handleLogout={handleLogout} />
 					</Tabs>
 				</AppBar>
@@ -86,12 +86,12 @@ function NavBar({ handleLogout, loggedIn, user }) {
 						label='History'
 						style={tabStyle}
 					/>
-					<Tab
+					{/* <Tab
 						component={NavLink}
 						to='/progress'
 						label='Progress'
 						style={tabStyle}
-					/>
+					/> */}
 					<Tab
 						component={NavLink}
 						to='/'

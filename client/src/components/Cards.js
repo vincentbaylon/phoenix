@@ -6,7 +6,7 @@ function Cards({ props }) {
 			<Card
 				sx={{
 					width: '125px',
-					height: '150px',
+					height: '125px',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -19,7 +19,7 @@ function Cards({ props }) {
 					{props.workout?.name}
 				</Typography>
 				<Typography variant='p' align='center'>
-					{props.day}
+					{props.day.join(', ')}
 				</Typography>
 			</Card>
 		</>

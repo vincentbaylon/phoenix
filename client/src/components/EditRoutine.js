@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import FadeIn from 'react-fade-in'
 import EditWorkoutCards from './EditWorkoutCards'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import {
 	Box,
 	Grid,
@@ -10,18 +12,24 @@ import {
 	Divider,
 } from '@mui/material'
 
-function EditRoutine({ setRoutine, routine }) {
+function EditRoutine({ setRoutine, routine, user }) {
 	const history = useHistory()
 	const [routineName, setRoutineName] = useState('')
-	const displayWorkouts = routine.routine_workouts.map((w, i) => {
+
+	useEffect(() => {
+		if (Object.keys(routine).length === 0) {
+			history.push('/routine')
+		}
+	}, [])
+
+	const displayWorkouts = routine?.routine_workouts?.map((w, i) => {
 		return (
 			<Grid item>
 				<EditWorkoutCards key={w.id} props={w} index={i} />
 			</Grid>
 		)
 	})
-
-	const displayExercises = routine.routine_exercises.map((eArr) => {
+	const displayExercises = routine?.routine_exercises?.map((eArr) => {
 		return eArr.map((e) => {
 			return (
 				<Grid item>
@@ -53,22 +61,27 @@ function EditRoutine({ setRoutine, routine }) {
 	}
 
 	const handleCurrent = async () => {
-		const res = await fetch(`/user_routines/${routine.id}`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				current: true,
-			}),
-		})
-
-		const parsedBody = await res.json()
-		if (parsedBody.error) {
-			alert(parsedBody.error)
-		} else {
-			alert('Current routine set. Have a good workout!')
-		}
+		fetch(`/user_routines/current/${user.id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				fetch(`/user_routines/${routine.id}`, {
+					method: 'PATCH',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						current: true,
+					}),
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						if (data.error) {
+							alert(data.error)
+						} else {
+							alert('Current routine set. Have a great workout!')
+						}
+					})
+			})
 	}
 
 	const handleDelete = async () => {
@@ -82,60 +95,69 @@ function EditRoutine({ setRoutine, routine }) {
 		}
 	}
 
+	const handleBack = () => {
+		history.goBack()
+	}
+
 	if (!routine) {
 		history.push('/routine')
 	}
 
 	return (
-		<Box sx={{ m: 2, mt: 10 }}>
-			<Typography variant='h5' sx={{ mb: 2 }}>
-				Edit Routine
-			</Typography>
-			<Typography variant='h5' fontWeight='bold' sx={{ mb: 1 }}>
-				{routine.name}
-			</Typography>
-			<TextField
-				label='Edit Name'
-				value={routineName}
-				onChange={handleChange}
-				variant='standard'
-			/>
-			<Button
-				variant='contained'
-				size='small'
-				onClick={handleRoutineName}
-				sx={{ m: 1, mt: 2 }}
-			>
-				Save
-			</Button>
-			<Button
-				onClick={handleCurrent}
-				variant='contained'
-				size='small'
-				sx={{ m: 1, mt: 2 }}
-			>
-				Set As Current
-			</Button>
-			<Button
-				onClick={handleDelete}
-				variant='contained'
-				color='secondary'
-				size='small'
-				sx={{ m: 1, mt: 2 }}
-			>
-				Delete Routine
-			</Button>
-			<Divider sx={{ mt: 2, mb: 2 }} />
-			<Typography variant='h6' fontWeight='bold'>
-				Workouts
-			</Typography>
-			<Grid container>{displayWorkouts}</Grid>
-			<Divider sx={{ mt: 2, mb: 2 }} />
-			<Typography variant='h6' fontWeight='bold'>
-				Exercises
-			</Typography>
-			<Grid container>{displayExercises}</Grid>
-		</Box>
+		<FadeIn>
+			<Box sx={{ m: 2, mt: 10 }}>
+				<Typography variant='h5' sx={{ mb: 3 }}>
+					<Button onClick={handleBack}>
+						<ArrowBackIosNewIcon />
+					</Button>
+					Edit Routine
+				</Typography>
+				<Typography variant='h5' fontWeight='bold' sx={{ mb: 1 }}>
+					{routine.name}
+				</Typography>
+				<TextField
+					label='Edit Name'
+					value={routineName}
+					onChange={handleChange}
+					variant='standard'
+				/>
+				<Button
+					variant='contained'
+					size='small'
+					onClick={handleRoutineName}
+					sx={{ m: 1, mt: 2 }}
+				>
+					Save
+				</Button>
+				<Button
+					onClick={handleCurrent}
+					variant='contained'
+					size='small'
+					sx={{ m: 1, mt: 2 }}
+				>
+					Set As Current
+				</Button>
+				<Button
+					onClick={handleDelete}
+					variant='contained'
+					color='secondary'
+					size='small'
+					sx={{ m: 1, mt: 2 }}
+				>
+					Delete Routine
+				</Button>
+				<Divider sx={{ mt: 2, mb: 2 }} />
+				<Typography variant='h6' fontWeight='bold'>
+					Workouts
+				</Typography>
+				<Grid container>{displayWorkouts}</Grid>
+				<Divider sx={{ mt: 2, mb: 2 }} />
+				<Typography variant='h6' fontWeight='bold'>
+					Exercises
+				</Typography>
+				<Grid container>{displayExercises}</Grid>
+			</Box>
+		</FadeIn>
 	)
 }
 

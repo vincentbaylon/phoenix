@@ -140,7 +140,7 @@ function CreateExercise({
 						whiteSpace: 'pre',
 					}}
 				>
-					<InputLabel id='workoutDays'>Select Day for Workout</InputLabel>
+					<InputLabel id='workoutDays'>Select Day/s for Workout</InputLabel>
 					<Select
 						labelId='workoutDays'
 						id='workoutDays'

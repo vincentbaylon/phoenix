@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
   create_table "histories", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "routine_id", null: false
+    t.bigint "workout_id", null: false
     t.string "date"
     t.boolean "in_progress", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["routine_id"], name: "index_histories_on_routine_id"
     t.index ["user_id"], name: "index_histories_on_user_id"
+    t.index ["workout_id"], name: "index_histories_on_workout_id"
   end
 
   create_table "progresses", force: :cascade do |t|
@@ -142,6 +144,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
 
   add_foreign_key "histories", "routines"
   add_foreign_key "histories", "users"
+  add_foreign_key "histories", "workouts"
   add_foreign_key "routine_workouts", "routines"
   add_foreign_key "routine_workouts", "workouts"
   add_foreign_key "trackers", "exercises"

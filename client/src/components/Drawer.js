@@ -51,17 +51,15 @@ export default function SwipeableTemporaryDrawer({ handleLogout }) {
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List>
-				{['Home', 'Routine', 'Start Workout', 'History', 'Progress'].map(
-					(text) => (
-						<ListItem button key={text} onClick={handleClick}>
-							<ListItemText primary={text} />
-						</ListItem>
-					)
-				)}
+				{['Home', 'Routine', 'Start Workout', 'History'].map((text) => (
+					<ListItem button key={text} onClick={handleClick}>
+						<ListItemText primary={text} />
+					</ListItem>
+				))}
 			</List>
 			<Divider />
 			<List>
-				{['Account', 'Logout'].map((text) => (
+				{['Logout'].map((text) => (
 					<ListItem button key={text} onClick={handleClick}>
 						<ListItemText primary={text} />
 					</ListItem>

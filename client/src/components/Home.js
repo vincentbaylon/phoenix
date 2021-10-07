@@ -3,10 +3,11 @@ import { useHistory } from 'react-router-dom'
 import FadeIn from 'react-fade-in'
 import Quotes from './Quotes'
 import Progress from './Progress'
+import Account from './Account'
 import DialogForm from './DialogForm'
 import background from '../assets/background.jpeg'
 
-function Home({ user, handleLogout }) {
+function Home({ user, handleLogout, setUser }) {
 	const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)]
 	const matches = useMediaQuery('(max-width:900px)')
 
@@ -26,16 +27,19 @@ function Home({ user, handleLogout }) {
 				margin: 'auto',
 			}}
 		>
+			{console.log(user)}
 			<FadeIn>
 				<Typography color='black' variant='h5' sx={{ m: 2, mb: 3 }}>
 					{randomQuote}
 				</Typography>
+				{/* <Divider />
+				<Typography>Action Items</Typography> */}
 				<Divider />
-				<Typography>Action Items</Typography>
-				<Divider />
-				<Button variant='contained' color='secondary' onClick={handleDelete}>
+				<Account user={user} setUser={setUser} />
+				<Progress user={user} />
+				{/* <Button variant='contained' color='secondary' onClick={handleDelete}>
 					Delete Account
-				</Button>
+				</Button> */}
 			</FadeIn>
 		</Box>
 	)

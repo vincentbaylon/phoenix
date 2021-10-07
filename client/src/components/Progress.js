@@ -67,12 +67,13 @@ function Progress({ user }) {
 	}
 
 	return (
-		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 10 }}>
+		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
 			<Grid
 				item
 				xs={12}
 				md={10}
-				lg={5}
+				lg={10}
+				xl={10}
 				sx={{
 					height: '100%',
 					width: '100%',
@@ -93,6 +94,7 @@ function Progress({ user }) {
 					/>
 				) : null}
 			</Grid>
+
 			<DialogForm user={user} refetchChart={refetchChart} />
 		</Grid>
 	)

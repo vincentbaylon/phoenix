@@ -28,8 +28,12 @@ function ExerciseCards({ props, day, handleSelect }) {
 					p: 1,
 				}}
 			>
-				<Typography variant='h6'>{props.name}</Typography>
-				<Typography variant='p'>{day?.day}</Typography>
+				<Typography variant='h6' align='center'>
+					{props.name}
+				</Typography>
+				<Typography variant='p' align='center'>
+					{day?.day}
+				</Typography>
 			</Card>
 		</>
 	)

@@ -4,9 +4,14 @@ class ExercisesController < ApplicationController
     render json: exercise, status: :created
   end
 
+  def show
+    exercise = Exercise.find(params[:id])
+    render json: exercise, status: :ok
+  end
+
   private
 
   def exercise_params
-    params.permit(:name, :weight, :bodypart)
+    params.permit(:name, :weight, :bodypart, :id)
   end
 end
