@@ -42,7 +42,6 @@ function CreateExercise({ routine, workouts, user }) {
 			if (parsedBody.error) {
 				alert(parsedBody.error)
 			} else {
-				console.log(parsedBody)
 				setWorkoutArr(parsedBody.workouts)
 				setWorkoutDays(parsedBody.routine_workouts)
 			}

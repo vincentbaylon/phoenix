@@ -13,7 +13,6 @@ function History({ user }) {
 		fetch(`/users/${user.id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data.histories.at(-1))
 				setHistoryDate(data.histories.at(-1).date)
 				setTrackers(data.histories.at(-1).show_trackers)
 			})

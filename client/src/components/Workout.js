@@ -24,7 +24,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 			.then((data) => {
 				if (data.routines.length > 0) {
 					const current = data.user_routines.find((r) => r.current === true)
-					console.log('CURRENT', current)
 					if (current) {
 						fetch(`/routines/${current.id}`)
 							.then((res) => res.json())
@@ -44,12 +43,9 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 
 	// useEffect(() => {
 	// 	let formattedDate = format(date, 'EEE, MMM dd')
-	// 	console.log(formattedDate)
-	// 	console.log(routine)
 	// }, [])
 
 	const handleSelect = (prop) => {
-		console.log(prop)
 		setWorkout(prop.workout_exercises)
 		let formattedDate = format(date, 'EEE, MMM dd')
 
@@ -70,7 +66,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log('HISTORY', data)
 				if (data.error) {
 					alert(data.error)
 				} else {
@@ -105,7 +100,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data)
 				alert('Great work! Rest up and fuel your body for recovery.')
 				history.push('/home')
 			})
@@ -120,7 +114,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				width: '100vw',
 			}}
 		>
-			{console.log(matches)}
 			<Box
 				sx={{
 					m: 2,

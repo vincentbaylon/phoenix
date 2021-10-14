@@ -1,9 +1,7 @@
 import { Card, Box, Typography } from '@mui/material'
 
 function EditWorkoutCards({ props, index }) {
-	const handleClick = () => {
-		console.log(index)
-	}
+	const handleClick = () => {}
 	return (
 		<>
 			<Card

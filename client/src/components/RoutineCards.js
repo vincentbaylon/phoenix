@@ -8,7 +8,6 @@ function RoutineCards({ props, handleClick, current }) {
 
 	return (
 		<>
-			{console.log(props)}
 			<Card
 				sx={{
 					width: '125px',

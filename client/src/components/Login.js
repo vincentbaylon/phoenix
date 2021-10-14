@@ -52,7 +52,6 @@ function Login({ setLoggedIn, setUser }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
-			console.log('LOGIN', parsedBody)
 			setUser(parsedBody)
 			setLoggedIn(true)
 			history.push('/home')

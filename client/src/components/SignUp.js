@@ -16,7 +16,7 @@ import { Stack } from '@mui/material'
 import background from '../assets/quote-bg2.jpeg'
 import FadeIn from 'react-fade-in'
 
-function SignUp({ setUser }) {
+function SignUp({ setUser, setLoggedIn }) {
 	const history = useHistory()
 	const [showPassword, setShowPassword] = useState(false)
 	const [formData, setFormData] = useState({
@@ -55,9 +55,22 @@ function SignUp({ setUser }) {
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {
-			console.log('SIGNUP', parsedBody)
-			setUser(parsedBody)
-			history.push('/home')
+			const res = await fetch('/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			})
+
+			const parsedBody = await res.json()
+			if (parsedBody.error) {
+				alert(parsedBody.error)
+			} else {
+				setUser(parsedBody)
+				setLoggedIn(true)
+				history.push('/home')
+			}
 		}
 	}
 

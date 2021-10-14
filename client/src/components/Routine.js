@@ -35,7 +35,6 @@ function Routine({ user, setRoutine, routine }) {
 			if (parsedBody.error) {
 				alert(parsedBody.error)
 			} else {
-				console.log(parsedBody)
 				setRoutineArr(parsedBody.routines)
 				const findCurrent = parsedBody.user_routines.find(
 					(r) => r.current === true

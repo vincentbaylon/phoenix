@@ -88,13 +88,11 @@ function CreateExercise({
 			if (parsedUserWorkoutBody.error) {
 				alert(parsedUserWorkoutBody.error)
 			} else {
-				console.log(parsedUserWorkoutBody)
 				let updateArr = [...workouts, parsedUserWorkoutBody]
 				setWorkouts(updateArr)
 				setName('')
 				setDay([])
 				// handleWorkoutDone()
-				console.log(workouts)
 			}
 		}
 	}

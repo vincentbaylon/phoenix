@@ -27,7 +27,6 @@ function Home({ user, handleLogout, setUser }) {
 				margin: 'auto',
 			}}
 		>
-			{console.log(user)}
 			<FadeIn>
 				<Typography color='black' variant='h5' sx={{ m: 2, mb: 3 }}>
 					{randomQuote}

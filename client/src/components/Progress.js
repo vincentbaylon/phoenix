@@ -36,7 +36,7 @@ function Progress({ user }) {
 			}
 		}
 		fetchRoutine()
-	}, [])
+	}, [user])
 
 	const refetchChart = async () => {
 		const res = await fetch(`/users/${user.id}`)

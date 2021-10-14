@@ -72,7 +72,7 @@ function App() {
 				)}
 				<Switch>
 					<Route path='/signup'>
-						<SignUp setUser={setUser} />
+						<SignUp setUser={setUser} setLoggedIn={setLoggedIn} />
 					</Route>
 					<Route path='/home'>
 						<Home user={user} setUser={setUser} handleLogout={handleLogout} />

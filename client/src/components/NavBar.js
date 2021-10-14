@@ -26,7 +26,6 @@ function NavBar({ handleLogout, loggedIn, user }) {
 	if (matches) {
 		return (
 			<>
-				{console.log(matches)}
 				<AppBar variant='fullWidth' sx={{ backgroundColor: 'black' }}>
 					<Tabs
 						centered
@@ -51,7 +50,6 @@ function NavBar({ handleLogout, loggedIn, user }) {
 
 	return (
 		<>
-			{console.log(matches)}
 			<AppBar variant='fullWidth' sx={{ backgroundColor: 'black' }}>
 				<Tabs
 					centered

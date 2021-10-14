@@ -20,7 +20,6 @@ export default function FormDialog({ user, setUser }) {
 	})
 
 	useEffect(() => {
-		console.log('USER')
 		setFormData({
 			name: user.name,
 			username: user.username,
@@ -52,7 +51,6 @@ export default function FormDialog({ user, setUser }) {
 				if (data.error) {
 					alert(data.error)
 				} else {
-					console.log('UPDATE USER', data)
 					setUser(data)
 				}
 			})

@@ -41,7 +41,6 @@ export default function FormDialog({ user, refetchChart }) {
 		})
 
 		const parsedBody = await res.json()
-		console.log(parsedBody)
 		if (parsedBody.error) {
 			alert(parsedBody.error)
 		} else {

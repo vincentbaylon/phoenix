@@ -14,7 +14,6 @@ function ExerciseCards({ props, day, handleSelect }) {
 
 	return (
 		<>
-			{console.log('DAY', day)}
 			<Card
 				onClick={handleClick}
 				sx={{

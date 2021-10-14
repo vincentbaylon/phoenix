@@ -20,9 +20,7 @@ function SetCard({ set, props, historyWorkout }) {
 		history_id: '',
 	})
 
-	useEffect(() => {
-		console.log('SETCARD', historyWorkout)
-	}, [historyWorkout])
+	useEffect(() => {}, [historyWorkout])
 
 	const [tracker, setTracker] = useState({})
 
@@ -34,8 +32,6 @@ function SetCard({ set, props, historyWorkout }) {
 				method: 'DELETE',
 			})
 		} else {
-			console.log('HISTORY ID', historyWorkout.id)
-
 			fetch('/trackers', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -49,7 +45,6 @@ function SetCard({ set, props, historyWorkout }) {
 			})
 				.then((res) => res.json())
 				.then((data) => {
-					console.log(data)
 					setTracker(data)
 				})
 		}
@@ -70,7 +65,7 @@ function SetCard({ set, props, historyWorkout }) {
 	}
 
 	const textStyle = {
-		width: '40px',
+		width: '50px',
 	}
 
 	return (
@@ -87,7 +82,7 @@ function SetCard({ set, props, historyWorkout }) {
 					direction='row'
 					alignItems='center'
 					justifyContent='center'
-					spacing={5}
+					spacing={4}
 				>
 					<Typography>{set}</Typography>
 					<Typography></Typography>
