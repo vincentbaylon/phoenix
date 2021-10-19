@@ -1,12 +1,8 @@
 import '../App.css'
 import { useEffect, useState } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
-import { Button } from '@mui/material'
-import { Typography } from '@mui/material'
-import { TextField } from '@mui/material'
 import { CssBaseline } from '@mui/material'
 import { Box } from '@mui/material'
-import { Container } from '@mui/material'
 import { useMediaQuery } from '@mui/material'
 
 import CreateRoutine from './CreateRoutine'
@@ -59,8 +55,6 @@ function App() {
 	const divStyle = {
 		width: '100%',
 		height: '100vh',
-		// background: 'linear-gradient(rgba(245,210,66,0.5),transparent)',
-		// backgroundColor: 'grey',
 	}
 
 	return (

@@ -1,13 +1,5 @@
 import { useState } from 'react'
-import {
-	Typography,
-	TextField,
-	Button,
-	Box,
-	Grid,
-	Divider,
-	Stack,
-} from '@mui/material'
+import { Typography, Button, Grid, Divider, Stack } from '@mui/material'
 
 import SetCard from './SetCard'
 
@@ -61,15 +53,9 @@ function TrackerCard({ props, historyWorkout }) {
 					</Stack>
 				</Grid>
 				<Grid item>{displayCards}</Grid>
-				{/* <Grid item>
-				<SetCard set={2} />
-			</Grid>
-			<Grid item>
-				<SetCard set={3} />
-			</Grid> */}
-				{/* <Grid item>
+				<Grid item>
 					<TextField placeholder='Notes' multiline rows={1} rowsmax={4} />
-				</Grid> */}
+				</Grid>
 				<Grid item>
 					<Button onClick={handleAdd}>Add Set</Button>
 					<Button onClick={handleRemove}>Remove Set</Button>

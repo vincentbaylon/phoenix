@@ -1,5 +1,3 @@
-import CreateWorkout from './CreateWorkout'
-import CreateExercise from './CreateExercise'
 import WorkoutCards from './WorkoutCards'
 import TrackerCard from './TrackerCard'
 import { Box, Typography, Divider, Grid, Button } from '@mui/material'
@@ -30,7 +28,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 							.then((data) => {
 								setRoutine(data)
 								setWorkoutDays(data.routine_workouts)
-								// setWorkout(data.workouts[0].workout_exercises)
 							})
 					} else {
 						alert('No routine set as "Current"')
@@ -40,10 +37,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				}
 			})
 	}, [])
-
-	// useEffect(() => {
-	// 	let formattedDate = format(date, 'EEE, MMM dd')
-	// }, [])
 
 	const handleSelect = (prop) => {
 		setWorkout(prop.workout_exercises)
@@ -121,8 +114,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 					width: matches ? '100%' : '50%',
 				}}
 			>
-				{/* <Typography variant='h4'>{routine?.name}</Typography> */}
-
 				{workoutInProgress ? (
 					<FadeIn>
 						<Typography variant='h5' sx={{ mb: 2 }}>

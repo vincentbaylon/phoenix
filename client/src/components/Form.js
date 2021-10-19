@@ -4,14 +4,11 @@ import TextField from '@mui/material/TextField'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Stack } from '@mui/material'
-import { format } from 'date-fns'
 
 export default function FormDialog({ user, setUser }) {
 	const [open, setOpen] = useState(false)
-	const [date, setDate] = useState(new Date())
 	const [formData, setFormData] = useState({
 		name: user.name,
 		username: user.username,

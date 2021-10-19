@@ -1,4 +1,4 @@
-import { Card, Box, Typography, Stack, Grid } from '@mui/material'
+import { Card, Box, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 function HistoryCard({ props }) {

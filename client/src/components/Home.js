@@ -1,11 +1,8 @@
-import { Box, Typography, Divider, Button, useMediaQuery } from '@mui/material'
-import { useHistory } from 'react-router-dom'
+import { Box, Typography, Divider, useMediaQuery } from '@mui/material'
 import FadeIn from 'react-fade-in'
 import Quotes from './Quotes'
 import Progress from './Progress'
 import Account from './Account'
-import DialogForm from './DialogForm'
-import background from '../assets/background.jpeg'
 
 function Home({ user, handleLogout, setUser }) {
 	const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)]

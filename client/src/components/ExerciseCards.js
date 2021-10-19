@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Card, Box, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
 
 function ExerciseCards({ props, day, handleSelect }) {
-	const [selected, setSelected] = useState(false)
 	const handleClick = () => {
 		const obj = {
 			id: props.id,

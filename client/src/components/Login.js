@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import {
 	TextField,
@@ -19,7 +19,6 @@ import FadeIn from 'react-fade-in'
 function Login({ setLoggedIn, setUser }) {
 	const history = useHistory()
 	const [showPassword, setShowPassword] = useState(false)
-	// const [user, setUser] = useState({})
 	const [formData, setFormData] = useState({
 		username: '',
 		password: '',
@@ -95,7 +94,7 @@ function Login({ setLoggedIn, setUser }) {
 					sm={6}
 					md={6}
 					lg={4}
-					sx={{ mb: 3 }}
+					sx={{ mb: 1 }}
 					style={{ textAlign: 'center' }}
 				>
 					<FadeIn>

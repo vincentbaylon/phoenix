@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import DialogForm from './DialogForm'
 
 function Progress({ user }) {
 	const [image, setImage] = useState('')
-	const [labels, setLabels] = useState([''])
-	const [checkIns, setCheckIns] = useState([0])
 
 	useEffect(() => {
 		async function fetchRoutine() {
@@ -80,10 +78,6 @@ function Progress({ user }) {
 				}}
 				style={{
 					textAlign: 'center',
-					// backgroundImage: `url(${image})`,
-					// backgroundRepeat: 'no-repeat',
-					// backgroundSize: 'contain',
-					// backgroundPosition: 'center',
 				}}
 			>
 				{image ? (

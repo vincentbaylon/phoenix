@@ -1,5 +1,4 @@
-import { Card, Box, Typography } from '@mui/material'
-import { useState } from 'react'
+import { Card, Typography } from '@mui/material'
 
 function RoutineCards({ props, handleClick, current }) {
 	const cardClick = () => {

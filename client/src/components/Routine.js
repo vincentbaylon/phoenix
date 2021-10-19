@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom'
 import CreateExercise from './CreateWorkout'
 import CreateWorkout from './CreateWorkout'
 import CreateRoutine from './CreateRoutine'
-import Cards from './Cards'
 import RoutineCards from './RoutineCards'
 import FadeIn from 'react-fade-in'
 

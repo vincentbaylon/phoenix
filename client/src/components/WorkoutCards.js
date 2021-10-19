@@ -1,4 +1,4 @@
-import { Card, Box, Typography } from '@mui/material'
+import { Card, Typography } from '@mui/material'
 
 function WorkoutCards({ props, handleSelect }) {
 	const handleClick = () => {
