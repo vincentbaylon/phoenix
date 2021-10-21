@@ -13,8 +13,10 @@ function History({ user }) {
 		fetch(`/users/${user.id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				setHistoryDate(data.histories.at(-1).date)
-				setTrackers(data.histories.at(-1).show_trackers)
+				if (data.histories.length > 0) {
+					setHistoryDate(data.histories.at(-1).date)
+					setTrackers(data.histories.at(-1).show_trackers)
+				}
 			})
 	}, [])
 
@@ -33,19 +35,23 @@ function History({ user }) {
 				width: '100vw',
 			}}
 		>
-			<Grid
-				container
-				direction='column'
-				justifyContent='center'
-				alignItems='center'
-			>
-				<Grid item>
-					<Typography variant='h6' align='left'>
-						Previous workout - {historyDate}
-					</Typography>
+			<FadeIn>
+				<Grid
+					container
+					direction='column'
+					justifyContent='center'
+					alignItems='center'
+				>
+					<Grid item>
+						<Typography variant='h6' align='left'>
+							{historyDate !== ''
+								? `Previous workout - ${historyDate}`
+								: `No previous workout`}
+						</Typography>
+					</Grid>
+					{displayTrackers}
 				</Grid>
-				<FadeIn>{displayTrackers}</FadeIn>
-			</Grid>
+			</FadeIn>
 		</Box>
 	)
 }
