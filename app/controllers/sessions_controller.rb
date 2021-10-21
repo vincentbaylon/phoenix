@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   before_action :authorize, except: [:destroy, :create]
 
   def create
-    user = User.find_by(username: params[:username])
+    user = User.where('lower(username) = ?', params[:username].downcase).first
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
       render json: user, status: :created

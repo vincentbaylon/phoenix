@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Grid } from '@mui/material'
+import { Grid, useMediaQuery } from '@mui/material'
 import DialogForm from './DialogForm'
+import ProgressPicture from './ProgressPicture'
 
 function Progress({ user }) {
 	const [image, setImage] = useState('')
+	const [checkIns, setCheckIns] = useState([])
 
 	useEffect(() => {
 		async function fetchRoutine() {
@@ -15,6 +17,7 @@ function Progress({ user }) {
 				let checkInArr = parsedBody.user_progresses
 				let labelsArr = []
 				let checkInsArr = []
+				setCheckIns(parsedBody.user_progresses)
 				checkInArr.forEach((p) => {
 					labelsArr = [...labelsArr, p.date]
 					checkInsArr = [...checkInsArr, p.weight]
@@ -45,6 +48,7 @@ function Progress({ user }) {
 			let checkInArr = parsedBody.user_progresses
 			let labelsArr = []
 			let checkInsArr = []
+			setCheckIns(parsedBody.user_progresses)
 			checkInArr.forEach((p) => {
 				labelsArr = [...labelsArr, p.date]
 				checkInsArr = [...checkInsArr, p.weight]
@@ -68,10 +72,6 @@ function Progress({ user }) {
 		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
 			<Grid
 				item
-				xs={12}
-				md={10}
-				lg={10}
-				xl={10}
 				sx={{
 					height: '100%',
 					width: '100%',
@@ -84,12 +84,18 @@ function Progress({ user }) {
 					<img
 						src={image}
 						alt='Progress chart'
-						style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+						style={{
+							objectFit: 'contain',
+							height: '100%',
+							width: '100%',
+						}}
 					/>
 				) : null}
 			</Grid>
 
 			<DialogForm user={user} refetchChart={refetchChart} />
+
+			<ProgressPicture checkIns={checkIns} />
 		</Grid>
 	)
 }

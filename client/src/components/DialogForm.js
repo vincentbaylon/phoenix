@@ -48,6 +48,7 @@ export default function FormDialog({ user, refetchChart }) {
 		const storage = getStorage()
 		const storageRef = ref(storage, `images/${imageAsFile.name}`)
 		const uploadTask = uploadBytesResumable(storageRef, imageAsFile)
+		let imageUrl
 
 		uploadTask.on(
 			'state_changed',
@@ -73,33 +74,36 @@ export default function FormDialog({ user, refetchChart }) {
 			() => {
 				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 					setImageAsUrl((imageAsUrl) => downloadURL)
+					imageUrl = downloadURL
+					console.log(downloadURL)
+
+					let formattedDate = format(date, 'M/d')
+
+					const body = {
+						user_id: user.id,
+						weight: weight,
+						date: formattedDate,
+						image_url: imageUrl,
+					}
+
+					fetch('/user_progresses', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(body),
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							if (data.error) {
+								alert(data.error)
+							} else {
+								refetchChart()
+							}
+						})
 				})
 			}
 		)
-
-		let formattedDate = format(date, 'M/d')
-
-		const body = {
-			user_id: user.id,
-			weight: weight,
-			date: formattedDate,
-			image_url: imageAsUrl,
-		}
-
-		const res = await fetch('/user_progresses', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(body),
-		})
-
-		const parsedBody = await res.json()
-		if (parsedBody.error) {
-			alert(parsedBody.error)
-		} else {
-			refetchChart()
-		}
 	}
 
 	const handleChange = (e) => {

@@ -16,6 +16,6 @@ class UserProgressesController < ApplicationController
   end
 
   def user_progress_params
-    params.permit(:user_id, :progress_id, :weight, :date)
+    params.permit(:user_id, :progress_id, :weight, :date, :image_url)
   end
 end
