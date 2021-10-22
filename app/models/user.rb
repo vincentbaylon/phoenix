@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   validates :username, :password_digest, :name, :email, presence: :true
   validates :username, :email, uniqueness: true
-  validates :password, length: { minimum: 6 }
+  # validates :password, length: { minimum: 6 }
 
   has_many :user_exercises, dependent: :destroy
   has_many :exercises, through: :user_exercises

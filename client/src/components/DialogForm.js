@@ -132,10 +132,11 @@ export default function FormDialog({ user, refetchChart }) {
 						/>
 						<DialogContentText>Add progress picture:</DialogContentText>
 						<FormControl>
-							<Input
+							<input
+								capture='environment'
 								type='file'
 								onChange={handleImageAsFile}
-								inputProps={{ accept: 'image/*' }}
+								accept='image/*'
 							/>
 						</FormControl>
 					</Stack>

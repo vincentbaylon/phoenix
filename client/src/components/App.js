@@ -2,8 +2,9 @@ import '../App.css'
 import { useEffect, useState } from 'react'
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom'
 import { CssBaseline } from '@mui/material'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { useMediaQuery } from '@mui/material'
+import FadeIn from 'react-fade-in'
 
 import CreateRoutine from './CreateRoutine'
 import CreateExercise from './CreateExercise'
@@ -54,7 +55,7 @@ function App() {
 
 	const divStyle = {
 		width: '100%',
-		height: '100vh',
+		height: '90vh',
 	}
 
 	return (
@@ -102,6 +103,13 @@ function App() {
 					</Route>
 				</Switch>
 			</Box>
+			<FadeIn>
+				{location.pathname === '/home' ? (
+					<Typography sx={{ textAlign: 'center', bottom: 0 }}>
+						Created by Vince Baylon © 2021
+					</Typography>
+				) : null}
+			</FadeIn>
 		</div>
 	)
 }

@@ -17,8 +17,11 @@ function Progress({ user }) {
 				let checkInArr = parsedBody.user_progresses
 				let labelsArr = []
 				let checkInsArr = []
-				setCheckIns(parsedBody.user_progresses)
-				checkInArr.forEach((p) => {
+
+				let sliceArr = checkInArr.slice(1).slice(-20)
+				setCheckIns(sliceArr)
+
+				sliceArr.forEach((p) => {
 					labelsArr = [...labelsArr, p.date]
 					checkInsArr = [...checkInsArr, p.weight]
 				})
@@ -48,8 +51,11 @@ function Progress({ user }) {
 			let checkInArr = parsedBody.user_progresses
 			let labelsArr = []
 			let checkInsArr = []
-			setCheckIns(parsedBody.user_progresses)
-			checkInArr.forEach((p) => {
+
+			let sliceArr = checkInArr.slice(1).slice(-20)
+			setCheckIns(sliceArr)
+
+			sliceArr.forEach((p) => {
 				labelsArr = [...labelsArr, p.date]
 				checkInsArr = [...checkInsArr, p.weight]
 			})
