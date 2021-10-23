@@ -60,9 +60,9 @@ function TrackerCard({ props, historyWorkout }) {
 					</Stack>
 				</Grid>
 				<Grid item>{displayCards}</Grid>
-				<Grid item>
+				{/* <Grid item>
 					<TextField placeholder='Notes' multiline rows={1} rowsmax={4} />
-				</Grid>
+				</Grid> */}
 				<Grid item>
 					<Button onClick={handleAdd}>Add Set</Button>
 					<Button onClick={handleRemove}>Remove Set</Button>

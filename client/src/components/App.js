@@ -103,13 +103,6 @@ function App() {
 					</Route>
 				</Switch>
 			</Box>
-			<FadeIn>
-				{location.pathname === '/home' ? (
-					<Typography sx={{ textAlign: 'center', bottom: 0 }}>
-						Created by Vince Baylon © 2021
-					</Typography>
-				) : null}
-			</FadeIn>
 		</div>
 	)
 }

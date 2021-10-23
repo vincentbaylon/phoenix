@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Grid, useMediaQuery } from '@mui/material'
+import { Grid, useMediaQuery, Typography } from '@mui/material'
 import DialogForm from './DialogForm'
 import ProgressPicture from './ProgressPicture'
 
@@ -98,10 +98,18 @@ function Progress({ user }) {
 					/>
 				) : null}
 			</Grid>
-
-			<DialogForm user={user} refetchChart={refetchChart} />
-
-			<ProgressPicture checkIns={checkIns} />
+			<Grid item xs={12} sx={{ mb: 2 }}>
+				<DialogForm user={user} refetchChart={refetchChart} />
+			</Grid>
+			<Grid item xs={12} sx={{ mb: 2 }}>
+				<Typography align='left'>Progress Pictures</Typography>
+			</Grid>
+			<Grid item xs={6}>
+				<ProgressPicture checkIns={checkIns} label='Previous' />
+			</Grid>
+			<Grid item xs={6}>
+				<ProgressPicture checkIns={checkIns} label='Current' />
+			</Grid>
 		</Grid>
 	)
 }

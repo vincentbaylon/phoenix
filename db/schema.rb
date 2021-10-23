@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
 
   create_table "user_progresses", force: :cascade do |t|
     t.integer "weight"
-    t.string "image_url"
+    t.string "image_url", default: ""
     t.string "date"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
