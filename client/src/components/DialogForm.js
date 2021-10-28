@@ -17,6 +17,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogContentText from '@mui/material/DialogContentText'
 import DialogTitle from '@mui/material/DialogTitle'
 import { format } from 'date-fns'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function FormDialog({ user, refetchChart }) {
 	const allInputs = { imgUrl: '' }
@@ -46,7 +47,7 @@ export default function FormDialog({ user, refetchChart }) {
 		setOpen(false)
 
 		const storage = getStorage()
-		const storageRef = ref(storage, `images/${imageAsFile.name}`)
+		const storageRef = ref(storage, `images/${uuidv4()}${imageAsFile.name}`)
 		const uploadTask = uploadBytesResumable(storageRef, imageAsFile)
 		let imageUrl
 
