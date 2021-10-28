@@ -56,7 +56,7 @@ function App() {
 
 	const divStyle = {
 		width: '100%',
-		height: '90vh',
+		height: matches ? 'env(safe-area-inset-top)' : '90vw',
 	}
 
 	return (

@@ -66,7 +66,7 @@ function SetCard({ set, props, historyWorkout }) {
 	}
 
 	const textStyle = {
-		width: '40px',
+		width: '45px',
 		textAlign: 'center',
 	}
 
