@@ -75,7 +75,12 @@ function Progress({ user }) {
 	}
 
 	return (
-		<Grid container alignItems='center' justifyContent='center' sx={{ mt: 2 }}>
+		<Grid
+			container
+			alignItems='center'
+			justifyContent='center'
+			sx={{ mt: 2, mb: 10 }}
+		>
 			<Grid
 				item
 				sx={{
