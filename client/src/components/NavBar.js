@@ -29,6 +29,8 @@ function NavBar({ handleLogout, loggedIn, user }) {
 				<AppBar
 					variant='fullWidth'
 					sx={{
+						padding:
+							'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-left)',
 						backgroundColor: 'black',
 					}}
 				>
