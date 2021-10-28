@@ -81,6 +81,17 @@ function Progress({ user }) {
 			justifyContent='center'
 			sx={{ padding: '0 0 env(safe-area-inset-bottom) 0' }}
 		>
+			<Grid item xs={12} sx={{ mb: 2 }}>
+				<Typography align='left' fontWeight='bold'>
+					Progress Pictures
+				</Typography>
+			</Grid>
+			<Grid item xs={6}>
+				<ProgressPicture checkIns={checkIns} label='Previous' />
+			</Grid>
+			<Grid item xs={6}>
+				<ProgressPicture checkIns={checkIns} label='Current' />
+			</Grid>
 			<Grid
 				item
 				sx={{
@@ -105,17 +116,6 @@ function Progress({ user }) {
 			</Grid>
 			<Grid item xs={12} sx={{ mb: 2 }}>
 				<DialogForm user={user} refetchChart={refetchChart} />
-			</Grid>
-			<Grid item xs={12} sx={{ mb: 2 }}>
-				<Typography align='left' fontWeight='bold'>
-					Progress Pictures
-				</Typography>
-			</Grid>
-			<Grid item xs={6}>
-				<ProgressPicture checkIns={checkIns} label='Previous' />
-			</Grid>
-			<Grid item xs={6}>
-				<ProgressPicture checkIns={checkIns} label='Current' />
 			</Grid>
 		</Grid>
 	)
