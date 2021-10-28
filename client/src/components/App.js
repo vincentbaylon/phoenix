@@ -60,7 +60,7 @@ function App() {
 	}
 
 	return (
-		<div className='main' style={divStyle}>
+		<div style={divStyle}>
 			<CssBaseline />
 			<Box style={{ height: '100%' }}>
 				{location.pathname === '/' || location.pathname === '/signup' ? null : (
