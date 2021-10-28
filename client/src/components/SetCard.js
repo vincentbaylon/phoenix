@@ -87,7 +87,7 @@ function SetCard({ set, props, historyWorkout }) {
 					spacing={4}
 				>
 					<Typography>{set}</Typography>
-					<Typography>185</Typography>
+					<Typography>N/A</Typography>
 					<TextField
 						name='reps'
 						type='number'

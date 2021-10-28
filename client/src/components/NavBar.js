@@ -26,7 +26,14 @@ function NavBar({ handleLogout, loggedIn, user }) {
 	if (matches) {
 		return (
 			<>
-				<AppBar variant='fullWidth' sx={{ backgroundColor: 'black' }}>
+				<AppBar
+					variant='fullWidth'
+					sx={{
+						padding:
+							'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
+						backgroundColor: 'black',
+					}}
+				>
 					<Tabs
 						centered
 						value={value}
@@ -52,7 +59,6 @@ function NavBar({ handleLogout, loggedIn, user }) {
 			<AppBar
 				variant='fullWidth'
 				sx={{
-					minHeight: 'calc(100% + env(safe-area-inset-top))',
 					padding:
 						'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
 					backgroundColor: 'black',
