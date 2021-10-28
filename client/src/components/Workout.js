@@ -11,6 +11,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 	const history = useHistory()
 	const [routine, setRoutine] = useState({})
 	const [workout, setWorkout] = useState([])
+	const [workoutName, setWorkoutName] = useState('')
 	const [workoutInProgress, setWorkoutInProgress] = useState(false)
 	const [workoutDays, setWorkoutDays] = useState([])
 	const [date, setDate] = useState(new Date())
@@ -32,6 +33,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 						fetch(`/workouts/${currentWorkout.workout_id}`)
 							.then((res) => res.json())
 							.then((data) => {
+								setWorkoutName(data.name)
 								setWorkout(data.workout_exercises)
 							})
 					} else {
@@ -161,7 +163,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				{workoutInProgress ? (
 					<FadeIn>
 						<Typography variant='h5' sx={{ mb: 2 }}>
-							{routine.workouts ? routine.workouts[0].name : 'Workout'}
+							{workoutName !== '' ? workoutName : 'Workout'}
 						</Typography>
 						<Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
 							<Button

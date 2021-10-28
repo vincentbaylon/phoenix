@@ -66,7 +66,13 @@ export default function SwipeableTemporaryDrawer({ handleLogout }) {
 	)
 
 	return (
-		<Box display='flex'>
+		<Box
+			display='flex'
+			sx={{
+				padding:
+					'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-left)',
+			}}
+		>
 			<Button onClick={toggleDrawer('right', true)} sx={{ color: 'white' }}>
 				<MenuIcon />
 			</Button>
