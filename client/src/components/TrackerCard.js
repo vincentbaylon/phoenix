@@ -55,7 +55,9 @@ function TrackerCard({ props, historyWorkout }) {
 						<Typography>Set</Typography>
 						<Typography>Prev</Typography>
 						<Typography>Reps</Typography>
-						<Typography>Weight</Typography>
+						<Typography>
+							{props.bodypart === 'Cardio' ? 'Time' : 'Weight'}
+						</Typography>
 						<Typography>Save</Typography>
 					</Stack>
 				</Grid>

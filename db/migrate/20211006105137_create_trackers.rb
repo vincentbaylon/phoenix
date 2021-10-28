@@ -7,6 +7,7 @@ class CreateTrackers < ActiveRecord::Migration[6.1]
       t.string :set
       t.integer :reps
       t.integer :weight
+      t.string :name
 
       t.timestamps
     end

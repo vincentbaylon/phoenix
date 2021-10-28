@@ -16,6 +16,7 @@ function SetCard({ set, props, historyWorkout }) {
 		reps: '',
 		weight: '',
 		exercise_id: props.id,
+		name: props.name,
 		history_id: '',
 	})
 
@@ -39,6 +40,7 @@ function SetCard({ set, props, historyWorkout }) {
 					reps: formData.reps,
 					weight: formData.weight,
 					exercise_id: props.id,
+					name: props.name,
 					history_id: historyWorkout.id,
 				}),
 			})
@@ -64,7 +66,8 @@ function SetCard({ set, props, historyWorkout }) {
 	}
 
 	const textStyle = {
-		width: '50px',
+		width: '40px',
+		textAlign: 'center',
 	}
 
 	return (
@@ -84,7 +87,7 @@ function SetCard({ set, props, historyWorkout }) {
 					spacing={4}
 				>
 					<Typography>{set}</Typography>
-					<Typography></Typography>
+					<Typography>185</Typography>
 					<TextField
 						name='reps'
 						type='number'
@@ -93,6 +96,7 @@ function SetCard({ set, props, historyWorkout }) {
 						value={formData.reps}
 						onChange={handleChange}
 						onClick={handleClick}
+						inputProps={{ min: 0, style: { textAlign: 'center' } }}
 					/>
 					<TextField
 						name='weight'
@@ -102,6 +106,7 @@ function SetCard({ set, props, historyWorkout }) {
 						value={formData.weight}
 						onChange={handleChange}
 						onClick={handleClick}
+						inputProps={{ min: 0, style: { textAlign: 'center' } }}
 					/>
 					<FormGroup>
 						<FormControlLabel

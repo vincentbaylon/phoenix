@@ -46,9 +46,13 @@ function CreateExercise({ routine, workouts, user }) {
 		fetchRoutine()
 	}, [])
 
+	function capitalizeName(name) {
+		return name.replace(/\b(\w)/g, (s) => s.toUpperCase())
+	}
+
 	const handleChange = (e) => {
 		const name = e.target.name
-		let value = e.target.value
+		let value = capitalizeName(e.target.value)
 
 		setFormData({
 			...formData,
@@ -134,8 +138,21 @@ function CreateExercise({ routine, workouts, user }) {
 		)
 	})
 
+	const handleDeleteExercise = (id) => {
+		const filteredExercise = addWorkouts.filter((w) => w.id !== id)
+		setAddWorkouts(filteredExercise)
+	}
+
 	const displayExercises = addWorkouts.map((e) => {
-		return <AddCards key={e.id} props={e} />
+		return (
+			<Grid item>
+				<AddCards
+					key={e.id}
+					props={e}
+					handleDeleteExercise={handleDeleteExercise}
+				/>
+			</Grid>
+		)
 	})
 
 	return (
@@ -169,6 +186,7 @@ function CreateExercise({ routine, workouts, user }) {
 						placeholder='Exercise'
 						variant='standard'
 						onChange={handleChange}
+						inputProps={{ style: { textTransform: 'capitalize' } }}
 					/>
 
 					<FormControl variant='standard'>
@@ -187,6 +205,8 @@ function CreateExercise({ routine, workouts, user }) {
 							<MenuItem value={'Shoulders'}>Shoulders</MenuItem>
 							<MenuItem value={'Arms'}>Arms</MenuItem>
 							<MenuItem value={'Olympic'}>Olympic</MenuItem>
+							<MenuItem value={'Abs'}>Abs</MenuItem>
+							<MenuItem value={'Cardio'}>Cardio</MenuItem>
 						</Select>
 					</FormControl>
 					<FormControl variant='standard'>

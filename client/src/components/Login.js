@@ -136,7 +136,7 @@ function Login({ setLoggedIn, setUser }) {
 								onChange={handleChange}
 							/> */}
 
-							<FormControl sx={{ m: 1 }} variant='filled'>
+							<FormControl variant='filled'>
 								<InputLabel htmlFor='outlined-adornment-password'>
 									Password
 								</InputLabel>

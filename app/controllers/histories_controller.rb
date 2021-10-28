@@ -17,6 +17,11 @@ class HistoriesController < ApplicationController
     render json: @history, status: :ok
   end
 
+  def destroy
+    @history.destroy
+    head :no_content
+  end
+
   private
   
   def find_history

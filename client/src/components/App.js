@@ -7,6 +7,7 @@ import { useMediaQuery } from '@mui/material'
 import FadeIn from 'react-fade-in'
 
 import CreateRoutine from './CreateRoutine'
+import CreateWorkout from './CreateWorkout'
 import CreateExercise from './CreateExercise'
 import Home from './Home'
 import Login from './Login'
@@ -84,6 +85,16 @@ function App() {
 					</Route>
 					<Route path='/create_exercise'>
 						<CreateExercise routine={routine} />
+					</Route>
+					<Route path='/create_routine'>
+						<CreateRoutine
+							routine={routine}
+							user={user}
+							setRoutine={setRoutine}
+						/>
+					</Route>
+					<Route path='/create_workout'>
+						<CreateWorkout routine={routine} />
 					</Route>
 					<Route path='/history'>
 						<History user={user} />

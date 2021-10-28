@@ -10,6 +10,11 @@ class WorkoutsController < ApplicationController
     render json: @workout, status: :ok
   end
 
+  def destroy
+    @workout.destroy
+    head :no_content
+  end
+
   private
 
   def find_workout
@@ -17,6 +22,6 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.permit(:name)
+    params.permit(:name, :id)
   end
 end

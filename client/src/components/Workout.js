@@ -20,20 +20,53 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 		fetch(`/users/${user.id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				if (data.routines.length > 0) {
-					const current = data.user_routines.find((r) => r.current === true)
-					if (current) {
-						fetch(`/routines/${current.id}`)
+				if (data.histories.length > 0) {
+					const currentWorkout = data.histories.find(
+						(h) => h.in_progress === true
+					)
+					if (currentWorkout) {
+						console.log(currentWorkout)
+						setHistoryWorkout(currentWorkout)
+						setWorkoutInProgress(true)
+
+						fetch(`/workouts/${currentWorkout.workout_id}`)
 							.then((res) => res.json())
 							.then((data) => {
-								setRoutine(data)
-								setWorkoutDays(data.routine_workouts)
+								setWorkout(data.workout_exercises)
 							})
 					} else {
-						alert('No routine set as "Current"')
+						if (data.routines.length > 0) {
+							const current = data.user_routines.find((r) => r.current === true)
+							if (current) {
+								fetch(`/routines/${current.id}`)
+									.then((res) => res.json())
+									.then((data) => {
+										setRoutine(data)
+										setWorkoutDays(data.routine_workouts)
+									})
+							} else {
+								alert('No routine set as "Current"')
+							}
+						} else {
+							alert('Create a routine')
+						}
 					}
 				} else {
-					alert('Create a routine')
+					if (data.routines.length > 0) {
+						const current = data.user_routines.find((r) => r.current === true)
+						if (current) {
+							fetch(`/routines/${current.id}`)
+								.then((res) => res.json())
+								.then((data) => {
+									setRoutine(data)
+									setWorkoutDays(data.routine_workouts)
+								})
+						} else {
+							alert('No routine set as "Current"')
+						}
+					} else {
+						alert('Create a routine')
+					}
 				}
 			})
 	}, [])
@@ -81,6 +114,11 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 		color: 'black',
 	}
 
+	const cancelButton = {
+		background: 'red',
+		color: 'black',
+	}
+
 	const handleEnd = () => {
 		fetch(`/histories/${historyWorkout.id}`, {
 			method: 'PATCH',
@@ -96,6 +134,12 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				alert('Great work! Rest up and fuel your body for recovery.')
 				history.push('/home')
 			})
+	}
+
+	const handleCancel = () => {
+		fetch(`/histories/${historyWorkout.id}`, {
+			method: 'DELETE',
+		}).then(history.push('/home'))
 	}
 
 	return (
@@ -119,6 +163,15 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 						<Typography variant='h5' sx={{ mb: 2 }}>
 							{routine.workouts ? routine.workouts[0].name : 'Workout'}
 						</Typography>
+						<Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+							<Button
+								variant='contained'
+								style={cancelButton}
+								onClick={handleCancel}
+							>
+								Cancel Workout
+							</Button>
+						</Box>
 						<Divider sx={{ mb: 2 }} />
 						{displayCards}
 						<Box
@@ -132,7 +185,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 								style={buttonStyle}
 								onClick={handleEnd}
 							>
-								End Workout
+								Finish Workout
 							</Button>
 						</Box>
 					</FadeIn>

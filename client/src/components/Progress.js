@@ -102,7 +102,9 @@ function Progress({ user }) {
 				<DialogForm user={user} refetchChart={refetchChart} />
 			</Grid>
 			<Grid item xs={12} sx={{ mb: 2 }}>
-				<Typography align='left'>Progress Pictures</Typography>
+				<Typography align='left' fontWeight='bold'>
+					Progress Pictures
+				</Typography>
 			</Grid>
 			<Grid item xs={6}>
 				<ProgressPicture checkIns={checkIns} label='Previous' />

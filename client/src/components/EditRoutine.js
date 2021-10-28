@@ -29,15 +29,15 @@ function EditRoutine({ setRoutine, routine, user }) {
 			</Grid>
 		)
 	})
-	const displayExercises = routine?.routine_exercises?.map((eArr) => {
-		return eArr.map((e) => {
-			return (
-				<Grid item>
-					<EditWorkoutCards key={e.id} props={e} />
-				</Grid>
-			)
-		})
-	})
+	// const displayExercises = routine?.routine_exercises?.map((eArr) => {
+	// 	return eArr.map((e) => {
+	// 		return (
+	// 			<Grid item>
+	// 				<EditWorkoutCards key={e.id} props={e} />
+	// 			</Grid>
+	// 		)
+	// 	})
+	// })
 
 	const handleRoutineName = () => {
 		fetch(`/routines/${routine.id}`, {
@@ -84,6 +84,10 @@ function EditRoutine({ setRoutine, routine, user }) {
 			})
 	}
 
+	const handleAddWorkout = () => {
+		history.push('/create_workout')
+	}
+
 	const handleDelete = async () => {
 		if (
 			window.confirm('Are you sure? You will lose all your routine history.')
@@ -112,7 +116,11 @@ function EditRoutine({ setRoutine, routine, user }) {
 					</Button>
 					Edit Routine
 				</Typography>
-				<Typography variant='h5' fontWeight='bold' sx={{ mb: 1 }}>
+				<Typography
+					variant='h5'
+					fontWeight='bold'
+					sx={{ mb: 1, textTransform: 'capitalize' }}
+				>
 					{routine.name}
 				</Typography>
 				<TextField
@@ -140,22 +148,29 @@ function EditRoutine({ setRoutine, routine, user }) {
 				<Button
 					onClick={handleDelete}
 					variant='contained'
-					color='secondary'
 					size='small'
-					sx={{ m: 1, mt: 2 }}
+					sx={{ m: 1, mt: 2, background: 'red', color: 'black' }}
 				>
 					Delete Routine
 				</Button>
 				<Divider sx={{ mt: 2, mb: 2 }} />
-				<Typography variant='h6' fontWeight='bold'>
-					Workouts
+				<Typography variant='h6' fontWeight='bold' sx={{ mb: 2 }}>
+					Edit Workouts
 				</Typography>
+				<Button
+					onClick={handleAddWorkout}
+					variant='contained'
+					size='small'
+					sx={{ mb: 2 }}
+				>
+					Add Workout
+				</Button>
 				<Grid container>{displayWorkouts}</Grid>
-				<Divider sx={{ mt: 2, mb: 2 }} />
+				{/* <Divider sx={{ mt: 2, mb: 2 }} />
 				<Typography variant='h6' fontWeight='bold'>
 					Exercises
 				</Typography>
-				<Grid container>{displayExercises}</Grid>
+				<Grid container>{displayExercises}</Grid> */}
 			</Box>
 		</FadeIn>
 	)

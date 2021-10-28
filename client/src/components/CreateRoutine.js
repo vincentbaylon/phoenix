@@ -1,17 +1,25 @@
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Typography } from '@mui/material'
 import { Button } from '@mui/material'
 import { Box } from '@mui/material'
 import { TextField } from '@mui/material'
 import { useMediaQuery } from '@mui/material'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
-function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
+function CreateRoutine({ setRoutine, user }) {
+	const history = useHistory()
 	const [name, setName] = useState('')
 	const [workoutDays, setWorkoutDays] = useState([])
 	const matches = useMediaQuery('(max-width:900px)')
 
+	function capitalizeName(name) {
+		return name.replace(/\b(\w)/g, (s) => s.toUpperCase())
+	}
+
 	const handleChange = (e) => {
-		setName(e.target.value)
+		let capitalName = capitalizeName(e.target.value)
+		setName(capitalName)
 	}
 
 	const handleDays = (e) => {
@@ -19,6 +27,10 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 			target: { value },
 		} = e
 		setWorkoutDays(typeof value === 'string' ? value.split(',') : value)
+	}
+
+	const handleBack = () => {
+		history.push('/routine')
 	}
 
 	const handleRoutine = async (e) => {
@@ -56,16 +68,20 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 			if (parsedUserRoutineBody.error) {
 				alert(parsedUserRoutineBody.error)
 			} else {
-				setShowRoutine(false)
-				setShowWorkout(true)
 				setRoutine(parsedRoutineBody)
+				history.push('create_workout')
 			}
 		}
 	}
 
 	return (
-		<Box sx={{ p: 2, width: matches ? '100vw' : '50vw' }}>
-			<Typography fontWeight='bold'>Create A Routine</Typography>
+		<Box sx={{ mt: 10, p: 2, width: matches ? '100vw' : '50vw' }}>
+			<Typography fontWeight='bold' variant='h5'>
+				<Button onClick={handleBack}>
+					<ArrowBackIosNewIcon />
+				</Button>
+				Create A Routine
+			</Typography>
 
 			<TextField
 				name='name'
@@ -74,6 +90,7 @@ function CreateRoutine({ setShowWorkout, setShowRoutine, setRoutine, user }) {
 				variant='standard'
 				value={name}
 				onChange={handleChange}
+				inputProps={{ style: { textTransform: 'capitalize' } }}
 			/>
 			<Button variant='contained' onClick={handleRoutine} sx={{ mt: 2 }}>
 				Create Routine

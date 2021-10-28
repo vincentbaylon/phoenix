@@ -1,6 +1,15 @@
-import { Card, Typography } from '@mui/material'
+import { Card, Typography, Button } from '@mui/material'
 
-function Cards({ props }) {
+function Cards({ props, handleDeleteWorkout }) {
+	const handleDelete = () => {
+		if (window.confirm('Are you sure?')) {
+			fetch(`/workouts/${props.id}`, {
+				method: 'DELETE',
+			}).then(handleDeleteWorkout(props.id))
+		} else {
+		}
+	}
+
 	return (
 		<>
 			<Card
@@ -21,6 +30,7 @@ function Cards({ props }) {
 				<Typography variant='p' align='center'>
 					{props.day.join(', ')}
 				</Typography>
+				<Button onClick={handleDelete}>Delete</Button>
 			</Card>
 		</>
 	)

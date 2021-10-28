@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import {
 	Typography,
 	TextField,
@@ -14,20 +14,15 @@ import {
 	Grid,
 	useMediaQuery,
 } from '@mui/material'
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 
 import Cards from './Cards'
 
-function CreateExercise({
-	routine,
-	user,
-	workouts,
-	setWorkouts,
-	setShowWorkout,
-	setShowExercise,
-	handleWorkoutDone,
-}) {
+function CreateWorkout({ routine, user }) {
 	const [day, setDay] = useState([])
 	const [name, setName] = useState('')
+	const location = useLocation()
+	const [workouts, setWorkouts] = useState([])
 	const history = useHistory()
 	const matches = useMediaQuery('(max-width:900px)')
 	const daysArr = [
@@ -40,18 +35,25 @@ function CreateExercise({
 		'Sunday',
 	]
 
-	useEffect(() => {})
+	function capitalizeName(name) {
+		return name.replace(/\b(\w)/g, (s) => s.toUpperCase())
+	}
 
 	const handleDay = (e) => {
 		setDay(e.target.value)
 	}
 
 	const handleChange = (e) => {
-		setName(e.target.value)
+		let capitalName = capitalizeName(e.target.value)
+		setName(capitalName)
 	}
 
 	const handleDone = () => {
 		history.push('/create_exercise')
+	}
+
+	const handleBack = () => {
+		history.goBack()
 	}
 
 	const handleAddWorkout = async (e) => {
@@ -97,10 +99,15 @@ function CreateExercise({
 		}
 	}
 
+	const handleDeleteWorkout = (id) => {
+		const filteredWorkouts = workouts.filter((w) => w.id !== id)
+		setWorkouts(filteredWorkouts)
+	}
+
 	const displayWorkouts = workouts.map((w) => {
 		return (
 			<Grid item>
-				<Cards key={w.id} props={w} />
+				<Cards key={w.id} props={w} handleDeleteWorkout={handleDeleteWorkout} />
 			</Grid>
 		)
 	})
@@ -114,8 +121,17 @@ function CreateExercise({
 	})
 
 	return (
-		<Box sx={{ p: 2, width: matches ? '100vw' : '50vw' }}>
+		<Box
+			sx={{
+				p: 2,
+				mt: location.pathname === '/routine' ? 0 : 10,
+				width: matches ? '100vw' : '50vw',
+			}}
+		>
 			<Typography variant='h6' fontWeight='bold'>
+				<Button onClick={handleBack}>
+					<ArrowBackIosNewIcon />
+				</Button>
 				Create Workouts For "{routine.name}"
 			</Typography>
 			<Stack spacing={2}>
@@ -126,6 +142,7 @@ function CreateExercise({
 					variant='standard'
 					value={name}
 					onChange={handleChange}
+					inputProps={{ style: { textTransform: 'capitalize' } }}
 				/>
 
 				<FormControl
@@ -159,7 +176,7 @@ function CreateExercise({
 			>
 				Add Workout
 			</Button>
-			<Divider />
+			<Divider sx={{ mb: 2 }} />
 			<Grid container>{workouts.length > 0 ? displayWorkouts : null}</Grid>
 			<Button
 				variant='contained'
@@ -173,4 +190,4 @@ function CreateExercise({
 	)
 }
 
-export default CreateExercise
+export default CreateWorkout
