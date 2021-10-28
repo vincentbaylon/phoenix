@@ -1,8 +1,15 @@
-import { Box, Typography, Divider, useMediaQuery } from '@mui/material'
+import {
+	Box,
+	Typography,
+	Divider,
+	useMediaQuery,
+	Container,
+} from '@mui/material'
 import FadeIn from 'react-fade-in'
 import Quotes from './Quotes'
 import Progress from './Progress'
 import Account from './Account'
+import Footer from './Footer'
 
 function Home({ user, handleLogout, setUser }) {
 	const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)]
@@ -12,6 +19,10 @@ function Home({ user, handleLogout, setUser }) {
 		fetch(`/users/${user.id}`, {
 			method: 'DELETE',
 		}).then(handleLogout)
+	}
+
+	const footerStyle = {
+		bottom: 0,
 	}
 
 	return (
@@ -36,6 +47,7 @@ function Home({ user, handleLogout, setUser }) {
 				{/* <Button variant='contained' color='secondary' onClick={handleDelete}>
 					Delete Account
 				</Button> */}
+				<Footer />
 			</FadeIn>
 		</Box>
 	)
