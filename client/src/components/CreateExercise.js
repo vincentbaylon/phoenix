@@ -162,7 +162,6 @@ function CreateExercise({ routine, workouts, user }) {
 				mt: 8,
 				p: 2,
 				width: matches ? '100vw' : '50vw',
-				margin: 'auto',
 			}}
 		>
 			<Box>
@@ -235,9 +234,9 @@ function CreateExercise({ routine, workouts, user }) {
 				<Typography variant='h6' fontweight='bold' sx={{ mt: 2, mb: 2 }}>
 					Exercises Currently Added
 				</Typography>
-				<Box sx={{ display: 'flex', flexDirection: 'row' }}>
+				<Grid container sx={{ display: 'flex', flexDirection: 'row' }}>
 					{displayExercises}
-				</Box>
+				</Grid>
 				<Box
 					sx={{
 						width: '100%',

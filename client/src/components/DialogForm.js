@@ -119,7 +119,9 @@ export default function FormDialog({ user, refetchChart }) {
 				<DialogTitle>Check-In</DialogTitle>
 				<DialogContent>
 					<Stack spacing={2}>
-						<DialogContentText>Enter your current weight:</DialogContentText>
+						<DialogContentText fontWeight='bold'>
+							Enter your current weight:
+						</DialogContentText>
 						<TextField
 							autoFocus
 							margin='dense'
@@ -130,7 +132,9 @@ export default function FormDialog({ user, refetchChart }) {
 							value={weight}
 							onChange={handleChange}
 						/>
-						<DialogContentText>Add progress picture:</DialogContentText>
+						<DialogContentText fontWeight='bold'>
+							Add progress picture:
+						</DialogContentText>
 						<FormControl>
 							<input
 								capture='environment'

@@ -130,7 +130,7 @@ function EditRoutine({ setRoutine, routine, user }) {
 					variant='standard'
 				/>
 				<Button
-					variant='contained'
+					variant='outlined'
 					size='small'
 					onClick={handleRoutineName}
 					sx={{ m: 1, mt: 2 }}
@@ -161,7 +161,7 @@ function EditRoutine({ setRoutine, routine, user }) {
 					onClick={handleAddWorkout}
 					variant='contained'
 					size='small'
-					sx={{ mb: 2 }}
+					sx={{ m: 1, mb: 2 }}
 				>
 					Add Workout
 				</Button>

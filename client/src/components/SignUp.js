@@ -25,8 +25,19 @@ function SignUp({ setUser, setLoggedIn }) {
 		email: '',
 	})
 
+	function capitalizeName(name) {
+		return name.replace(/\b(\w)/g, (s) => s.toUpperCase())
+	}
+
 	const handleShowPassword = (e) => {
 		setShowPassword((showPassword) => !showPassword)
+	}
+
+	const handleName = (e) => {
+		const name = e.target.name
+		let value = capitalizeName(e.target.value)
+
+		setFormData({ ...formData, [name]: value })
 	}
 
 	const handleChange = (e) => {
@@ -120,7 +131,7 @@ function SignUp({ setUser, setLoggedIn }) {
 							name='name'
 							value={formData.name}
 							label='Name'
-							onChange={handleChange}
+							onChange={handleName}
 							style={textStyle}
 							variant='filled'
 						/>

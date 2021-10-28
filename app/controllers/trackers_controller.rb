@@ -29,6 +29,6 @@ class TrackersController < ApplicationController
   end
 
   def tracker_params
-    params.permit(:id, :exercise_id, :history_id, :set, :reps, :weight, :date)
+    params.permit(:id, :exercise_id, :history_id, :set, :reps, :weight, :date, :name)
   end
 end

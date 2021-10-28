@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_10_06_105137) do
     t.string "set"
     t.integer "reps"
     t.integer "weight"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["exercise_id"], name: "index_trackers_on_exercise_id"
