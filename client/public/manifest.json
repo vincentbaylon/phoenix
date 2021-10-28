@@ -1,1 +1,5 @@
-{}
+{
+  "name": "Phoenix Fitness",
+  "display": "standalone",
+  "start_url": "/?standalone=true"
+}
