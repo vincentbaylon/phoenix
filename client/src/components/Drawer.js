@@ -46,6 +46,10 @@ export default function SwipeableTemporaryDrawer({ handleLogout }) {
 			role='presentation'
 			onClick={toggleDrawer(anchor, false)}
 			onKeyDown={toggleDrawer(anchor, false)}
+			sx={{
+				padding:
+					'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-left)',
+			}}
 		>
 			<List>
 				{['Home', 'Routine', 'Start Workout', 'History'].map((text) => (
@@ -66,13 +70,7 @@ export default function SwipeableTemporaryDrawer({ handleLogout }) {
 	)
 
 	return (
-		<Box
-			display='flex'
-			sx={{
-				padding:
-					'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-left)',
-			}}
-		>
+		<Box display='flex'>
 			<Button onClick={toggleDrawer('right', true)} sx={{ color: 'white' }}>
 				<MenuIcon />
 			</Button>

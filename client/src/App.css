@@ -37,10 +37,8 @@
 	}
 }
 
-.element {
-	height: env(safe-area-inset-top);
-	width: env(safe-area-inset-left);
-	margin: env(safe-area-inset-right);
-	/* you can also use fallback values */
-	padding: env(safe-area-inset-bottom, 20px);
+main {
+	min-height: calc(100% + env(safe-area-inset-top));
+	padding: env(safe-area-inset-top) env(safe-area-inset-right)
+		env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
