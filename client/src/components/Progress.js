@@ -97,6 +97,7 @@ function Progress({ user }) {
 				sx={{
 					height: '100%',
 					width: '100%',
+					mt: 2,
 				}}
 				style={{
 					textAlign: 'center',
