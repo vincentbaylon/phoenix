@@ -79,7 +79,7 @@ function Progress({ user }) {
 			container
 			alignItems='center'
 			justifyContent='center'
-			sx={{ mt: 2, padding: 'env(safe-area-inset-bottom)' }}
+			sx={{ padding: '0 0 env(safe-area-inset-bottom) 0' }}
 		>
 			<Grid
 				item
