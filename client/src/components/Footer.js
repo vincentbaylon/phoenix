@@ -6,7 +6,7 @@ const footerStyle = {
 	position: 'fixed',
 	bottom: 0,
 	left: 0,
-	widht: '100%',
+	// width: '100%',
 }
 
 function Footer() {

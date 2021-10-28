@@ -18,6 +18,7 @@ import Workout from './Workout'
 import Routine from './Routine'
 import History from './History'
 import EditRoutine from './EditRoutine'
+import Contact from './Contact'
 
 function App() {
 	const history = useHistory()
@@ -108,6 +109,9 @@ function App() {
 							routine={routine}
 							user={user}
 						/>
+					</Route>
+					<Route path='/contact'>
+						<Contact />
 					</Route>
 					<Route exact path='/'>
 						<Login setLoggedIn={setLoggedIn} setUser={setUser} />

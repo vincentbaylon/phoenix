@@ -51,7 +51,7 @@ function TrackerCard({ props, historyWorkout }) {
 					</Typography>
 				</Grid>
 				<Grid item>
-					<Stack direction='row' spacing={3}>
+					<Stack direction='row' spacing={4}>
 						<Typography>Set</Typography>
 						<Typography>Prev</Typography>
 						<Typography>Reps</Typography>

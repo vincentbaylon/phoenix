@@ -60,7 +60,7 @@ export default function SwipeableTemporaryDrawer({ handleLogout }) {
 			</List>
 			<Divider />
 			<List>
-				{['Logout'].map((text) => (
+				{['Contact', 'Logout'].map((text) => (
 					<ListItem button key={text} onClick={handleClick}>
 						<ListItemText primary={text} />
 					</ListItem>

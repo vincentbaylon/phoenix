@@ -19,10 +19,9 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/me', to: 'users#show'
-  post 'password/forgot', to: 'passwords#forgot'
-  post 'password/reset', to: 'passwords#reset'
+  post '/password/forgot', to: 'passwords#forgot'
+  post '/password/reset', to: 'passwords#reset'
   get '/user_routines/current/:id', to: 'user_routines#current'
-
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

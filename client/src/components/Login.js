@@ -61,6 +61,31 @@ function Login({ setLoggedIn, setUser }) {
 		history.push('/signup')
 	}
 
+	const handleReset = () => {
+		const email = prompt('Please enter your email')
+		if (email === '') {
+			alert('No email provided')
+		} else {
+			fetch(`/password/forgot`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email: email,
+				}),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.error) {
+						alert(data.error)
+					} else {
+						alert('Reset email sent')
+					}
+				})
+		}
+	}
+
 	const textStyle = {
 		backgroundColor: 'white',
 		borderColor: '1px solid white',
@@ -116,7 +141,7 @@ function Login({ setLoggedIn, setUser }) {
 							direction='column'
 							justifyContent='center'
 							alignItems='center'
-							spacing={2}
+							spacing={1}
 						>
 							<TextField
 								name='username'
@@ -178,11 +203,26 @@ function Login({ setLoggedIn, setUser }) {
 									alignItems: 'center',
 								}}
 							>
-								<Typography color='white'>Don't have an account?</Typography>
-								<Button onClick={handleSignUp} sx={{ color: '#4266F5' }}>
+								<Typography color='white' sx={{ mt: 2 }}>
+									Don't have an account?
+								</Typography>
+								<Button onClick={handleSignUp} sx={{ color: '#4266F5', mt: 2 }}>
 									Sign Up
 								</Button>
 							</Box>
+							{/* <Box
+								sx={{
+									display: 'flex',
+									direction: 'row',
+									justifyContent: 'center',
+									alignItems: 'center',
+								}}
+							>
+								<Typography color='white'>Forgot your password?</Typography>
+								<Button onClick={handleReset} sx={{ color: '#4266F5' }}>
+									Reset
+								</Button>
+							</Box> */}
 						</Stack>
 					</FadeIn>
 				</Grid>

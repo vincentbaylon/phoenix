@@ -74,6 +74,8 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 	}, [])
 
 	const handleSelect = (prop) => {
+		console.log(prop)
+		setWorkoutName(prop.name)
 		setWorkout(prop.workout_exercises)
 		let formattedDate = format(date, 'EEE, MMM dd')
 
@@ -97,6 +99,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				if (data.error) {
 					alert(data.error)
 				} else {
+					console.log(data)
 					setHistoryWorkout(data)
 					setWorkoutInProgress(true)
 				}
@@ -162,7 +165,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 			>
 				{workoutInProgress ? (
 					<FadeIn>
-						<Typography variant='h5' sx={{ mb: 2 }}>
+						<Typography variant='h5' fontWeight='bold' sx={{ mb: 2 }}>
 							{workoutName !== '' ? workoutName : 'Workout'}
 						</Typography>
 						<Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
@@ -170,6 +173,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 								variant='contained'
 								style={cancelButton}
 								onClick={handleCancel}
+								size='small'
 							>
 								Cancel Workout
 							</Button>

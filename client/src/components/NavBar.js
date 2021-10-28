@@ -97,6 +97,12 @@ function NavBar({ handleLogout, loggedIn, user }) {
 					/>
 					<Tab
 						component={NavLink}
+						to='/contact'
+						label='Contact'
+						style={tabStyle}
+					/>
+					<Tab
+						component={NavLink}
 						to='/'
 						label={loggedIn ? 'Logout' : 'Login'}
 						onClick={loggedIn ? handleLogout : null}
