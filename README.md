@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to Phoenix Fitness 👋</h1>
 <p>
-  <a href="https://twitter.com/vincentbaylon\_" target="_blank">
-    <img alt="Twitter: vincentbaylon\_" src="https://img.shields.io/twitter/follow/vincentbaylon\_.svg?style=social" />
+  <a href="https://twitter.com/vincentbaylon_" target="_blank">
+    <img alt="Twitter: vincentbaylon_" src="https://img.shields.io/twitter/follow/vincentbaylon_.svg?style=social" />
   </a>
 </p>
 
@@ -12,17 +12,22 @@
 ## Install
 
 ```sh
-bundle install, rails db:create db:migrate, rails s, npm install --prefix client, npm start --prefix client
+bundle install
+rails db:create db:migrate
+rails s
+
+npm install --prefix client
+npm start --prefix client
 ```
 
 ## Author
 
 👤 **Vincent Baylon**
 
-* Website: https://www.linkedin.com/in/vincentbaylon/
-* Twitter: [@vincentbaylon\_](https://twitter.com/vincentbaylon\_)
+* Website: https://dev.to/vincentbaylon
+* Twitter: [@vincentbaylon_](https://twitter.com/vincentbaylon_)
 * Github: [@vincentbaylon](https://github.com/vincentbaylon)
-* LinkedIn: [@vincentbaylon\_](https://linkedin.com/in/vincentbaylon\_)
+* LinkedIn: [@vincentbaylon](https://linkedin.com/in/vincentbaylon)
 
 ## Show your support
 
