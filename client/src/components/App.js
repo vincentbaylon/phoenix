@@ -19,6 +19,7 @@ import Routine from './Routine'
 import History from './History'
 import EditRoutine from './EditRoutine'
 import Contact from './Contact'
+import Reset from './Reset'
 
 function App() {
 	const history = useHistory()
@@ -112,6 +113,9 @@ function App() {
 					</Route>
 					<Route path='/contact'>
 						<Contact />
+					</Route>
+					<Route path='/password/reset/:token'>
+						<Reset />
 					</Route>
 					<Route exact path='/'>
 						<Login setLoggedIn={setLoggedIn} setUser={setUser} />
