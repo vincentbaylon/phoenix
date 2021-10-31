@@ -12,7 +12,7 @@ const footerStyle = {
 function Footer() {
 	return (
 		<div style={footerStyle}>
-			<Typography>Created by Vince Baylon © 2021</Typography>
+			<Typography>Created by Vincent Baylon © 2021</Typography>
 		</div>
 	)
 }
