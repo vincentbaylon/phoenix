@@ -41,6 +41,9 @@
 - Workout Tracker
 - Weight Tracker
 - Progress Pictures
+- Progressive Web App (PWA)
+  - Can be added to home screen of mobile devices
+  - Functions as a full-screen mobile app
 
 ## Screenshots
 
