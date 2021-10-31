@@ -61,6 +61,7 @@
 - Open project in your editor
 - Open terminal from editor or 'cd' to project directory and run:
   - bundle install
+  - rails db:create db:migrate
   - rails s
 - Open another terminal and run:
   - npm install --prefix client
