@@ -71,7 +71,8 @@ Project is: _in progress_
 
 Room for improvement:
 
-- Refactor code to be useable
+- Refactor code to be reuseable
+- Find repeating code
 - Fix sizing of elements on different screens
 
 To do:
