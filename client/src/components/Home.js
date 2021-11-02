@@ -15,12 +15,6 @@ function Home({ user, handleLogout, setUser }) {
 	const randomQuote = Quotes[Math.floor(Math.random() * Quotes.length)]
 	const matches = useMediaQuery('(max-width:900px)')
 
-	const handleDelete = () => {
-		fetch(`/users/${user.id}`, {
-			method: 'DELETE',
-		}).then(handleLogout)
-	}
-
 	const footerStyle = {
 		bottom: 0,
 	}
@@ -42,7 +36,7 @@ function Home({ user, handleLogout, setUser }) {
 				{/* <Divider />
 				<Typography>Action Items</Typography> */}
 				<Divider />
-				<Account user={user} setUser={setUser} />
+				<Account user={user} setUser={setUser} handleLogout={handleLogout} />
 				<Progress user={user} />
 				{/* <Button variant='contained' color='secondary' onClick={handleDelete}>
 					Delete Account

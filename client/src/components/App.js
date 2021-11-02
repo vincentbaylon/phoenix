@@ -76,7 +76,12 @@ function App() {
 						<Home user={user} setUser={setUser} handleLogout={handleLogout} />
 					</Route>
 					<Route path='/routine'>
-						<Routine user={user} setRoutine={setRoutine} routine={routine} />
+						<Routine
+							user={user}
+							setRoutine={setRoutine}
+							routine={routine}
+							handleLogout={handleLogout}
+						/>
 					</Route>
 					<Route path='/workout'>
 						<Workout

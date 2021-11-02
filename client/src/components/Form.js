@@ -7,7 +7,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
 import { Stack } from '@mui/material'
 
-export default function FormDialog({ user, setUser }) {
+export default function FormDialog({ user, setUser, handleLogout }) {
 	const [open, setOpen] = useState(false)
 	const [formData, setFormData] = useState({
 		name: user.name,
@@ -63,6 +63,19 @@ export default function FormDialog({ user, setUser }) {
 		})
 	}
 
+	const handleDelete = () => {
+		if (
+			window.confirm(
+				'Are you sure you want to tackle your fitness goals alone?'
+			)
+		) {
+			fetch(`/users/${user.id}`, {
+				method: 'DELETE',
+			}).then(handleLogout)
+		} else {
+		}
+	}
+
 	return (
 		<div>
 			<Button onClick={handleClickOpen} size='small'>
@@ -103,6 +116,9 @@ export default function FormDialog({ user, setUser }) {
 					</Stack>
 				</DialogContent>
 				<DialogActions>
+					<Button color='error' onClick={handleDelete}>
+						Delete Account
+					</Button>
 					<Button onClick={handleClose}>Cancel</Button>
 					<Button onClick={handleSubmit}>Submit</Button>
 				</DialogActions>
