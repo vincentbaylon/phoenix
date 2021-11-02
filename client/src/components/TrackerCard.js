@@ -14,6 +14,17 @@ function TrackerCard({ props, historyWorkout, previousWorkout }) {
 	const [count, setCount] = useState(1)
 
 	useEffect(() => {
+		if (Object.entries(previousWorkout).length !== 0) {
+			const countFilter = previousWorkout.show_trackers.filter(
+				(t) => t.exercise_id === props.id
+			).length
+			if (countFilter > 0) {
+				setCount((count) => countFilter)
+			}
+		}
+	}, [previousWorkout])
+
+	useEffect(() => {
 		const countFilter = historyWorkout.show_trackers.filter(
 			(t) => t.exercise_id === props.id
 		).length
