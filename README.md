@@ -1,10 +1,11 @@
-<p align="center"><img src="client/src/assets/logo.png" alt="logo" width="400px" margin="auto"></p>
+<p align="center"><img src="client/src/assets/logo.png" alt="logo" width="500px" margin="auto"></p>
 
 <br />
 
 # Phoenix Fitness
 
 > Phoenix Fitness is a workout and body progress tracker to assist you with achieving your fitness goals.
+> 
 > Live demo [_here_](https://phoenix-fitness.herokuapp.com). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
@@ -17,7 +18,6 @@
 - [Usage](#usage)
 - [Project Status](#project-status)
 - [Room for Improvement](#room-for-improvement)
-- [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
 <!-- * [License](#license) -->
 
@@ -40,6 +40,9 @@
 - Workout Tracker
 - Weight Tracker
 - Progress Pictures
+- Progressive Web App (PWA)
+  - Can be added to home screen of mobile devices
+  - Functions as a full-screen mobile app
 
 ## Screenshots
 
@@ -57,6 +60,7 @@
 - Open project in your editor
 - Open terminal from editor or 'cd' to project directory and run:
   - bundle install
+  - rails db:create db:migrate
   - rails s
 - Open another terminal and run:
   - npm install --prefix client
@@ -70,7 +74,8 @@ Project is: _in progress_
 
 Room for improvement:
 
-- Refactor code to be useable
+- Refactor code to be reuseable
+- Find repeating code
 - Fix sizing of elements on different screens
 
 To do:
