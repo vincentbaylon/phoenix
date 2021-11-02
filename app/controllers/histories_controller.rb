@@ -1,5 +1,5 @@
 class HistoriesController < ApplicationController
-  before_action :find_history, except: [:create, :index]
+  before_action :find_history, except: [:create, :index, :find_last]
 
   def index
     
