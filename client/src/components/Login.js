@@ -174,6 +174,7 @@ function Login({ setLoggedIn, setUser }) {
 									placeholder='(Min 6 characters)'
 									onChange={handleChange}
 									style={textStyle}
+									autoComplete='off'
 									endAdornment={
 										<InputAdornment position='end'>
 											<IconButton
