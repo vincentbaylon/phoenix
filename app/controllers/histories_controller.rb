@@ -33,6 +33,6 @@ class HistoriesController < ApplicationController
   end
 
   def history_params
-    params.permit(:user_id, :routine_id, :workout_id, :date, :in_progress)
+    params.permit(:user_id, :routine_id, :workout_id, :date, :in_progress, :id)
   end
 end
