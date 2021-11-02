@@ -36,7 +36,10 @@ function ProgressPicture({ checkIns, label }) {
 				>
 					{displayCheckIns}
 				</Select>
-				<img src={selected?.image_url} style={{ width: '100%' }} />
+				<img
+					src={selected?.image_url}
+					style={{ objectFit: 'cover', width: '100%' }}
+				/>
 			</FormControl>
 		</Box>
 	)

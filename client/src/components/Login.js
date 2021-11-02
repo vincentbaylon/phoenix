@@ -210,7 +210,7 @@ function Login({ setLoggedIn, setUser }) {
 									Sign Up
 								</Button>
 							</Box>
-							<Box
+							{/* <Box
 								sx={{
 									display: 'flex',
 									direction: 'row',
@@ -222,7 +222,7 @@ function Login({ setLoggedIn, setUser }) {
 								<Button onClick={handleReset} sx={{ color: '#4266F5' }}>
 									Reset
 								</Button>
-							</Box>
+							</Box> */}
 						</Stack>
 					</FadeIn>
 				</Grid>

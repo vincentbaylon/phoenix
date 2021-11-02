@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/password/forgot', to: 'passwords#forgot'
   post '/password/reset', to: 'passwords#reset'
   get '/user_routines/current/:id', to: 'user_routines#current'
+  get '/find_last/:id', to: 'histories#find_last'
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

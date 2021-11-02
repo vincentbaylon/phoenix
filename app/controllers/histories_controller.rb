@@ -22,6 +22,10 @@ class HistoriesController < ApplicationController
     head :no_content
   end
 
+  def find_last
+    render json: History.where(workout_id: params[:id]).second_to_last!, status: :ok
+  end
+
   private
   
   def find_history

@@ -75,7 +75,7 @@ function CreateRoutine({ setRoutine, user }) {
 	}
 
 	return (
-		<Box sx={{ mt: 10, p: 2, width: matches ? '100vw' : '50vw' }}>
+		<Box sx={{ m: 2, mt: 10, width: matches ? '95%' : '50%', margin: 'auto' }}>
 			<Typography fontWeight='bold' variant='h5'>
 				<Button onClick={handleBack}>
 					<ArrowBackIosNewIcon />

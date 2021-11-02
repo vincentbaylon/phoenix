@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
 	Typography,
 	Button,
@@ -10,8 +10,17 @@ import {
 
 import SetCard from './SetCard'
 
-function TrackerCard({ props, historyWorkout }) {
+function TrackerCard({ props, historyWorkout, previousWorkout }) {
 	const [count, setCount] = useState(1)
+
+	useEffect(() => {
+		const countFilter = historyWorkout.show_trackers.filter(
+			(t) => t.exercise_id === props.id
+		).length
+		if (countFilter > 0) {
+			setCount((count) => countFilter)
+		}
+	}, [])
 
 	const handleAdd = () => {
 		setCount((count) => count + 1)
@@ -31,6 +40,7 @@ function TrackerCard({ props, historyWorkout }) {
 				set={i + 1}
 				props={props}
 				historyWorkout={historyWorkout}
+				previousWorkout={previousWorkout}
 			/>
 		)
 	})

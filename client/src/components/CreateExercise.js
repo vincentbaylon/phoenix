@@ -161,12 +161,13 @@ function CreateExercise({ routine, workouts, user }) {
 				m: 2,
 				mt: 8,
 				p: 2,
-				width: matches ? '100vw' : '50vw',
+				width: matches ? '95%' : '50%',
+				margin: 'auto',
 			}}
 		>
 			<Box>
 				<Typography variant='h6' fontWeight='bold' sx={{ mb: 2 }}>
-					Select A Workout
+					Select A Workout To Add Exercise
 				</Typography>
 				<Grid container>{workoutArr.length > 0 ? displayWorkouts : null}</Grid>
 				<Typography sx={{ mb: 2 }}>

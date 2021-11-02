@@ -6,6 +6,7 @@ import ProgressPicture from './ProgressPicture'
 function Progress({ user }) {
 	const [image, setImage] = useState('')
 	const [checkIns, setCheckIns] = useState([])
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		async function fetchRoutine() {
@@ -86,12 +87,15 @@ function Progress({ user }) {
 					Progress Pictures
 				</Typography>
 			</Grid>
-			<Grid item xs={6}>
-				<ProgressPicture checkIns={checkIns} label='Previous' />
+			<Grid container>
+				<Grid item xs={6}>
+					<ProgressPicture checkIns={checkIns} label='Previous' />
+				</Grid>
+				<Grid item xs={6}>
+					<ProgressPicture checkIns={checkIns} label='Current' />
+				</Grid>
 			</Grid>
-			<Grid item xs={6}>
-				<ProgressPicture checkIns={checkIns} label='Current' />
-			</Grid>
+
 			<Grid
 				item
 				sx={{
@@ -110,7 +114,7 @@ function Progress({ user }) {
 						style={{
 							objectFit: 'contain',
 							height: '100%',
-							width: '100%',
+							width: matches ? '95%' : '80%',
 						}}
 					/>
 				) : null}

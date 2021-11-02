@@ -16,6 +16,7 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 	const [workoutDays, setWorkoutDays] = useState([])
 	const [date, setDate] = useState(new Date())
 	const matches = useMediaQuery('(max-width:900px)')
+	const [previousWorkout, setPreviousWorkout] = useState({})
 
 	useEffect(() => {
 		fetch(`/users/${user.id}`)
@@ -35,6 +36,17 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 							.then((data) => {
 								setWorkoutName(data.name)
 								setWorkout(data.workout_exercises)
+
+								fetch(`/find_last/${currentWorkout.workout_id}`)
+									.then((res) => res.json())
+									.then((data) => {
+										if (data.error) {
+											console.log(data.error)
+										} else {
+											console.log('ADDING PREVIOUS')
+											setPreviousWorkout(data)
+										}
+									})
 							})
 					} else {
 						if (data.routines.length > 0) {
@@ -102,12 +114,29 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 					console.log(data)
 					setHistoryWorkout(data)
 					setWorkoutInProgress(true)
+
+					fetch(`/find_last/${prop.id}`)
+						.then((res) => res.json())
+						.then((data) => {
+							if (data.error) {
+								console.log(data.error)
+							} else {
+								setPreviousWorkout(data)
+							}
+						})
 				}
 			})
 	}
 
 	const displayCards = workout.map((w) => {
-		return <TrackerCard key={w.id} props={w} historyWorkout={historyWorkout} />
+		return (
+			<TrackerCard
+				key={w.id}
+				props={w}
+				historyWorkout={historyWorkout}
+				previousWorkout={previousWorkout}
+			/>
+		)
 	})
 
 	const displayWorkouts = routine?.workouts?.map((w) => {

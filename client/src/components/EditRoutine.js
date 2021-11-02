@@ -10,11 +10,13 @@ import {
 	TextField,
 	Button,
 	Divider,
+	useMediaQuery,
 } from '@mui/material'
 
 function EditRoutine({ setRoutine, routine, user }) {
 	const history = useHistory()
 	const [routineName, setRoutineName] = useState('')
+	const matches = useMediaQuery('(max-width:900px)')
 
 	useEffect(() => {
 		if (Object.keys(routine).length === 0) {
@@ -109,7 +111,9 @@ function EditRoutine({ setRoutine, routine, user }) {
 
 	return (
 		<FadeIn>
-			<Box sx={{ m: 2, mt: 10 }}>
+			<Box
+				sx={{ m: 2, mt: 10, width: matches ? '95%' : '50%', margin: 'auto' }}
+			>
 				<Typography variant='h5' sx={{ mb: 3 }}>
 					<Button onClick={handleBack}>
 						<ArrowBackIosNewIcon />

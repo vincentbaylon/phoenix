@@ -61,7 +61,14 @@ function Routine({ user, setRoutine }) {
 	})
 
 	return (
-		<Box sx={{ m: 2, mt: 10 }}>
+		<Box
+			sx={{
+				m: 2,
+				mt: 10,
+				width: matches ? '95%' : '50%',
+				margin: 'auto',
+			}}
+		>
 			<FadeIn>
 				<Grid container>
 					<Grid item>

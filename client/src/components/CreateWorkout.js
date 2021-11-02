@@ -123,9 +123,11 @@ function CreateWorkout({ routine, user }) {
 	return (
 		<Box
 			sx={{
+				m: 2,
 				p: 2,
 				mt: location.pathname === '/routine' ? 0 : 10,
-				width: matches ? '100vw' : '50vw',
+				width: matches ? '95%' : '50%',
+				margin: 'auto',
 			}}
 		>
 			<Typography variant='h6' fontWeight='bold'>

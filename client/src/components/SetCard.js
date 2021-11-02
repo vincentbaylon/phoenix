@@ -9,7 +9,7 @@ import {
 	Stack,
 } from '@mui/material'
 
-function SetCard({ set, props, historyWorkout }) {
+function SetCard({ set, props, historyWorkout, previousWorkout }) {
 	const [checked, setChecked] = useState(false)
 	const [formData, setFormData] = useState({
 		set: set,
@@ -19,8 +19,43 @@ function SetCard({ set, props, historyWorkout }) {
 		name: props.name,
 		history_id: '',
 	})
+	const [prev, setPrev] = useState('N/A')
 
-	useEffect(() => {}, [historyWorkout])
+	useEffect(() => {
+		console.log('PREV', previousWorkout)
+
+		if (Object.entries(previousWorkout).length !== 0) {
+			const prevFilter = previousWorkout.show_trackers.filter(
+				(t) => t.exercise_id === props.id
+			)
+			const prevSetFilter = prevFilter.filter((s) => s.set === `${set}`)
+
+			if (prevSetFilter[0] !== undefined) {
+				setPrev(prevSetFilter[0].weight)
+			}
+		}
+	}, [previousWorkout])
+
+	useEffect(() => {
+		const exerciseFilter = historyWorkout.show_trackers.filter(
+			(t) => t.exercise_id === props.id
+		)
+		const setFilter = exerciseFilter.filter((e) => e.set === `${set}`)
+		console.log(setFilter[0])
+
+		if (setFilter[0] !== undefined) {
+			setFormData({
+				set: set,
+				reps: setFilter[0].reps,
+				weight: setFilter[0].weight,
+				exercise_id: setFilter[0].id,
+				name: setFilter.name,
+				history_id: historyWorkout.id,
+			})
+			setChecked(true)
+			setTracker(setFilter[0])
+		}
+	}, [])
 
 	const [tracker, setTracker] = useState({})
 
@@ -87,7 +122,7 @@ function SetCard({ set, props, historyWorkout }) {
 					spacing={4}
 				>
 					<Typography>{set}</Typography>
-					<Typography>N/A</Typography>
+					<Typography>{prev}</Typography>
 					<TextField
 						name='reps'
 						type='number'
@@ -97,6 +132,7 @@ function SetCard({ set, props, historyWorkout }) {
 						onChange={handleChange}
 						onClick={handleClick}
 						inputProps={{ min: 0, style: { textAlign: 'center' } }}
+						disabled={checked ? 'disabled' : null}
 					/>
 					<TextField
 						name='weight'
@@ -107,6 +143,7 @@ function SetCard({ set, props, historyWorkout }) {
 						onChange={handleChange}
 						onClick={handleClick}
 						inputProps={{ min: 0, style: { textAlign: 'center' } }}
+						disabled={checked ? 'disabled' : null}
 					/>
 					<FormGroup>
 						<FormControlLabel
