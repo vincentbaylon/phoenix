@@ -119,7 +119,7 @@ function App() {
 					<Route path='/contact'>
 						<Contact />
 					</Route>
-					<Route path='/password/reset/:token'>
+					<Route path='/password/reset/'>
 						<Reset />
 					</Route>
 					<Route exact path='/'>
