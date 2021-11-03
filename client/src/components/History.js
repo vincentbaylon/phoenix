@@ -26,7 +26,6 @@ function History({ user }) {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data.histories.length > 0) {
-					console.log(data.histories)
 					setHistories(data.histories)
 					setHistoryDate(data.histories.at(-1).date)
 					setTrackers(data.histories.at(-1).show_trackers)
@@ -72,9 +71,7 @@ function History({ user }) {
 				>
 					<Grid item>
 						<Typography variant='h6' align='left' sx={{ mb: 2 }}>
-							{historyDate !== ''
-								? `Latest Workout - ${historyDate}`
-								: `No previous workout`}
+							History
 						</Typography>
 
 						<Stack spacing={2}>

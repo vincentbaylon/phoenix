@@ -27,7 +27,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 						(h) => h.in_progress === true
 					)
 					if (currentWorkout) {
-						console.log(currentWorkout)
 						setHistoryWorkout(currentWorkout)
 						setWorkoutInProgress(true)
 
@@ -41,9 +40,8 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 									.then((res) => res.json())
 									.then((data) => {
 										if (data.error) {
-											console.log(data.error)
+											alert(data.error)
 										} else {
-											console.log('ADDING PREVIOUS')
 											setPreviousWorkout(data)
 										}
 									})
@@ -86,7 +84,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 	}, [])
 
 	const handleSelect = (prop) => {
-		console.log(prop)
 		setWorkoutName(prop.name)
 		setWorkout(prop.workout_exercises)
 		let formattedDate = format(date, 'EEE, MMM dd')
@@ -111,7 +108,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 				if (data.error) {
 					alert(data.error)
 				} else {
-					console.log(data)
 					setHistoryWorkout(data)
 					setWorkoutInProgress(true)
 
@@ -119,7 +115,6 @@ function Workout({ user, historyWorkout, setHistoryWorkout }) {
 						.then((res) => res.json())
 						.then((data) => {
 							if (data.error) {
-								console.log(data.error)
 							} else {
 								setPreviousWorkout(data)
 							}

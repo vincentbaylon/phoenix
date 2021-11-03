@@ -22,8 +22,6 @@ function SetCard({ set, props, historyWorkout, previousWorkout }) {
 	const [prev, setPrev] = useState('N/A')
 
 	useEffect(() => {
-		console.log('PREV', previousWorkout)
-
 		if (Object.entries(previousWorkout).length !== 0) {
 			const prevFilter = previousWorkout.show_trackers.filter(
 				(t) => t.exercise_id === props.id
@@ -41,7 +39,6 @@ function SetCard({ set, props, historyWorkout, previousWorkout }) {
 			(t) => t.exercise_id === props.id
 		)
 		const setFilter = exerciseFilter.filter((e) => e.set === `${set}`)
-		console.log(setFilter[0])
 
 		if (setFilter[0] !== undefined) {
 			setFormData({

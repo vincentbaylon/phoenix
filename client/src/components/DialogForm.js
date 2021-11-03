@@ -76,7 +76,6 @@ export default function FormDialog({ user, refetchChart }) {
 				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 					setImageAsUrl((imageAsUrl) => downloadURL)
 					imageUrl = downloadURL
-					console.log(downloadURL)
 
 					let formattedDate = format(date, 'M/d')
 

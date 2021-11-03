@@ -95,7 +95,6 @@ function Progress({ user }) {
 					<ProgressPicture checkIns={checkIns} label='Current' />
 				</Grid>
 			</Grid>
-
 			<Grid
 				item
 				sx={{

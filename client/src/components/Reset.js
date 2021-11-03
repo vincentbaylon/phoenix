@@ -72,7 +72,6 @@ function Reset() {
 
 	return (
 		<Box sx={{ m: 2, mt: 10, width: matches ? '95%' : '50%', margin: 'auto' }}>
-			{console.log('URL', window.location.href)}
 			<Grid
 				container
 				direction='column'
