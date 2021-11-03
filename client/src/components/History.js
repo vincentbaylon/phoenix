@@ -58,8 +58,10 @@ function History({ user }) {
 	return (
 		<Box
 			sx={{
+				m: 2,
 				mt: 10,
-				width: '100vw',
+				width: matches ? '95%' : '50%',
+				margin: 'auto',
 			}}
 		>
 			<FadeIn>
@@ -68,38 +70,29 @@ function History({ user }) {
 					direction='column'
 					justifyContent='center'
 					alignItems='center'
+					sx={{ width: '100%' }}
 				>
 					<Grid item>
 						<Typography variant='h6' align='left' sx={{ mb: 2 }}>
 							History
 						</Typography>
-
-						<Stack spacing={2}>
-							<FormControl
-								fullWidth
-								variant='standard'
-								sx={{ mb: 1 }}
-								style={{
-									textOverflow: 'ellipsis',
-									overflow: 'hidden',
-									whiteSpace: 'pre',
-								}}
+					</Grid>
+					<Grid item sx={{ width: '95%' }}>
+						<FormControl fullWidth variant='standard' sx={{ mb: 1 }}>
+							<InputLabel id='previousWorkout'>
+								Select Workout History
+							</InputLabel>
+							<Select
+								labelId='previousWorkout'
+								id='previousWorkout'
+								value={selected.date}
+								label='Previous Workout'
+								name='previousWorkout'
+								onChange={handleSelect}
 							>
-								<InputLabel id='previousWorkout'>
-									Select Workout History
-								</InputLabel>
-								<Select
-									labelId='previousWorkout'
-									id='previousWorkout'
-									value={selected.date}
-									label='Previous Workout'
-									name='previousWorkout'
-									onChange={handleSelect}
-								>
-									{menuItems}
-								</Select>
-							</FormControl>
-						</Stack>
+								{menuItems}
+							</Select>
+						</FormControl>
 						{displayTrackers}
 					</Grid>
 				</Grid>
